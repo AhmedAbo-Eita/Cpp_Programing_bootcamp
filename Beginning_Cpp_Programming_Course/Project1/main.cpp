@@ -10,7 +10,9 @@ int main(){
     cin >> favorite_number;
 
     // Write message to user
-    cout << "Amazing, That is my favorite number too." << endl;
+    cout << "Amazing, That is my favorite number too. " << endl;
+
+    cout << "No really, " << favorite_number << " is my favorite number." << endl;
 
     return 0;
 
