@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C/C++: g++.exe build active file",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17", // Sets the C++ standard to C++17
+                "-static",    // Statically links the executable
+                "-Wall",
+                "${file}",    // Compiles the active file
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Generated task by Debugger."
+        }
+    ]
+}
