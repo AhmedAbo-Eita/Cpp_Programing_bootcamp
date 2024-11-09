@@ -6,10 +6,10 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-std=c++17", // Sets the C++ standard to C++17
-                "-static",    // Statically links the executable
+                "-std=c++17",
+                "-static",
                 "-Wall",
-                "${file}",    // Compiles the active file
+                "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
@@ -17,7 +17,9 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": ["$gcc"],
+            "problemMatcher": [
+                "$gcc"
+            ],
             "detail": "Generated task by Debugger."
         }
     ]
