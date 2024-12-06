@@ -37,6 +37,17 @@ using namespace std;
 
 
 
+/**
+ * @brief      Main function
+ *
+ * @details    This program is a demonstration of how to use vectors in C++.
+ *             It shows how to add elements to a vector dynamically using the
+ *             push_back() method, how to get the size of a vector using the
+ *             size() method, how to access elements in a vector using the at()
+ *             method, and how to use a two dimensional vector.
+ *
+ * @return     0
+ **/
 int main(){
 
     vector <int> vector1;
