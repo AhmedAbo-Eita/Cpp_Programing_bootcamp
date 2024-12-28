@@ -36,15 +36,6 @@ void print_guest_list(const string &guest_1,const string &guest_2,const string &
 
 }
 
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * @brief      Clears the guest list
- *
- * @param[out] guest_1  The first guest
- * @param[out] guest_2  The second guest
- * @param[out] guest_3  The third guest
- */
-/******  77d7d766-3e9a-4a98-9b4e-0c183bbb1d5e  *******/
 void clear_guest_list( string &guest_1,string &guest_2,string &guest_3)
 {
     guest_1 = " ";
