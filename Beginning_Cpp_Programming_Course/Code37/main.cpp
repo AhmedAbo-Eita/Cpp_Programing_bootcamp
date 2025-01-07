@@ -16,12 +16,12 @@ using namespace std;
 int find_max_element(int* arr, int size)
 {
     int counter {0};
-    int max = arr[0];
+    int max = *arr;
     for(counter = 1 ; counter < size ; counter ++)
     {
-        if (max < arr[counter])
+        if (max < *(arr+counter))
         {
-            max = arr[counter];
+            max = *(arr+counter);
         }
 
     }
