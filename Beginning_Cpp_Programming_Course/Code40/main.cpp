@@ -23,9 +23,12 @@ int main() {
 
     cout << "Result: " ;
     print(results, results_size);
-    
-    
     cout << endl;
+
+    // release meemory 
+    delete [] results; 
+    
+   
 
     return 0;
 }
