@@ -9,3 +9,13 @@ Given the following Dog class in `Dog.h` add the following public getter and set
 
 * set_age sets the age attribute of the dog to the int passed into the method.
 
+-------------------------------
+
+
+# Add more public methods to an existing class
+Given an existing Dog class in Dog.h, add the following public method to the class:
+
+* `get_human_years()` return the `dog's age * 7`
+
+* `speak()`  returns the `std::string "Woof"`
+

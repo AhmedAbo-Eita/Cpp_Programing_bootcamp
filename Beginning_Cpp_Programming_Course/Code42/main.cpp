@@ -26,5 +26,11 @@ int main()
     lello.set_age(3);
     cout << "Dog age: " << lello.get_age() << endl;
 
+    // get human years depends on dog age
+    cout <<"Human years: " << lello.get_human_years()<< endl;
+
+    // get speak
+    cout << "Speak: " << lello.speak() << endl;
+
     return 0;
 }
