@@ -18,4 +18,8 @@ Given an existing Dog class in Dog.h, add the following public method to the cla
 * `get_human_years()` return the `dog's age * 7`
 
 * `speak()`  returns the `std::string "Woof"`
+-------------------------------
 
+
+# Add a Default Constructor to an Existing Class
+Given the Dog class in Dog.h, add a default no-args constructor that initializes the dog's name to "None" and the dog's age to zero.

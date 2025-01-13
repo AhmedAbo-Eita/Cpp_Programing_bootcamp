@@ -13,9 +13,17 @@ string get_name(){return name;}
 void set_name(string p_name){name = p_name;}
 int get_age(){return age;}
 void set_age(int p_age){age = p_age;}
-
+/************************************************** */
 int get_human_years(){return age*7;}
 string speak(){return "Woof";}
+/************************************************** */
+Dog()
+{
+    name = "None";
+    age = 0;
+}
+
+
 };
 
 

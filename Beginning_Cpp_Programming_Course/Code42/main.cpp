@@ -32,5 +32,13 @@ int main()
     // get speak
     cout << "Speak: " << lello.speak() << endl;
 
+    cout<< "---------------"<<endl;
+
+    Dog solly;//default class constructor
+    cout<< "Dog name: " << solly.get_name() << endl;
+    cout << "Dog age: " << solly.get_age() << endl;
+
+
+
     return 0;
 }
