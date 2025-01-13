@@ -23,6 +23,12 @@ Dog()
     age = 0;
 }
 
+Dog(string name_val, int age_val)
+{
+    name = name_val;
+    age = age_val;
+}
+
 
 };
 
