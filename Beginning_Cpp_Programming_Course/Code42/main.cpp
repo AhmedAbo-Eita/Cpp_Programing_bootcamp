@@ -52,6 +52,11 @@ int main()
     cout<< "Dog name: " << spot.get_name() << endl;
     cout << "Dog age: " << spot.get_age() << endl;
 
+    /*************************************************/
+    Dog twin {spot};        // Copy constructor, twin will be a copy of spot
+    cout<< "---------------"<<endl;
+    cout<< "Dog name: " << twin.get_name() << endl;
+    cout << "Dog age: " << twin.get_age() << endl;
 
     return 0;
 }

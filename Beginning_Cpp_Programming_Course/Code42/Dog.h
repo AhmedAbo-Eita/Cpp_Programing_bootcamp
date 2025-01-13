@@ -29,6 +29,11 @@ Dog(string name_val, int age_val)
     age = age_val;
 }
 
+//copy constructor
+Dog(const Dog &source) : name{source.name}, age{source.age}{
+    cout <<"Copy Constructor";
+}
+
 
 };
 
