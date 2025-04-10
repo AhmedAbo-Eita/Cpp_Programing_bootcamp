@@ -18,7 +18,7 @@ void do_stuff()
 }
 int main()
 {
-    do_stuff();
+    do_stuff(); // calling function
 
     qDebug() << "Done!";
 
