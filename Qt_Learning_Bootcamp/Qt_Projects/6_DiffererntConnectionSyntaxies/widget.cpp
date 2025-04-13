@@ -36,7 +36,7 @@ Widget::Widget(QWidget *parent)
     //Functor notation : lambdas
     // connect(ui->MySlider, &QSlider::sliderMoved,[=](int value){
     //     ui->MyProgressBar->setValue(value);
-    //     qDebug() << "value is " << value;
+    //     qDebug() << "value is " << value ;
     // });
 
 }

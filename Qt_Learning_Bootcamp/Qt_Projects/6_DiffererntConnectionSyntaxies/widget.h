@@ -19,7 +19,7 @@ public:
 
 private slots :
 //    void change_text();
-    void respond(int );
+   void respond(int );
 //    void change_bar(int );
 
 private:
