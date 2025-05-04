@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/File">
+        <file>images/square_14034319.png</file>
+    </qresource>
+    <qresource prefix="/Edit">
+        <file>images/paper-stack_10303709.png</file>
+        <file>images/paste_10573679.png</file>
+        <file>images/scissors_1077668.png</file>
+    </qresource>
+    <qresource prefix="/help">
+        <file>images/info_14099159.png</file>
+    </qresource>
+</RCC>
