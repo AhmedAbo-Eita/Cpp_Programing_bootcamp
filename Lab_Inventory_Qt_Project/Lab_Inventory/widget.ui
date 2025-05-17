@@ -2,16 +2,24 @@
 <ui version="4.0">
  <class>Widget</class>
  <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1080</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>Lab Inventory</string>
   </property>
   <widget class="QLabel" name="appIconlabel">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>81</width>
-     <height>81</height>
+     <x>19</x>
+     <y>9</y>
+     <width>101</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -30,13 +38,435 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QTabWidget" name="inventoryTabWidget">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>9</x>
+     <y>123</y>
+     <width>1901</width>
+     <height>851</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12pt &quot;Blinker&quot;;</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Inventory Table</string>
+    </attribute>
+    <widget class="QGroupBox" name="inventoryTableGroupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>1881</width>
+       <height>421</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Blinker&quot;;</string>
+     </property>
+     <property name="title">
+      <string>Inventory Table</string>
+     </property>
+     <widget class="QTableWidget" name="inventoryTableWidget">
+      <property name="geometry">
+       <rect>
+        <x>15</x>
+        <y>20</y>
+        <width>1851</width>
+        <height>391</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>440</y>
+       <width>1871</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12pt &quot;Blinker&quot;;</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="NewComponentTab">
+      <attribute name="title">
+       <string>Add New Component</string>
+      </attribute>
+      <widget class="QGroupBox" name="dataEnteryGroupBox">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>651</width>
+         <height>311</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Data Entery</string>
+       </property>
+       <widget class="QLabel" name="locationLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>261</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Blinker</family>
+          <pointsize>14</pointsize>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Locartion of component in Lab:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="footprintLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>190</y>
+          <width>181</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Blinker</family>
+          <pointsize>14</pointsize>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Component Footprint:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="MPNLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>263</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Blinker</family>
+          <pointsize>14</pointsize>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Enter Manufacturer part number:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="MPNLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>30</y>
+          <width>351</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="quantityLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>110</y>
+          <width>101</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Blinker</family>
+          <pointsize>14</pointsize>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Quantity:</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="typeComboBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>150</y>
+          <width>171</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>IC</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Resistor </string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Capacitor</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Inductor</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MOSFET</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Transistor</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Diode</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Connector</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPushButton" name="clearPushButton">
+        <property name="geometry">
+         <rect>
+          <x>430</x>
+          <y>260</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Clear All</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="footprintComboBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>190</y>
+          <width>171</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>SOT-8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1206</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>0603</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>0805</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QSpinBox" name="quantitySpinBox">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>110</y>
+          <width>171</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="maximum">
+         <number>99999</number>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="addPushButton">
+        <property name="geometry">
+         <rect>
+          <x>430</x>
+          <y>220</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Add Component</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="typeLabel">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>150</y>
+          <width>139</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Blinker</family>
+          <pointsize>14</pointsize>
+          <italic>false</italic>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Component Type:</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="locationLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>70</y>
+          <width>351</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="geometry">
+        <rect>
+         <x>670</x>
+         <y>10</y>
+         <width>1181</width>
+         <height>311</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Footprint</string>
+       </property>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>20</y>
+          <width>351</width>
+          <height>281</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="Resources.qrc">:/footprint/Images/Footprints/SOT-8-dim.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>640</x>
+          <y>30</y>
+          <width>331</width>
+          <height>271</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="Resources.qrc">:/footprint/Images/Footprints/SOT-8.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="EditComponentTab">
+      <attribute name="title">
+       <string>Edit Component</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="SearchComponentTab">
+      <attribute name="title">
+       <string>Search Component</string>
+      </attribute>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
      <y>30</y>
      <width>227</width>
-     <height>51</height>
+     <height>63</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -61,6 +491,17 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>2</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2"/>
   </widget>
  </widget>
  <resources>

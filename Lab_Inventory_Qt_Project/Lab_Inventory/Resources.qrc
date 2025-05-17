@@ -4,4 +4,8 @@
         <file>Images/package_6216014.png</file>
         <file>Images/package_6216454.png</file>
     </qresource>
+    <qresource prefix="/footprint">
+        <file>Images/Footprints/SOT-8.png</file>
+        <file>Images/Footprints/SOT-8-dim.png</file>
+    </qresource>
 </RCC>

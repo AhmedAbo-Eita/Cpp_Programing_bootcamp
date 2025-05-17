@@ -19,5 +19,7 @@ public:
 
 private:
     Ui::Widget *ui;
+    void inventoryTableSetup();
+
 };
 #endif // WIDGET_H
