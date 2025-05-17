@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/inventoryMainIcons">
+        <file>Images/package_6215997.png</file>
+        <file>Images/package_6216014.png</file>
+        <file>Images/package_6216454.png</file>
+    </qresource>
+</RCC>
