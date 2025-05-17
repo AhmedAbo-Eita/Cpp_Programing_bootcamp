@@ -3,13 +3,15 @@
 #include <QWidget>
 #include <QScreen>
 
+
 Widget *initialize_mainWindow();
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    initialize_mainWindow();
+    Widget *mainWindow = initialize_mainWindow();
+    mainWindow->show();
 
     return a.exec();
 }

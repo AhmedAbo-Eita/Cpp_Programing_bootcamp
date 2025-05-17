@@ -2,6 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <vector>
+#include "component.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,9 +19,18 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_addPushButton_clicked();
+    void on_clearPushButton_clicked();
+
+
 private:
     Ui::Widget *ui;
-    void inventoryTableSetup();
+    std::vector<Component> componentList;
+    void inventoryTableStyleSetup();
+    void showComponentsInTable();
+
+
 
 };
 #endif // WIDGET_H
