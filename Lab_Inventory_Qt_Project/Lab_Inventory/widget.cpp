@@ -2,18 +2,19 @@
 #include "./ui_widget.h"
 #include <QLabel>
 #include <QGraphicsOpacityEffect>
+#include <QMessageBox>
+#include <QFile>
+#include <QStandardPaths>
+#include <QFileDialog>
+#include <qscreen.h>
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
-
     //Setup the inventory table
     inventoryTableStyleSetup();
-
-
-
 
 }
 
@@ -21,6 +22,8 @@ Widget::~Widget()
 {
     delete ui;
 }
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
 
 void Widget::inventoryTableStyleSetup()
 {
@@ -65,6 +68,8 @@ void Widget::inventoryTableStyleSetup()
         );
 }
 
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
 
 
 /**
@@ -114,8 +119,31 @@ void Widget::on_clearPushButton_clicked()
     ui->quantitySpinBox->setValue(0);
 }
 
+void Widget::on_exportPushButton_clicked()
+{
+    QString filePath = QFileDialog::getSaveFileName(
+        this,
+        "Export CSV",
+        QStandardPaths::writableLocation(QStandardPaths::DesktopLocation) + "/inventory.csv",
+        "CSV Files (*.csv)"
+        );
+
+    if (!filePath.isEmpty()) {
+        exportToCSV(filePath);
+    }
+}
 
 
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
+
+
+/**
+ * @brief reset all the parameters of user data
+ *
+ * @param signal from clear button.
+ * @return default values.
+ */
 void Widget::showComponentsInTable()
 {
     //clear the table
@@ -137,5 +165,39 @@ void Widget::showComponentsInTable()
 }
 
 
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
+
+void Widget::exportToCSV(const QString &filePath)
+{
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+
+        // Write headers
+        QStringList headers;
+        for (int col = 0; col < ui->inventoryTableWidget->columnCount(); col++) {
+            headers << ui->inventoryTableWidget->horizontalHeaderItem(col)->text();
+        }
+        out << headers.join(",") << "\n";
+
+        // Write each row
+        for (int row = 0; row < ui->inventoryTableWidget->rowCount(); row++) {
+            QStringList rowData;
+            for (int col = 0; col < ui->inventoryTableWidget->columnCount(); ++col) {
+                QTableWidgetItem *item = ui->inventoryTableWidget->item(row, col);
+                rowData << (item ? item->text() : "");
+            }
+            out << rowData.join(",") << "\n";
+        }
+
+        file.close();
+    } else {
+        QMessageBox::warning(this, "Error", "Cannot write file!");
+    }
+}
+
+/*******************************************************************************************************************/
+/*******************************************************************************************************************/
 
 

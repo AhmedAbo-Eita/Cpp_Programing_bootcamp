@@ -22,13 +22,15 @@ public:
 private slots:
     void on_addPushButton_clicked();
     void on_clearPushButton_clicked();
-
+    void on_exportPushButton_clicked();
 
 private:
     Ui::Widget *ui;
     std::vector<Component> componentList;
     void inventoryTableStyleSetup();
     void showComponentsInTable();
+    void exportToCSV(const QString &filePath);
+    void resizeWithAspectRatio(float aspectRatio);
 
 
 
