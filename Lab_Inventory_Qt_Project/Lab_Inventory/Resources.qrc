@@ -3,6 +3,7 @@
         <file>Images/package_6215997.png</file>
         <file>Images/package_6216014.png</file>
         <file>Images/package_6216454.png</file>
+        <file>Images/appLogo.png</file>
     </qresource>
     <qresource prefix="/footprint">
         <file>Images/Footprints/SOT-8.png</file>
