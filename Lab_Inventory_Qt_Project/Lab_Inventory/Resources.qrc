@@ -4,6 +4,9 @@
         <file>Images/package_6216014.png</file>
         <file>Images/package_6216454.png</file>
         <file>Images/appLogo.png</file>
+        <file>Images/clean.png</file>
+        <file>Images/Export.png</file>
+        <file>Images/import.png</file>
     </qresource>
     <qresource prefix="/footprint">
         <file>Images/Footprints/SOT-8.png</file>
