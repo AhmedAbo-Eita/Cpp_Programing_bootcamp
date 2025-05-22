@@ -10,8 +10,22 @@
     <height>1080</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Blinker</family>
+    <pointsize>10</pointsize>
+    <italic>false</italic>
+    <bold>false</bold>
+   </font>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>Lab Inventory</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 10pt &quot;Blinker&quot;;</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -67,7 +81,8 @@
          <property name="font">
           <font>
            <family>Blinker</family>
-           <pointsize>11</pointsize>
+           <pointsize>10</pointsize>
+           <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
@@ -97,7 +112,8 @@
          <property name="font">
           <font>
            <family>Blinker</family>
-           <pointsize>11</pointsize>
+           <pointsize>10</pointsize>
+           <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
@@ -127,7 +143,8 @@
          <property name="font">
           <font>
            <family>Blinker</family>
-           <pointsize>11</pointsize>
+           <pointsize>10</pointsize>
+           <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
@@ -158,7 +175,7 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="inventoryTableTab">
       <attribute name="title">
        <string>Inventory Table</string>
       </attribute>
@@ -248,77 +265,6 @@
                       </property>
                      </widget>
                     </item>
-                    <item row="4" column="0">
-                     <widget class="QLabel" name="footprintLabel">
-                      <property name="font">
-                       <font>
-                        <family>Blinker</family>
-                        <pointsize>14</pointsize>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Component Footprint:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="locationLabel">
-                      <property name="font">
-                       <font>
-                        <family>Blinker</family>
-                        <pointsize>14</pointsize>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Location of component in Lab:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="0" column="0">
-                     <widget class="QLabel" name="MPNLabel">
-                      <property name="font">
-                       <font>
-                        <family>Blinker</family>
-                        <pointsize>14</pointsize>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Enter Manufacturer part number:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1" colspan="3">
-                     <widget class="QLineEdit" name="locationLineEdit">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="1" colspan="2">
-                     <widget class="QSpinBox" name="quantitySpinBox">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="maximum">
-                       <number>99999</number>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="3" column="1" colspan="2">
                      <widget class="QComboBox" name="typeComboBox">
                       <property name="styleSheet">
@@ -366,6 +312,72 @@
                       </item>
                      </widget>
                     </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="locationLabel">
+                      <property name="font">
+                       <font>
+                        <family>Blinker</family>
+                        <pointsize>14</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Location of component in Lab:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="footprintLabel">
+                      <property name="font">
+                       <font>
+                        <family>Blinker</family>
+                        <pointsize>14</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Component Footprint:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1" colspan="3">
+                     <widget class="QLineEdit" name="locationLineEdit">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="placeholderText">
+                       <string>Enter the component's location</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="7" column="2" colspan="2">
+                     <widget class="QPushButton" name="clearPushButton">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Clear All</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1" colspan="2">
+                     <widget class="QSpinBox" name="quantitySpinBox">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="maximum">
+                       <number>99999</number>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="3" column="0">
                      <widget class="QLabel" name="typeLabel">
                       <property name="font">
@@ -384,10 +396,34 @@
                       </property>
                      </widget>
                     </item>
-                    <item row="0" column="1" colspan="3">
-                     <widget class="QLineEdit" name="MPNLineEdit">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="MPNLabel">
+                      <property name="font">
+                       <font>
+                        <family>Blinker</family>
+                        <pointsize>14</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
                       <property name="styleSheet">
                        <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Manufacturer part number:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1" colspan="3">
+                     <widget class="QLineEdit" name="MPNLineEdit">
+                      <property name="accessibleDescription">
+                       <string/>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="placeholderText">
+                       <string>Enter the component's MPN</string>
                       </property>
                      </widget>
                     </item>
@@ -398,16 +434,6 @@
                       </property>
                       <property name="text">
                        <string>Add Component</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="7" column="2" colspan="2">
-                     <widget class="QPushButton" name="clearPushButton">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Clear All</string>
                       </property>
                      </widget>
                     </item>

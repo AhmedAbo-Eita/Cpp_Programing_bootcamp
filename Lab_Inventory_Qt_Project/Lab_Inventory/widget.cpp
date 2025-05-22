@@ -1,12 +1,6 @@
 #include "widget.h"
 #include "./ui_widget.h"
-#include <QLabel>
-#include <QGraphicsOpacityEffect>
-#include <QMessageBox>
-#include <QFile>
-#include <QStandardPaths>
-#include <QFileDialog>
-#include <qscreen.h>
+
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -15,6 +9,93 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     //Setup the inventory table
     inventoryTableStyleSetup();
+
+
+    /**
+     * @brief add the input data from user to component list
+     *        and show it in table.
+     *
+     * @param signal from add button.
+     * @return
+     */
+    connect(ui->addPushButton,&QPushButton::clicked,this,[=]()
+    {
+        if(ui->MPNLineEdit->text().isEmpty() && ui->locationLineEdit->text().isEmpty())
+        {
+            QMessageBox::critical(this, tr("Not Completed Info"),
+                                        tr("You do not insert the MPN and location of component.\n"
+                                        "Please insert the all info needed"),QMessageBox:: Ok);
+        }
+        else if(ui->MPNLineEdit->text().isEmpty())
+        {
+            QMessageBox::critical(this, tr("Not Completed Info"),
+                                  tr("You do not insert the MPN of component.\n"
+                                     "Please insert the all info needed"),QMessageBox:: Ok);
+        }
+        else if(ui->locationLineEdit->text().isEmpty())
+        {
+            QMessageBox::critical(this, tr("Not Completed Info"),
+                                  tr("You do not insert the Location of component.\n"
+                                     "Please insert the all info needed"),QMessageBox:: Ok);
+        }
+        else
+        {
+            //get the values from user
+            QString user_MPN = ui->MPNLineEdit->text();
+            QString user_location = ui->locationLineEdit->text();
+            QString user_type = ui->typeComboBox->currentText();
+            QString user_footprint = ui->footprintComboBox->currentText();
+            int     user_quantity = ui->quantitySpinBox->value();
+
+            //creat an object from user input values
+            Component user_component;
+            user_component.setMPN(user_MPN);
+            user_component.setLocation(user_location);
+            user_component.setType(user_type);
+            user_component.setFootpint(user_footprint);
+            user_component.setQuantity(user_quantity);
+
+            if(searchComponentsInTable(user_MPN) == std::nullopt)
+            {
+                // add the user component to the component list
+                componentList.push_back(user_component);
+
+                //show the component list after update
+                showComponentsInTable();
+
+                //reset all the input data to default state
+                ui->MPNLineEdit->clear();
+                ui->locationLineEdit->clear();
+                ui->quantitySpinBox->setValue(0);
+                ui->footprintComboBox->setCurrentIndex(0);
+                ui->typeComboBox->setCurrentIndex(0);
+            }
+            else
+            {
+                QMessageBox::critical(this, tr("Not New Component"),
+                                      tr("This component is already founded in your inventory\n"
+                                         "Please cheack it"),QMessageBox:: Ok);
+            }
+        }
+    });
+
+
+    //**
+    //  * @brief reset all the parameters of user data
+    //  *
+    //  * @param signal from clear button.
+    //  * @return default values.
+    //  */
+    connect(ui->clearPushButton,&QPushButton::clicked,this,[=]()
+    {
+        ui->MPNLineEdit->clear();
+        ui->locationLineEdit->clear();
+        ui->typeComboBox->setCurrentIndex(0);
+        ui->footprintComboBox->setCurrentIndex(0);
+        ui->quantitySpinBox->setValue(0);
+    });
+
+
 
 }
 
@@ -66,84 +147,15 @@ void Widget::inventoryTableStyleSetup()
         "padding: 4px;"
         "}"
         );
-}
-
-/*******************************************************************************************************************/
-/*******************************************************************************************************************/
 
 
-/**
- * @brief add the input data from user to component list
- *        and show it in table.
- *
- * @param signal from add button.
- * @return
- */
-void Widget::on_addPushButton_clicked()
-{
-    //get the values from user
-    QString user_MPN = ui->MPNLineEdit->text();
-    QString user_location = ui->locationLineEdit->text();
-    QString user_type = ui->typeComboBox->currentText();
-    QString user_footprint = ui->footprintComboBox->currentText();
-    int     user_quantity = ui->quantitySpinBox->value();
-
-    //creat an object from user input values
-    Component user_component;
-    user_component.setMPN(user_MPN);
-    user_component.setLocation(user_location);
-    user_component.setType(user_type);
-    user_component.setFootpint(user_footprint);
-    user_component.setQuantity(user_quantity);
-
-    // add the user component to the component list
-    componentList.push_back(user_component);
-
-    //show the component list after update
-    showComponentsInTable();
+    // Set the font
+    // QFont appFont("Blinker", 12);
+    // QApplication::setFont(appFont);
 
 }
 
-/**
- * @brief reset all the parameters of user data
- *
- * @param signal from clear button.
- * @return default values.
- */
-void Widget::on_clearPushButton_clicked()
-{
-    ui->MPNLineEdit->clear();
-    ui->locationLineEdit->clear();
-    ui->typeComboBox->setCurrentIndex(0);
-    ui->footprintComboBox->setCurrentIndex(0);
-    ui->quantitySpinBox->setValue(0);
-}
 
-void Widget::on_exportPushButton_clicked()
-{
-    QString filePath = QFileDialog::getSaveFileName(
-        this,
-        "Export CSV",
-        QStandardPaths::writableLocation(QStandardPaths::DesktopLocation) + "/inventory.csv",
-        "CSV Files (*.csv)"
-        );
-
-    if (!filePath.isEmpty()) {
-        exportToCSV(filePath);
-    }
-}
-
-
-/*******************************************************************************************************************/
-/*******************************************************************************************************************/
-
-
-/**
- * @brief reset all the parameters of user data
- *
- * @param signal from clear button.
- * @return default values.
- */
 void Widget::showComponentsInTable()
 {
     //clear the table
@@ -164,40 +176,16 @@ void Widget::showComponentsInTable()
     }
 }
 
-
-/*******************************************************************************************************************/
-/*******************************************************************************************************************/
-
-void Widget::exportToCSV(const QString &filePath)
-{
-    QFile file(filePath);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&file);
-
-        // Write headers
-        QStringList headers;
-        for (int col = 0; col < ui->inventoryTableWidget->columnCount(); col++) {
-            headers << ui->inventoryTableWidget->horizontalHeaderItem(col)->text();
+std::optional<int> Widget::searchComponentsInTable(QString MPN){
+    for(int component_index = 0 ; component_index < componentList.size();component_index++)
+    {
+        if (ui->inventoryTableWidget->item(component_index,0)->text() == MPN)
+        {
+            return component_index;
         }
-        out << headers.join(",") << "\n";
-
-        // Write each row
-        for (int row = 0; row < ui->inventoryTableWidget->rowCount(); row++) {
-            QStringList rowData;
-            for (int col = 0; col < ui->inventoryTableWidget->columnCount(); ++col) {
-                QTableWidgetItem *item = ui->inventoryTableWidget->item(row, col);
-                rowData << (item ? item->text() : "");
-            }
-            out << rowData.join(",") << "\n";
-        }
-
-        file.close();
-    } else {
-        QMessageBox::warning(this, "Error", "Cannot write file!");
     }
+    return std::nullopt;
 }
 
-/*******************************************************************************************************************/
-/*******************************************************************************************************************/
 
 

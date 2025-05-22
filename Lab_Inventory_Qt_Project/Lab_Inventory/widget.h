@@ -3,7 +3,18 @@
 
 #include <QWidget>
 #include <vector>
+#include <QLabel>
+#include <QGraphicsOpacityEffect>
+#include <QMessageBox>
+#include <QFile>
+#include <QStandardPaths>
+#include <QFileDialog>
+#include <QPdfView>
+#include <QPdfDocument>
+#include <QVBoxLayout>
 #include "component.h"
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,19 +30,13 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
-private slots:
-    void on_addPushButton_clicked();
-    void on_clearPushButton_clicked();
-    void on_exportPushButton_clicked();
 
 private:
     Ui::Widget *ui;
     std::vector<Component> componentList;
     void inventoryTableStyleSetup();
     void showComponentsInTable();
-    void exportToCSV(const QString &filePath);
-    void resizeWithAspectRatio(float aspectRatio);
-
+    std::optional<int> searchComponentsInTable(QString MPN);
 
 
 };
