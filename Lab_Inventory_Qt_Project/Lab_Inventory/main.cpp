@@ -1,4 +1,4 @@
-#include "widget.h"
+#include "header_files/widget.h"
 #include <QApplication>
 #include <QWidget>
 #include <QScreen>

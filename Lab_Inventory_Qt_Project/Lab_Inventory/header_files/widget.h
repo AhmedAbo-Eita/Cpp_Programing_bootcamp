@@ -9,8 +9,6 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QFileDialog>
-#include <QPdfView>
-#include <QPdfDocument>
 #include <QVBoxLayout>
 #include "component.h"
 

@@ -1,4 +1,4 @@
-#include "widget.h"
+#include "../header_files/widget.h"
 #include "./ui_widget.h"
 
 
@@ -176,7 +176,7 @@ void Widget::showComponentsInTable()
     //set the number or raws according to the component list elements
     ui->inventoryTableWidget->setRowCount(componentList.size());
 
-    for(int row = 0; row<componentList.size(); row++)
+    for(std::size_t row = 0; row<componentList.size(); row++)
     {
         Component currentComponent = componentList[row];
 
@@ -189,7 +189,7 @@ void Widget::showComponentsInTable()
 }
 
 std::optional<int> Widget::searchComponentsInTable(QString MPN){
-    for(int component_index = 0 ; component_index < componentList.size();component_index++)
+    for(std::size_t component_index = 0 ; component_index < componentList.size();component_index++)
     {
         if (ui->inventoryTableWidget->item(component_index,0)->text() == MPN)
         {
