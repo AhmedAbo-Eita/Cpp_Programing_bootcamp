@@ -80,12 +80,12 @@ Widget::Widget(QWidget *parent)
     });
 
 
-    //**
-    //  * @brief reset all the parameters of user data
-    //  *
-    //  * @param signal from clear button.
-    //  * @return default values.
-    //  */
+    /**
+     * @brief reset all the parameters of user data
+     *
+     * @param signal from clear button.
+     * @return default values.
+     */
     connect(ui->clearPushButton,&QPushButton::clicked,this,[=]()
     {
         ui->MPNLineEdit->clear();
@@ -95,6 +95,18 @@ Widget::Widget(QWidget *parent)
         ui->quantitySpinBox->setValue(0);
     });
 
+
+    /**
+     * @brief this function clear all the data in table dependent on signal
+     * from clear pushBotton using connect function
+     *
+     * @param signal from clean button.
+     * @return empty table
+     */
+    connect(ui->cleanPushButton, &QPushButton::clicked, this, [=](){
+        componentList = {};// clear all components in component list
+        showComponentsInTable();
+    });
 
 
 }
