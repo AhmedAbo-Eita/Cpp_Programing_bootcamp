@@ -7,9 +7,10 @@
         <file>Images/clean.png</file>
         <file>Images/Export.png</file>
         <file>Images/import.png</file>
+        <file>Images/pdf-file_8257805.png</file>
+        <file>Images/chip_3459062.png</file>
     </qresource>
     <qresource prefix="/footprint">
-        <file>Images/Footprints/SOT-8.png</file>
-        <file>Images/Footprints/SOT-8-dim.png</file>
+        <file>footprint/SMDDimensionSelectionGuide.pdf</file>
     </qresource>
 </RCC>

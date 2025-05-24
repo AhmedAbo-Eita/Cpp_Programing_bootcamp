@@ -1,4 +1,4 @@
-QT       += core gui
+QT += core gui widgets pdf pdfwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,6 +22,7 @@ FORMS += \
 
 RESOURCES += \
     Resources.qrc
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

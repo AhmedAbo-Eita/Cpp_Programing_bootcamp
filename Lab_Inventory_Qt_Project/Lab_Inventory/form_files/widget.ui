@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1280</width>
+    <height>728</height>
    </rect>
   </property>
   <property name="font">
@@ -27,7 +27,7 @@
   <property name="styleSheet">
    <string notr="true">font: 10pt &quot;Blinker&quot;;</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
@@ -48,7 +48,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="Resources.qrc">:/inventoryMainIcons/Images/appLogo.png</pixmap>
+        <pixmap resource="../Resources.qrc">:/inventoryMainIcons/Images/appLogo.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -90,7 +90,7 @@
           <string>Import CSV  </string>
          </property>
          <property name="icon">
-          <iconset resource="Resources.qrc">
+          <iconset resource="../Resources.qrc">
            <normaloff>:/inventoryMainIcons/Images/import.png</normaloff>:/inventoryMainIcons/Images/import.png</iconset>
          </property>
          <property name="iconSize">
@@ -121,7 +121,7 @@
           <string>Export CSV  </string>
          </property>
          <property name="icon">
-          <iconset resource="Resources.qrc">
+          <iconset resource="../Resources.qrc">
            <normaloff>:/inventoryMainIcons/Images/Export.png</normaloff>:/inventoryMainIcons/Images/Export.png</iconset>
          </property>
          <property name="iconSize">
@@ -152,7 +152,7 @@
           <string>Clean Table  </string>
          </property>
          <property name="icon">
-          <iconset resource="Resources.qrc">
+          <iconset resource="../Resources.qrc">
            <normaloff>:/inventoryMainIcons/Images/clean.png</normaloff>:/inventoryMainIcons/Images/clean.png</iconset>
          </property>
          <property name="iconSize">
@@ -179,24 +179,24 @@
       <attribute name="title">
        <string>Inventory Table</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QGroupBox" name="inventoryTableGroupBox">
-           <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Blinker&quot;;</string>
-           </property>
-           <property name="title">
-            <string>Inventory Table</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QTableWidget" name="inventoryTableWidget"/>
-            </item>
-           </layout>
-          </widget>
-         </item>
+        <widget class="QGroupBox" name="inventoryTableGroupBox">
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;Blinker&quot;;</string>
+         </property>
+         <property name="title">
+          <string>Inventory Table</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QTableWidget" name="inventoryTableWidget"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
           <widget class="QTabWidget" name="tabWidget">
            <property name="styleSheet">
@@ -209,62 +209,32 @@
             <attribute name="title">
              <string>Add New Component</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
               <layout class="QHBoxLayout" name="horizontalLayout_2">
                <item>
                 <widget class="QGroupBox" name="dataEnteryGroupBox">
                  <property name="title">
                   <string>Data Entery</string>
                  </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout">
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
                   <item>
                    <layout class="QGridLayout" name="gridLayout">
-                    <item row="4" column="1" colspan="2">
-                     <widget class="QComboBox" name="footprintComboBox">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <item>
-                       <property name="text">
-                        <string>SOT-8</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>1206</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>0603</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>0805</string>
-                       </property>
-                      </item>
-                     </widget>
-                    </item>
-                    <item row="2" column="0">
-                     <widget class="QLabel" name="quantityLabel">
-                      <property name="font">
-                       <font>
-                        <family>Blinker</family>
-                        <pointsize>14</pointsize>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Quantity:</string>
-                      </property>
-                     </widget>
-                    </item>
+                    <property name="sizeConstraint">
+                     <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>6</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="horizontalSpacing">
+                     <number>6</number>
+                    </property>
                     <item row="3" column="1" colspan="2">
                      <widget class="QComboBox" name="typeComboBox">
                       <property name="styleSheet">
@@ -312,69 +282,26 @@
                       </item>
                      </widget>
                     </item>
-                    <item row="1" column="0">
-                     <widget class="QLabel" name="locationLabel">
-                      <property name="font">
-                       <font>
-                        <family>Blinker</family>
-                        <pointsize>14</pointsize>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                    <item row="2" column="3" rowspan="3">
+                     <widget class="QPushButton" name="footprintPackageExternalButton">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
                       </property>
                       <property name="text">
-                       <string>Location of component in Lab:</string>
+                       <string/>
                       </property>
-                     </widget>
-                    </item>
-                    <item row="4" column="0">
-                     <widget class="QLabel" name="footprintLabel">
-                      <property name="font">
-                       <font>
-                        <family>Blinker</family>
-                        <pointsize>14</pointsize>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
+                      <property name="icon">
+                       <iconset resource="../Resources.qrc">
+                        <normaloff>:/inventoryMainIcons/Images/pdf-file_8257805.png</normaloff>:/inventoryMainIcons/Images/pdf-file_8257805.png</iconset>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Component Footprint:</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="1" column="1" colspan="3">
-                     <widget class="QLineEdit" name="locationLineEdit">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="placeholderText">
-                       <string>Enter the component's location</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="7" column="2" colspan="2">
-                     <widget class="QPushButton" name="clearPushButton">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="text">
-                       <string>Clear All</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item row="2" column="1" colspan="2">
-                     <widget class="QSpinBox" name="quantitySpinBox">
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="maximum">
-                       <number>99999</number>
+                      <property name="iconSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                      </widget>
                     </item>
@@ -396,6 +323,57 @@
                       </property>
                      </widget>
                     </item>
+                    <item row="0" column="1" colspan="3">
+                     <widget class="QLineEdit" name="MPNLineEdit">
+                      <property name="accessibleDescription">
+                       <string/>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="placeholderText">
+                       <string>Enter the component's MPN</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1" colspan="2">
+                     <widget class="QSpinBox" name="quantitySpinBox">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="maximum">
+                       <number>99999</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="quantityLabel">
+                      <property name="font">
+                       <font>
+                        <family>Blinker</family>
+                        <pointsize>14</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Quantity:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1" colspan="3">
+                     <widget class="QLineEdit" name="locationLineEdit">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="placeholderText">
+                       <string>Enter the component's location</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item row="0" column="0">
                      <widget class="QLabel" name="MPNLabel">
                       <property name="font">
@@ -414,19 +392,6 @@
                       </property>
                      </widget>
                     </item>
-                    <item row="0" column="1" colspan="3">
-                     <widget class="QLineEdit" name="MPNLineEdit">
-                      <property name="accessibleDescription">
-                       <string/>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                      </property>
-                      <property name="placeholderText">
-                       <string>Enter the component's MPN</string>
-                      </property>
-                     </widget>
-                    </item>
                     <item row="6" column="2" colspan="2">
                      <widget class="QPushButton" name="addPushButton">
                       <property name="styleSheet">
@@ -435,18 +400,695 @@
                       <property name="text">
                        <string>Add Component</string>
                       </property>
+                      <property name="autoDefault">
+                       <bool>true</bool>
+                      </property>
+                      <property name="default">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="locationLabel">
+                      <property name="font">
+                       <font>
+                        <family>Blinker</family>
+                        <pointsize>14</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Location of component in Lab:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="8" column="2" colspan="2">
+                     <widget class="QPushButton" name="clearPushButton">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Clear All</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="1" colspan="2">
+                     <widget class="QComboBox" name="footprintComboBox">
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <item>
+                       <property name="text">
+                        <string>SOT-8</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TSSOP-8</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0201</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0201-A</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CSP0201</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>CSP1006-2</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1006-2</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1006-2L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1006-3</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1308-5</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1510-6</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1608-2</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1610-2</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1610-6</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1616-6</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN1616-6L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2020-3A</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2020-3L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2020-6J</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2020-6JA</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2020-6L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2020-6LE</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN-10</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN2626-10</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN3333</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN3333-8</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN3333-D</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN4120-10</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN5060</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN5060-8D</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DFN8080A</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>D2-PAK</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DPAK</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DO-218AB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DO-221AC</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SMA</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SMB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SMBF</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SMC</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SME</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SMG</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-123</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-123FL</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-123HE1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-123TFL</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-323</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-323FL</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-323HE</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-323HL</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-523</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOD-923</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOP-8</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-143</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-223</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-23</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-23-3L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT23-6L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-323</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-363</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-523</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-563</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-723</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SOT-89</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-277</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SDB-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DB-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DBL-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>SDBL-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>LMBS-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MBLS-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MBS-1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TBL</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TBS</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TBN</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TOLL-8L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>D3K</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>JA</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>JB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBJ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBL</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBP</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>KBJ</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBU</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TSB-5</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>PB-6</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>PB-10</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>PB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBPC</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBPC-H</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>GBPC-W</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MT-35A</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MB-35</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MB-35W</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MP-50</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>MP-50W</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>AK</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-220</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-220 TO-220AB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-220AB(H)</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-220AC</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-220F</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>ITO-220AB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>ITO-220AC</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-247</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-247-2L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-247AD</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-247AB</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-247-4</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TO-262L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>TSSOP-8</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>A-405</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DO-15</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DO-201AD</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DO-201AE</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>DO-41</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>R-3</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>R-6</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>RS-4L</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>RS-6</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>C2</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>D1</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>D2</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>1206</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0603</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>0805</string>
+                       </property>
+                      </item>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="footprintLabel">
+                      <property name="font">
+                       <font>
+                        <family>Blinker</family>
+                        <pointsize>14</pointsize>
+                        <italic>false</italic>
+                        <bold>false</bold>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                      </property>
+                      <property name="text">
+                       <string>Component Footprint:</string>
+                      </property>
                      </widget>
                     </item>
                    </layout>
                   </item>
                  </layout>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGroupBox" name="groupBox">
-                 <property name="title">
-                  <string>Footprint</string>
-                 </property>
                 </widget>
                </item>
               </layout>
@@ -458,11 +1100,191 @@
              <string>Edit Component</string>
             </attribute>
            </widget>
-           <widget class="QWidget" name="SearchComponentTab">
-            <attribute name="title">
-             <string>Search Component</string>
-            </attribute>
-           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Search Component</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="2" column="0">
+               <widget class="QLabel" name="locationLabel_2">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Location of component in Lab:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="MPNLabel_2">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Manufacturer part number:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="footprintLabel_2">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Component Footprint:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="quantityLabel_2">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Quantity:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="MPNLineEdit_2">
+                <property name="accessibleDescription">
+                 <string/>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Enter the component's MPN</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="typeLabel_2">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Component Type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="label">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="addPushButton_2">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>FInd Compinent</string>
+                </property>
+                <property name="autoDefault">
+                 <bool>true</bool>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="label_2">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="label_3">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLabel" name="label_4">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>PushButton</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
@@ -471,10 +1293,17 @@
      </widget>
     </widget>
    </item>
+   <item>
+    <widget class="QLabel" name="createdbylabel">
+     <property name="text">
+      <string>This Application Created By: Ahmed Aboeita</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources>
-  <include location="Resources.qrc"/>
+  <include location="../Resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -7,9 +7,15 @@
 #include <QGraphicsOpacityEffect>
 #include <QMessageBox>
 #include <QFile>
-#include <QStandardPaths>
 #include <QFileDialog>
 #include <QVBoxLayout>
+#include <QTableWidget>
+#include <QVBoxLayout>
+#include <QFileInfo>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QCoreApplication>
+#include <QTemporaryFile>
 #include "component.h"
 
 
@@ -29,12 +35,17 @@ public:
     ~Widget();
 
 
+
 private:
     Ui::Widget *ui;
     std::vector<Component> componentList;
     void inventoryTableStyleSetup();
+    void widget_connect_func();
     void showComponentsInTable();
     std::optional<int> searchComponentsInTable(QString MPN);
+    void exportTableToCSV(QTableWidget *tableWidget,QWidget *parent);
+    void importTableFromCSV(QTableWidget *tableWidget, QWidget *parent);
+
 
 
 };
