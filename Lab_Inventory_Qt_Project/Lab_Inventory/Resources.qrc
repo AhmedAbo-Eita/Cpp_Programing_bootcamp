@@ -9,6 +9,7 @@
         <file>Images/import.png</file>
         <file>Images/pdf-file_8257805.png</file>
         <file>Images/chip_3459062.png</file>
+        <file>Images/Lab_Inventory.ico</file>
     </qresource>
     <qresource prefix="/footprint">
         <file>footprint/SMDDimensionSelectionGuide.pdf</file>

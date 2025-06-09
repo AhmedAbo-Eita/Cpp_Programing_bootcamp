@@ -1,5 +1,6 @@
 QT += core gui widgets pdf pdfwidgets
 
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -23,6 +24,8 @@ FORMS += \
 RESOURCES += \
     Resources.qrc
 
+
+RC_FILE = Lab_Inventory.rc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

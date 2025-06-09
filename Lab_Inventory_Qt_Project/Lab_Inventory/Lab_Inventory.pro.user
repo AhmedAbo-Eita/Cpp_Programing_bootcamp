@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 16.0.2, 2025-06-08T11:58:07. -->
+<!-- Written by QtCreator 16.0.2, 2025-06-09T21:50:15. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -139,31 +139,16 @@
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">C:\Users\Ahmed Aboeita\Desktop\Labinventory\Lab_Inventory\build\Desktop_Qt_6_9_0_MinGW_64_bit-Release</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">C:/Users/Ahmed Aboeita/Desktop/Labinventory/Lab_Inventory/build/Desktop_Qt_6_9_0_MinGW_64_bit-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">D:\RnD\Cpp_Programing_bootcamp\Lab_Inventory_Qt_Project\Lab_Inventory</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">D:/RnD/Cpp_Programing_bootcamp/Lab_Inventory_Qt_Project/Lab_Inventory</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
-     <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
-      <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">QtProjectManager.QMakeBuildStep</value>
-      <value type="bool" key="QtProjectManager.QMakeBuildStep.QMakeForced">false</value>
-      <valuelist type="QVariantList" key="QtProjectManager.QMakeBuildStep.SelectedAbis"/>
-     </valuemap>
-     <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
-      <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.MakeStep</value>
-     </valuemap>
-     <value type="qlonglong" key="ProjectExplorer.BuildStepList.StepsCount">2</value>
+     <value type="qlonglong" key="ProjectExplorer.BuildStepList.StepsCount">0</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Build</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Build</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Build</value>
     </valuemap>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.1">
-     <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
-      <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.MakeStep</value>
-      <value type="QString" key="Qt4ProjectManager.MakeStep.MakeArguments">clean</value>
-     </valuemap>
-     <value type="qlonglong" key="ProjectExplorer.BuildStepList.StepsCount">1</value>
+     <value type="qlonglong" key="ProjectExplorer.BuildStepList.StepsCount">0</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Clean</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Clean</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Clean</value>
@@ -244,10 +229,10 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph &quot;dwarf,4096&quot; -F 250</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Lab_Inventory2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/RnD/Cpp_Programing_bootcamp/Lab_Inventory_Qt_Project/Lab_Inventory/Lab_Inventory.pro</value>
-    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
+    <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
