@@ -200,7 +200,7 @@
          <item>
           <widget class="QTabWidget" name="tabWidget">
            <property name="styleSheet">
-            <string notr="true">font: 12pt &quot;Blinker&quot;;</string>
+            <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
            </property>
            <property name="currentIndex">
             <number>0</number>
@@ -1117,7 +1117,7 @@
             <item>
              <layout class="QGridLayout" name="gridLayout_2">
               <item row="2" column="0">
-               <widget class="QLabel" name="locationLabel_2">
+               <widget class="QLabel" name="searchLocationLabel">
                 <property name="font">
                  <font>
                   <family>Blinker</family>
@@ -1135,7 +1135,7 @@
                </widget>
               </item>
               <item row="0" column="0">
-               <widget class="QLabel" name="MPNLabel_2">
+               <widget class="QLabel" name="searchMPNLabel">
                 <property name="font">
                  <font>
                   <family>Blinker</family>
@@ -1153,7 +1153,7 @@
                </widget>
               </item>
               <item row="4" column="0">
-               <widget class="QLabel" name="footprintLabel_2">
+               <widget class="QLabel" name="searchFootprintLabel">
                 <property name="font">
                  <font>
                   <family>Blinker</family>
@@ -1171,7 +1171,7 @@
                </widget>
               </item>
               <item row="3" column="0">
-               <widget class="QLabel" name="quantityLabel_2">
+               <widget class="QLabel" name="searchQuantityLabel">
                 <property name="font">
                  <font>
                   <family>Blinker</family>
@@ -1189,7 +1189,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="MPNLineEdit_2">
+               <widget class="QLineEdit" name="searchMPNLineEdit">
                 <property name="accessibleDescription">
                  <string/>
                 </property>
@@ -1202,7 +1202,7 @@
                </widget>
               </item>
               <item row="5" column="0">
-               <widget class="QLabel" name="typeLabel_2">
+               <widget class="QLabel" name="searchTypeLabel">
                 <property name="font">
                  <font>
                   <family>Blinker</family>
@@ -1220,22 +1220,25 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLabel" name="label">
+               <widget class="QLabel" name="foundedLocationLable">
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(230, 230, 230);</string>
                 </property>
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
                 </property>
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QPushButton" name="addPushButton_2">
+               <widget class="QPushButton" name="findPushButton">
                 <property name="styleSheet">
                  <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
                 </property>
                 <property name="text">
-                 <string>FInd Compinent</string>
+                 <string>FInd Component</string>
                 </property>
                 <property name="autoDefault">
                  <bool>true</bool>
@@ -1246,41 +1249,73 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QLabel" name="label_2">
+               <widget class="QLabel" name="foundedQuantityLabel">
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(230, 230, 230);</string>
                 </property>
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
                 </property>
                </widget>
               </item>
               <item row="4" column="1">
-               <widget class="QLabel" name="label_3">
+               <widget class="QLabel" name="foundedFootprintLabel">
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(230, 230, 230);</string>
                 </property>
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
                 </property>
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QLabel" name="label_4">
+               <widget class="QLabel" name="foundedTypeLable">
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(230, 230, 230);</string>
                 </property>
                 <property name="text">
-                 <string>TextLabel</string>
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
                 </property>
                </widget>
               </item>
              </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="EditComponentPushButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Blinker</family>
+                <pointsize>14</pointsize>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+              </property>
               <property name="text">
-               <string>PushButton</string>
+               <string>Edit Component</string>
               </property>
              </widget>
             </item>

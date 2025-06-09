@@ -1,6 +1,13 @@
 #include "../header_files/widget.h"
 #include "./ui_widget.h"
 
+//Macros
+#define quantityOfComponent     1
+#define typeOfComponent         2
+#define footprintOfComponent    3
+#define locationOfComponent     4
+
+
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -251,6 +258,60 @@ void Widget::widget_connect_func()
 
     });
 
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+
+    /**
+     * @brief Search on component in lab inventory by MPN
+     *
+     * @param signal from Search pushbutton button.
+     * @return display status of the component on Ui
+     */
+
+    connect(ui->findPushButton,&QPushButton::clicked,this,[=]()
+    {
+        //component search and return its row index value
+        std::optional<int> index = searchComponentsInTable(ui->searchMPNLineEdit->text());
+
+
+        // Check if the component available in inventory or not
+        //if not let the user know
+        if(index != std::nullopt)
+        {
+            //show the location of component
+            ui->foundedLocationLable->setText(ui->inventoryTableWidget->item(*index,locationOfComponent)->text());
+            //show the Quantity of component
+            ui->foundedQuantityLabel->setText(ui->inventoryTableWidget->item(*index,quantityOfComponent)->text());
+            //show the footprint of component
+            ui->foundedFootprintLabel->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
+            //show the type of component
+            ui->foundedTypeLable->setText(ui->inventoryTableWidget->item(*index,typeOfComponent)->text());
+        }
+        else
+        {
+            auto ret = QMessageBox::warning(this, tr("Component Search"),
+                                 tr("The MPN you Entered not in your inventory\n"
+                                    "Do you want to add it?"),
+                                 QMessageBox::Ok |QMessageBox::Cancel);
+            if(ret == QMessageBox::Ok)
+            {
+                ui->MPNLineEdit->setText(ui->searchMPNLineEdit->text());// copy the MPN to the tab of add
+                ui->locationLineEdit->setFocus();// move the pointer to Location
+            }
+        }
+    });
+
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+    connect(ui->EditComponentPushButton, &QPushButton::clicked,this,[=]()
+    {
+        ui->tabWidget->setCurrentIndex(1);
+
+    });
+
+
 }
 
 
@@ -277,7 +338,11 @@ void Widget::showComponentsInTable()
 std::optional<int> Widget::searchComponentsInTable(QString MPN){
     for(std::size_t component_index = 0 ; component_index < componentList.size();component_index++)
     {
-        if (ui->inventoryTableWidget->item(component_index,0)->text() == MPN)
+        //remove all spaces in the input text and make all letters in uppercase
+        MPN = MPN.remove(' ').remove('\n').toUpper();
+
+        // Searching on component in table
+        if (ui->inventoryTableWidget->item(component_index,0)->text().toUpper() == MPN)
         {
             return component_index;
         }
