@@ -62,26 +62,42 @@ public:
     QLabel *quantityLabel;
     QLineEdit *locationLineEdit;
     QLabel *MPNLabel;
-    QPushButton *addPushButton;
     QLabel *locationLabel;
-    QPushButton *clearPushButton;
     QComboBox *footprintComboBox;
     QLabel *footprintLabel;
+    QPushButton *addPushButton;
+    QPushButton *clearPushButton;
     QWidget *EditComponentTab;
+    QHBoxLayout *horizontalLayout_7;
+    QGroupBox *groupBox_2;
+    QHBoxLayout *horizontalLayout_8;
+    QGridLayout *gridLayout_3;
+    QLabel *editFootprintLabel;
+    QLabel *editMPNLabel;
+    QLabel *editQuantityLabel;
+    QLineEdit *editMPNLineEdit;
+    QLabel *editLocationLabel;
+    QLabel *editTypeLabel;
+    QLineEdit *editFootprintLineEdit;
+    QLineEdit *editLocatioLineEdit;
+    QSpinBox *editQuantitySpinBox;
+    QComboBox *editTypeComboBox;
+    QPushButton *editFindpushButton;
+    QPushButton *applyEditspushButton;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout_4;
     QGridLayout *gridLayout_2;
-    QLabel *searchLocationLabel;
-    QLabel *searchMPNLabel;
     QLabel *searchFootprintLabel;
+    QLabel *searchMPNLabel;
+    QLabel *foundedTypeLable;
+    QLabel *foundedQuantityLabel;
+    QLabel *searchLocationLabel;
+    QPushButton *findPushButton;
+    QLabel *foundedLocationLable;
+    QLabel *searchTypeLabel;
     QLabel *searchQuantityLabel;
     QLineEdit *searchMPNLineEdit;
-    QLabel *searchTypeLabel;
-    QLabel *foundedLocationLable;
-    QPushButton *findPushButton;
-    QLabel *foundedQuantityLabel;
     QLabel *foundedFootprintLabel;
-    QLabel *foundedTypeLable;
     QPushButton *EditComponentPushButton;
     QLabel *createdbylabel;
 
@@ -273,25 +289,12 @@ public:
 
         gridLayout->addWidget(MPNLabel, 0, 0, 1, 1);
 
-        addPushButton = new QPushButton(dataEnteryGroupBox);
-        addPushButton->setObjectName("addPushButton");
-        addPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-        addPushButton->setAutoDefault(true);
-
-        gridLayout->addWidget(addPushButton, 6, 2, 1, 2);
-
         locationLabel = new QLabel(dataEnteryGroupBox);
         locationLabel->setObjectName("locationLabel");
         locationLabel->setFont(font1);
         locationLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
         gridLayout->addWidget(locationLabel, 1, 0, 1, 1);
-
-        clearPushButton = new QPushButton(dataEnteryGroupBox);
-        clearPushButton->setObjectName("clearPushButton");
-        clearPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-
-        gridLayout->addWidget(clearPushButton, 8, 2, 1, 2);
 
         footprintComboBox = new QComboBox(dataEnteryGroupBox);
         footprintComboBox->addItem(QString());
@@ -420,6 +423,7 @@ public:
         footprintComboBox->addItem(QString());
         footprintComboBox->addItem(QString());
         footprintComboBox->setObjectName("footprintComboBox");
+        footprintComboBox->setEnabled(true);
         footprintComboBox->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
         gridLayout->addWidget(footprintComboBox, 4, 1, 1, 2);
@@ -430,6 +434,19 @@ public:
         footprintLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
         gridLayout->addWidget(footprintLabel, 4, 0, 1, 1);
+
+        addPushButton = new QPushButton(dataEnteryGroupBox);
+        addPushButton->setObjectName("addPushButton");
+        addPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+        addPushButton->setAutoDefault(true);
+
+        gridLayout->addWidget(addPushButton, 6, 2, 1, 2);
+
+        clearPushButton = new QPushButton(dataEnteryGroupBox);
+        clearPushButton->setObjectName("clearPushButton");
+        clearPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+
+        gridLayout->addWidget(clearPushButton, 8, 2, 1, 2);
 
 
         verticalLayout_3->addLayout(gridLayout);
@@ -443,6 +460,88 @@ public:
         tabWidget->addTab(NewComponentTab, QString());
         EditComponentTab = new QWidget();
         EditComponentTab->setObjectName("EditComponentTab");
+        horizontalLayout_7 = new QHBoxLayout(EditComponentTab);
+        horizontalLayout_7->setObjectName("horizontalLayout_7");
+        groupBox_2 = new QGroupBox(EditComponentTab);
+        groupBox_2->setObjectName("groupBox_2");
+        horizontalLayout_8 = new QHBoxLayout(groupBox_2);
+        horizontalLayout_8->setObjectName("horizontalLayout_8");
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setObjectName("gridLayout_3");
+        editFootprintLabel = new QLabel(groupBox_2);
+        editFootprintLabel->setObjectName("editFootprintLabel");
+
+        gridLayout_3->addWidget(editFootprintLabel, 5, 0, 1, 1);
+
+        editMPNLabel = new QLabel(groupBox_2);
+        editMPNLabel->setObjectName("editMPNLabel");
+
+        gridLayout_3->addWidget(editMPNLabel, 0, 0, 1, 1);
+
+        editQuantityLabel = new QLabel(groupBox_2);
+        editQuantityLabel->setObjectName("editQuantityLabel");
+
+        gridLayout_3->addWidget(editQuantityLabel, 3, 0, 1, 1);
+
+        editMPNLineEdit = new QLineEdit(groupBox_2);
+        editMPNLineEdit->setObjectName("editMPNLineEdit");
+
+        gridLayout_3->addWidget(editMPNLineEdit, 0, 1, 1, 1);
+
+        editLocationLabel = new QLabel(groupBox_2);
+        editLocationLabel->setObjectName("editLocationLabel");
+
+        gridLayout_3->addWidget(editLocationLabel, 4, 0, 1, 1);
+
+        editTypeLabel = new QLabel(groupBox_2);
+        editTypeLabel->setObjectName("editTypeLabel");
+
+        gridLayout_3->addWidget(editTypeLabel, 6, 0, 1, 1);
+
+        editFootprintLineEdit = new QLineEdit(groupBox_2);
+        editFootprintLineEdit->setObjectName("editFootprintLineEdit");
+
+        gridLayout_3->addWidget(editFootprintLineEdit, 5, 1, 1, 1);
+
+        editLocatioLineEdit = new QLineEdit(groupBox_2);
+        editLocatioLineEdit->setObjectName("editLocatioLineEdit");
+
+        gridLayout_3->addWidget(editLocatioLineEdit, 4, 1, 1, 1);
+
+        editQuantitySpinBox = new QSpinBox(groupBox_2);
+        editQuantitySpinBox->setObjectName("editQuantitySpinBox");
+
+        gridLayout_3->addWidget(editQuantitySpinBox, 3, 1, 1, 1);
+
+        editTypeComboBox = new QComboBox(groupBox_2);
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->addItem(QString());
+        editTypeComboBox->setObjectName("editTypeComboBox");
+
+        gridLayout_3->addWidget(editTypeComboBox, 6, 1, 1, 1);
+
+        editFindpushButton = new QPushButton(groupBox_2);
+        editFindpushButton->setObjectName("editFindpushButton");
+
+        gridLayout_3->addWidget(editFindpushButton, 1, 1, 1, 1);
+
+        applyEditspushButton = new QPushButton(groupBox_2);
+        applyEditspushButton->setObjectName("applyEditspushButton");
+
+        gridLayout_3->addWidget(applyEditspushButton, 7, 1, 1, 1);
+
+
+        horizontalLayout_8->addLayout(gridLayout_3);
+
+
+        horizontalLayout_7->addWidget(groupBox_2);
+
         tabWidget->addTab(EditComponentTab, QString());
 
         horizontalLayout_5->addWidget(tabWidget);
@@ -458,12 +557,12 @@ public:
         verticalLayout_4->setObjectName("verticalLayout_4");
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName("gridLayout_2");
-        searchLocationLabel = new QLabel(groupBox);
-        searchLocationLabel->setObjectName("searchLocationLabel");
-        searchLocationLabel->setFont(font1);
-        searchLocationLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+        searchFootprintLabel = new QLabel(groupBox);
+        searchFootprintLabel->setObjectName("searchFootprintLabel");
+        searchFootprintLabel->setFont(font1);
+        searchFootprintLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
-        gridLayout_2->addWidget(searchLocationLabel, 2, 0, 1, 1);
+        gridLayout_2->addWidget(searchFootprintLabel, 4, 0, 1, 1);
 
         searchMPNLabel = new QLabel(groupBox);
         searchMPNLabel->setObjectName("searchMPNLabel");
@@ -472,12 +571,47 @@ public:
 
         gridLayout_2->addWidget(searchMPNLabel, 0, 0, 1, 1);
 
-        searchFootprintLabel = new QLabel(groupBox);
-        searchFootprintLabel->setObjectName("searchFootprintLabel");
-        searchFootprintLabel->setFont(font1);
-        searchFootprintLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+        foundedTypeLable = new QLabel(groupBox);
+        foundedTypeLable->setObjectName("foundedTypeLable");
+        foundedTypeLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedTypeLable->setMargin(9);
 
-        gridLayout_2->addWidget(searchFootprintLabel, 4, 0, 1, 1);
+        gridLayout_2->addWidget(foundedTypeLable, 5, 1, 1, 1);
+
+        foundedQuantityLabel = new QLabel(groupBox);
+        foundedQuantityLabel->setObjectName("foundedQuantityLabel");
+        foundedQuantityLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedQuantityLabel->setMargin(9);
+
+        gridLayout_2->addWidget(foundedQuantityLabel, 3, 1, 1, 1);
+
+        searchLocationLabel = new QLabel(groupBox);
+        searchLocationLabel->setObjectName("searchLocationLabel");
+        searchLocationLabel->setFont(font1);
+        searchLocationLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+
+        gridLayout_2->addWidget(searchLocationLabel, 2, 0, 1, 1);
+
+        findPushButton = new QPushButton(groupBox);
+        findPushButton->setObjectName("findPushButton");
+        findPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+        findPushButton->setAutoDefault(true);
+
+        gridLayout_2->addWidget(findPushButton, 1, 1, 1, 1);
+
+        foundedLocationLable = new QLabel(groupBox);
+        foundedLocationLable->setObjectName("foundedLocationLable");
+        foundedLocationLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedLocationLable->setMargin(9);
+
+        gridLayout_2->addWidget(foundedLocationLable, 2, 1, 1, 1);
+
+        searchTypeLabel = new QLabel(groupBox);
+        searchTypeLabel->setObjectName("searchTypeLabel");
+        searchTypeLabel->setFont(font1);
+        searchTypeLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+
+        gridLayout_2->addWidget(searchTypeLabel, 5, 0, 1, 1);
 
         searchQuantityLabel = new QLabel(groupBox);
         searchQuantityLabel->setObjectName("searchQuantityLabel");
@@ -492,50 +626,12 @@ public:
 
         gridLayout_2->addWidget(searchMPNLineEdit, 0, 1, 1, 1);
 
-        searchTypeLabel = new QLabel(groupBox);
-        searchTypeLabel->setObjectName("searchTypeLabel");
-        searchTypeLabel->setFont(font1);
-        searchTypeLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-
-        gridLayout_2->addWidget(searchTypeLabel, 5, 0, 1, 1);
-
-        foundedLocationLable = new QLabel(groupBox);
-        foundedLocationLable->setObjectName("foundedLocationLable");
-        foundedLocationLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedLocationLable->setMargin(9);
-
-        gridLayout_2->addWidget(foundedLocationLable, 2, 1, 1, 1);
-
-        findPushButton = new QPushButton(groupBox);
-        findPushButton->setObjectName("findPushButton");
-        findPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-        findPushButton->setAutoDefault(true);
-
-        gridLayout_2->addWidget(findPushButton, 1, 1, 1, 1);
-
-        foundedQuantityLabel = new QLabel(groupBox);
-        foundedQuantityLabel->setObjectName("foundedQuantityLabel");
-        foundedQuantityLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedQuantityLabel->setMargin(9);
-
-        gridLayout_2->addWidget(foundedQuantityLabel, 3, 1, 1, 1);
-
         foundedFootprintLabel = new QLabel(groupBox);
         foundedFootprintLabel->setObjectName("foundedFootprintLabel");
         foundedFootprintLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
         foundedFootprintLabel->setMargin(9);
 
         gridLayout_2->addWidget(foundedFootprintLabel, 4, 1, 1, 1);
-
-        foundedTypeLable = new QLabel(groupBox);
-        foundedTypeLable->setObjectName("foundedTypeLable");
-        foundedTypeLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedTypeLable->setMargin(9);
-
-        gridLayout_2->addWidget(foundedTypeLable, 5, 1, 1, 1);
-
-
-        verticalLayout_4->addLayout(gridLayout_2);
 
         EditComponentPushButton = new QPushButton(groupBox);
         EditComponentPushButton->setObjectName("EditComponentPushButton");
@@ -548,7 +644,10 @@ public:
         EditComponentPushButton->setFont(font1);
         EditComponentPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
-        verticalLayout_4->addWidget(EditComponentPushButton);
+        gridLayout_2->addWidget(EditComponentPushButton, 6, 1, 1, 1);
+
+
+        verticalLayout_4->addLayout(gridLayout_2);
 
 
         horizontalLayout_5->addWidget(groupBox);
@@ -604,9 +703,7 @@ public:
         quantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
         locationLineEdit->setPlaceholderText(QCoreApplication::translate("Widget", "Enter the component's location", nullptr));
         MPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
-        addPushButton->setText(QCoreApplication::translate("Widget", "Add Component", nullptr));
         locationLabel->setText(QCoreApplication::translate("Widget", "Location of component in Lab:", nullptr));
-        clearPushButton->setText(QCoreApplication::translate("Widget", "Clear All", nullptr));
         footprintComboBox->setItemText(0, QCoreApplication::translate("Widget", "SOT-8", nullptr));
         footprintComboBox->setItemText(1, QCoreApplication::translate("Widget", "TSSOP-8", nullptr));
         footprintComboBox->setItemText(2, QCoreApplication::translate("Widget", "0201", nullptr));
@@ -734,23 +831,42 @@ public:
         footprintComboBox->setItemText(124, QCoreApplication::translate("Widget", "0805", nullptr));
 
         footprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint:", nullptr));
+        addPushButton->setText(QCoreApplication::translate("Widget", "Add Component", nullptr));
+        clearPushButton->setText(QCoreApplication::translate("Widget", "Clear All", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(NewComponentTab), QCoreApplication::translate("Widget", "Add New Component", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("Widget", "Edit Component", nullptr));
+        editFootprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint", nullptr));
+        editMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
+        editQuantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
+        editLocationLabel->setText(QCoreApplication::translate("Widget", "Location of Component in Lab:", nullptr));
+        editTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type", nullptr));
+        editTypeComboBox->setItemText(0, QCoreApplication::translate("Widget", "IC", nullptr));
+        editTypeComboBox->setItemText(1, QCoreApplication::translate("Widget", "MOSFET", nullptr));
+        editTypeComboBox->setItemText(2, QCoreApplication::translate("Widget", "Transistor", nullptr));
+        editTypeComboBox->setItemText(3, QCoreApplication::translate("Widget", "Connector", nullptr));
+        editTypeComboBox->setItemText(4, QCoreApplication::translate("Widget", "Resistor", nullptr));
+        editTypeComboBox->setItemText(5, QCoreApplication::translate("Widget", "Capacitor", nullptr));
+        editTypeComboBox->setItemText(6, QCoreApplication::translate("Widget", "Inductor", nullptr));
+        editTypeComboBox->setItemText(7, QCoreApplication::translate("Widget", "Diode", nullptr));
+
+        editFindpushButton->setText(QCoreApplication::translate("Widget", "Find Component", nullptr));
+        applyEditspushButton->setText(QCoreApplication::translate("Widget", "Apply Edits", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(EditComponentTab), QCoreApplication::translate("Widget", "Edit Component", nullptr));
         groupBox->setTitle(QCoreApplication::translate("Widget", "Search Component", nullptr));
-        searchLocationLabel->setText(QCoreApplication::translate("Widget", "Location of component in Lab:", nullptr));
-        searchMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
         searchFootprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint:", nullptr));
+        searchMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
+        foundedTypeLable->setText(QString());
+        foundedQuantityLabel->setText(QString());
+        searchLocationLabel->setText(QCoreApplication::translate("Widget", "Location of component in Lab:", nullptr));
+        findPushButton->setText(QCoreApplication::translate("Widget", "FInd Component", nullptr));
+        foundedLocationLable->setText(QString());
+        searchTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type:", nullptr));
         searchQuantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
 #if QT_CONFIG(accessibility)
         searchMPNLineEdit->setAccessibleDescription(QString());
 #endif // QT_CONFIG(accessibility)
         searchMPNLineEdit->setPlaceholderText(QCoreApplication::translate("Widget", "Enter the component's MPN", nullptr));
-        searchTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type:", nullptr));
-        foundedLocationLable->setText(QString());
-        findPushButton->setText(QCoreApplication::translate("Widget", "FInd Component", nullptr));
-        foundedQuantityLabel->setText(QString());
         foundedFootprintLabel->setText(QString());
-        foundedTypeLable->setText(QString());
         EditComponentPushButton->setText(QCoreApplication::translate("Widget", "Edit Component", nullptr));
         inventoryTabWidget->setTabText(inventoryTabWidget->indexOf(inventoryTableTab), QCoreApplication::translate("Widget", "Inventory Table", nullptr));
         createdbylabel->setText(QCoreApplication::translate("Widget", "This Application Created By: Ahmed Aboeita", nullptr));

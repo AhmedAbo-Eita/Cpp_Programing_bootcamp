@@ -288,6 +288,13 @@ void Widget::widget_connect_func()
             //show the type of component
             ui->foundedTypeLable->setText(ui->inventoryTableWidget->item(*index,typeOfComponent)->text());
         }
+        else if (ui->searchMPNLineEdit->text().isEmpty())
+        {
+            QMessageBox::warning(this, tr("Component Search"),
+                                 tr("You didn't enter the MPN\n"
+                                    "Please insert it and try again"),
+                                 QMessageBox::Ok);
+        }
         else
         {
             auto ret = QMessageBox::warning(this, tr("Component Search"),
@@ -296,6 +303,7 @@ void Widget::widget_connect_func()
                                  QMessageBox::Ok |QMessageBox::Cancel);
             if(ret == QMessageBox::Ok)
             {
+                ui->tabWidget->setCurrentIndex(0);//open add component widget
                 ui->MPNLineEdit->setText(ui->searchMPNLineEdit->text());// copy the MPN to the tab of add
                 ui->locationLineEdit->setFocus();// move the pointer to Location
             }
