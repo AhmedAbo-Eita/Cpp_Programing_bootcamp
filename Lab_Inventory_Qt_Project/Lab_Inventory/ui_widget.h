@@ -33,13 +33,14 @@ class Ui_Widget
 {
 public:
     QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_6;
+    QHBoxLayout *horizontalLayout_4;
     QLabel *appLogoLabel;
     QSpacerItem *horizontalSpacer;
-    QHBoxLayout *horizontalLayout_4;
+    QPushButton *cleanPushButton_2;
+    QPushButton *cleanPushButton;
+    QPushButton *savePushButton;
     QPushButton *importPushButton;
     QPushButton *exportPushButton;
-    QPushButton *cleanPushButton;
     QTabWidget *inventoryTabWidget;
     QWidget *inventoryTableTab;
     QVBoxLayout *verticalLayout;
@@ -72,33 +73,34 @@ public:
     QGroupBox *groupBox_2;
     QHBoxLayout *horizontalLayout_8;
     QGridLayout *gridLayout_3;
-    QLabel *editFootprintLabel;
-    QLabel *editMPNLabel;
-    QLabel *editQuantityLabel;
-    QLineEdit *editMPNLineEdit;
-    QLabel *editLocationLabel;
-    QLabel *editTypeLabel;
-    QLineEdit *editFootprintLineEdit;
     QLineEdit *editLocatioLineEdit;
-    QSpinBox *editQuantitySpinBox;
     QComboBox *editTypeComboBox;
-    QPushButton *editFindpushButton;
     QPushButton *applyEditspushButton;
+    QLineEdit *editFootprintLineEdit;
+    QLabel *editTypeLabel;
+    QLabel *editLocationLabel;
+    QLineEdit *editMPNLineEdit;
+    QSpinBox *editQuantitySpinBox;
+    QLabel *editFootprintLabel;
+    QPushButton *editFindpushButton;
+    QLabel *editQuantityLabel;
+    QLabel *editMPNLabel;
+    QPushButton *deleteComponentpushButton;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout_4;
     QGridLayout *gridLayout_2;
-    QLabel *searchFootprintLabel;
-    QLabel *searchMPNLabel;
+    QLabel *foundedFootprintLabel;
     QLabel *foundedTypeLable;
-    QLabel *foundedQuantityLabel;
+    QLabel *searchFootprintLabel;
+    QPushButton *EditComponentPushButton;
     QLabel *searchLocationLabel;
-    QPushButton *findPushButton;
     QLabel *foundedLocationLable;
+    QLabel *searchMPNLabel;
+    QPushButton *findPushButton;
+    QLineEdit *searchMPNLineEdit;
     QLabel *searchTypeLabel;
     QLabel *searchQuantityLabel;
-    QLineEdit *searchMPNLineEdit;
-    QLabel *foundedFootprintLabel;
-    QPushButton *EditComponentPushButton;
+    QLabel *foundedQuantityLabel;
     QLabel *createdbylabel;
 
     void setupUi(QWidget *Widget)
@@ -116,8 +118,8 @@ public:
         Widget->setStyleSheet(QString::fromUtf8("font: 10pt \"Blinker\";"));
         verticalLayout_2 = new QVBoxLayout(Widget);
         verticalLayout_2->setObjectName("verticalLayout_2");
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName("horizontalLayout_4");
         appLogoLabel = new QLabel(Widget);
         appLogoLabel->setObjectName("appLogoLabel");
         QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
@@ -129,22 +131,58 @@ public:
         appLogoLabel->setPixmap(QPixmap(QString::fromUtf8(":/inventoryMainIcons/Images/appLogo.png")));
         appLogoLabel->setScaledContents(true);
 
-        horizontalLayout_6->addWidget(appLogoLabel);
+        horizontalLayout_4->addWidget(appLogoLabel);
 
-        horizontalSpacer = new QSpacerItem(1138, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        horizontalSpacer = new QSpacerItem(308, 78, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
-        horizontalLayout_6->addItem(horizontalSpacer);
+        horizontalLayout_4->addItem(horizontalSpacer);
 
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        cleanPushButton_2 = new QPushButton(Widget);
+        cleanPushButton_2->setObjectName("cleanPushButton_2");
+        sizePolicy.setHeightForWidth(cleanPushButton_2->sizePolicy().hasHeightForWidth());
+        cleanPushButton_2->setSizePolicy(sizePolicy);
+        cleanPushButton_2->setMinimumSize(QSize(100, 50));
+        cleanPushButton_2->setFont(font);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/return_10118885.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        cleanPushButton_2->setIcon(icon);
+        cleanPushButton_2->setIconSize(QSize(40, 50));
+
+        horizontalLayout_4->addWidget(cleanPushButton_2);
+
+        cleanPushButton = new QPushButton(Widget);
+        cleanPushButton->setObjectName("cleanPushButton");
+        sizePolicy.setHeightForWidth(cleanPushButton->sizePolicy().hasHeightForWidth());
+        cleanPushButton->setSizePolicy(sizePolicy);
+        cleanPushButton->setFont(font);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/clean.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        cleanPushButton->setIcon(icon1);
+        cleanPushButton->setIconSize(QSize(50, 50));
+
+        horizontalLayout_4->addWidget(cleanPushButton);
+
+        savePushButton = new QPushButton(Widget);
+        savePushButton->setObjectName("savePushButton");
+        sizePolicy.setHeightForWidth(savePushButton->sizePolicy().hasHeightForWidth());
+        savePushButton->setSizePolicy(sizePolicy);
+        savePushButton->setMinimumSize(QSize(125, 0));
+        savePushButton->setFont(font);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/save_9584668.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        savePushButton->setIcon(icon2);
+        savePushButton->setIconSize(QSize(40, 50));
+
+        horizontalLayout_4->addWidget(savePushButton);
+
         importPushButton = new QPushButton(Widget);
         importPushButton->setObjectName("importPushButton");
         sizePolicy.setHeightForWidth(importPushButton->sizePolicy().hasHeightForWidth());
         importPushButton->setSizePolicy(sizePolicy);
         importPushButton->setFont(font);
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/import.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        importPushButton->setIcon(icon);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/import.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        importPushButton->setIcon(icon3);
         importPushButton->setIconSize(QSize(50, 50));
 
         horizontalLayout_4->addWidget(importPushButton);
@@ -154,30 +192,15 @@ public:
         sizePolicy.setHeightForWidth(exportPushButton->sizePolicy().hasHeightForWidth());
         exportPushButton->setSizePolicy(sizePolicy);
         exportPushButton->setFont(font);
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/Export.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        exportPushButton->setIcon(icon1);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/Export.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        exportPushButton->setIcon(icon4);
         exportPushButton->setIconSize(QSize(50, 50));
 
         horizontalLayout_4->addWidget(exportPushButton);
 
-        cleanPushButton = new QPushButton(Widget);
-        cleanPushButton->setObjectName("cleanPushButton");
-        sizePolicy.setHeightForWidth(cleanPushButton->sizePolicy().hasHeightForWidth());
-        cleanPushButton->setSizePolicy(sizePolicy);
-        cleanPushButton->setFont(font);
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/clean.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        cleanPushButton->setIcon(icon2);
-        cleanPushButton->setIconSize(QSize(50, 50));
 
-        horizontalLayout_4->addWidget(cleanPushButton);
-
-
-        horizontalLayout_6->addLayout(horizontalLayout_4);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_6);
+        verticalLayout_2->addLayout(horizontalLayout_4);
 
         inventoryTabWidget = new QTabWidget(Widget);
         inventoryTabWidget->setObjectName("inventoryTabWidget");
@@ -193,6 +216,13 @@ public:
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         inventoryTableWidget = new QTableWidget(inventoryTableGroupBox);
         inventoryTableWidget->setObjectName("inventoryTableWidget");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(inventoryTableWidget->sizePolicy().hasHeightForWidth());
+        inventoryTableWidget->setSizePolicy(sizePolicy1);
+        inventoryTableWidget->setMinimumSize(QSize(0, 0));
+        inventoryTableWidget->setBaseSize(QSize(0, 150));
 
         horizontalLayout_3->addWidget(inventoryTableWidget);
 
@@ -237,9 +267,9 @@ public:
         footprintPackageExternalButton->setObjectName("footprintPackageExternalButton");
         sizePolicy.setHeightForWidth(footprintPackageExternalButton->sizePolicy().hasHeightForWidth());
         footprintPackageExternalButton->setSizePolicy(sizePolicy);
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/pdf-file_8257805.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        footprintPackageExternalButton->setIcon(icon3);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/pdf-file_8257805.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        footprintPackageExternalButton->setIcon(icon5);
         footprintPackageExternalButton->setIconSize(QSize(100, 100));
 
         gridLayout->addWidget(footprintPackageExternalButton, 2, 3, 3, 1);
@@ -468,50 +498,10 @@ public:
         horizontalLayout_8->setObjectName("horizontalLayout_8");
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setObjectName("gridLayout_3");
-        editFootprintLabel = new QLabel(groupBox_2);
-        editFootprintLabel->setObjectName("editFootprintLabel");
-
-        gridLayout_3->addWidget(editFootprintLabel, 5, 0, 1, 1);
-
-        editMPNLabel = new QLabel(groupBox_2);
-        editMPNLabel->setObjectName("editMPNLabel");
-
-        gridLayout_3->addWidget(editMPNLabel, 0, 0, 1, 1);
-
-        editQuantityLabel = new QLabel(groupBox_2);
-        editQuantityLabel->setObjectName("editQuantityLabel");
-
-        gridLayout_3->addWidget(editQuantityLabel, 3, 0, 1, 1);
-
-        editMPNLineEdit = new QLineEdit(groupBox_2);
-        editMPNLineEdit->setObjectName("editMPNLineEdit");
-
-        gridLayout_3->addWidget(editMPNLineEdit, 0, 1, 1, 1);
-
-        editLocationLabel = new QLabel(groupBox_2);
-        editLocationLabel->setObjectName("editLocationLabel");
-
-        gridLayout_3->addWidget(editLocationLabel, 4, 0, 1, 1);
-
-        editTypeLabel = new QLabel(groupBox_2);
-        editTypeLabel->setObjectName("editTypeLabel");
-
-        gridLayout_3->addWidget(editTypeLabel, 6, 0, 1, 1);
-
-        editFootprintLineEdit = new QLineEdit(groupBox_2);
-        editFootprintLineEdit->setObjectName("editFootprintLineEdit");
-
-        gridLayout_3->addWidget(editFootprintLineEdit, 5, 1, 1, 1);
-
         editLocatioLineEdit = new QLineEdit(groupBox_2);
         editLocatioLineEdit->setObjectName("editLocatioLineEdit");
 
         gridLayout_3->addWidget(editLocatioLineEdit, 4, 1, 1, 1);
-
-        editQuantitySpinBox = new QSpinBox(groupBox_2);
-        editQuantitySpinBox->setObjectName("editQuantitySpinBox");
-
-        gridLayout_3->addWidget(editQuantitySpinBox, 3, 1, 1, 1);
 
         editTypeComboBox = new QComboBox(groupBox_2);
         editTypeComboBox->addItem(QString());
@@ -526,15 +516,61 @@ public:
 
         gridLayout_3->addWidget(editTypeComboBox, 6, 1, 1, 1);
 
+        applyEditspushButton = new QPushButton(groupBox_2);
+        applyEditspushButton->setObjectName("applyEditspushButton");
+
+        gridLayout_3->addWidget(applyEditspushButton, 7, 1, 1, 1);
+
+        editFootprintLineEdit = new QLineEdit(groupBox_2);
+        editFootprintLineEdit->setObjectName("editFootprintLineEdit");
+
+        gridLayout_3->addWidget(editFootprintLineEdit, 5, 1, 1, 1);
+
+        editTypeLabel = new QLabel(groupBox_2);
+        editTypeLabel->setObjectName("editTypeLabel");
+
+        gridLayout_3->addWidget(editTypeLabel, 6, 0, 1, 1);
+
+        editLocationLabel = new QLabel(groupBox_2);
+        editLocationLabel->setObjectName("editLocationLabel");
+
+        gridLayout_3->addWidget(editLocationLabel, 4, 0, 1, 1);
+
+        editMPNLineEdit = new QLineEdit(groupBox_2);
+        editMPNLineEdit->setObjectName("editMPNLineEdit");
+
+        gridLayout_3->addWidget(editMPNLineEdit, 0, 1, 1, 1);
+
+        editQuantitySpinBox = new QSpinBox(groupBox_2);
+        editQuantitySpinBox->setObjectName("editQuantitySpinBox");
+
+        gridLayout_3->addWidget(editQuantitySpinBox, 3, 1, 1, 1);
+
+        editFootprintLabel = new QLabel(groupBox_2);
+        editFootprintLabel->setObjectName("editFootprintLabel");
+
+        gridLayout_3->addWidget(editFootprintLabel, 5, 0, 1, 1);
+
         editFindpushButton = new QPushButton(groupBox_2);
         editFindpushButton->setObjectName("editFindpushButton");
 
         gridLayout_3->addWidget(editFindpushButton, 1, 1, 1, 1);
 
-        applyEditspushButton = new QPushButton(groupBox_2);
-        applyEditspushButton->setObjectName("applyEditspushButton");
+        editQuantityLabel = new QLabel(groupBox_2);
+        editQuantityLabel->setObjectName("editQuantityLabel");
 
-        gridLayout_3->addWidget(applyEditspushButton, 7, 1, 1, 1);
+        gridLayout_3->addWidget(editQuantityLabel, 3, 0, 1, 1);
+
+        editMPNLabel = new QLabel(groupBox_2);
+        editMPNLabel->setObjectName("editMPNLabel");
+
+        gridLayout_3->addWidget(editMPNLabel, 0, 0, 1, 1);
+
+        deleteComponentpushButton = new QPushButton(groupBox_2);
+        deleteComponentpushButton->setObjectName("deleteComponentpushButton");
+        deleteComponentpushButton->setStyleSheet(QString::fromUtf8("color: rgb(170, 0, 0);"));
+
+        gridLayout_3->addWidget(deleteComponentpushButton, 8, 1, 1, 1);
 
 
         horizontalLayout_8->addLayout(gridLayout_3);
@@ -548,21 +584,62 @@ public:
 
         groupBox = new QGroupBox(inventoryTableTab);
         groupBox->setObjectName("groupBox");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
-        groupBox->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(groupBox->sizePolicy().hasHeightForWidth());
+        groupBox->setSizePolicy(sizePolicy2);
         verticalLayout_4 = new QVBoxLayout(groupBox);
         verticalLayout_4->setObjectName("verticalLayout_4");
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName("gridLayout_2");
+        foundedFootprintLabel = new QLabel(groupBox);
+        foundedFootprintLabel->setObjectName("foundedFootprintLabel");
+        foundedFootprintLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedFootprintLabel->setMargin(9);
+
+        gridLayout_2->addWidget(foundedFootprintLabel, 5, 1, 1, 1);
+
+        foundedTypeLable = new QLabel(groupBox);
+        foundedTypeLable->setObjectName("foundedTypeLable");
+        foundedTypeLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedTypeLable->setMargin(9);
+
+        gridLayout_2->addWidget(foundedTypeLable, 6, 1, 1, 1);
+
         searchFootprintLabel = new QLabel(groupBox);
         searchFootprintLabel->setObjectName("searchFootprintLabel");
         searchFootprintLabel->setFont(font1);
         searchFootprintLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
-        gridLayout_2->addWidget(searchFootprintLabel, 4, 0, 1, 1);
+        gridLayout_2->addWidget(searchFootprintLabel, 5, 0, 1, 1);
+
+        EditComponentPushButton = new QPushButton(groupBox);
+        EditComponentPushButton->setObjectName("EditComponentPushButton");
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(EditComponentPushButton->sizePolicy().hasHeightForWidth());
+        EditComponentPushButton->setSizePolicy(sizePolicy3);
+        EditComponentPushButton->setMinimumSize(QSize(0, 35));
+        EditComponentPushButton->setFont(font1);
+        EditComponentPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+
+        gridLayout_2->addWidget(EditComponentPushButton, 7, 1, 1, 1);
+
+        searchLocationLabel = new QLabel(groupBox);
+        searchLocationLabel->setObjectName("searchLocationLabel");
+        searchLocationLabel->setFont(font1);
+        searchLocationLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+
+        gridLayout_2->addWidget(searchLocationLabel, 3, 0, 1, 1);
+
+        foundedLocationLable = new QLabel(groupBox);
+        foundedLocationLable->setObjectName("foundedLocationLable");
+        foundedLocationLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedLocationLable->setMargin(9);
+
+        gridLayout_2->addWidget(foundedLocationLable, 3, 1, 1, 1);
 
         searchMPNLabel = new QLabel(groupBox);
         searchMPNLabel->setObjectName("searchMPNLabel");
@@ -571,27 +648,6 @@ public:
 
         gridLayout_2->addWidget(searchMPNLabel, 0, 0, 1, 1);
 
-        foundedTypeLable = new QLabel(groupBox);
-        foundedTypeLable->setObjectName("foundedTypeLable");
-        foundedTypeLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedTypeLable->setMargin(9);
-
-        gridLayout_2->addWidget(foundedTypeLable, 5, 1, 1, 1);
-
-        foundedQuantityLabel = new QLabel(groupBox);
-        foundedQuantityLabel->setObjectName("foundedQuantityLabel");
-        foundedQuantityLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedQuantityLabel->setMargin(9);
-
-        gridLayout_2->addWidget(foundedQuantityLabel, 3, 1, 1, 1);
-
-        searchLocationLabel = new QLabel(groupBox);
-        searchLocationLabel->setObjectName("searchLocationLabel");
-        searchLocationLabel->setFont(font1);
-        searchLocationLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-
-        gridLayout_2->addWidget(searchLocationLabel, 2, 0, 1, 1);
-
         findPushButton = new QPushButton(groupBox);
         findPushButton->setObjectName("findPushButton");
         findPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
@@ -599,52 +655,32 @@ public:
 
         gridLayout_2->addWidget(findPushButton, 1, 1, 1, 1);
 
-        foundedLocationLable = new QLabel(groupBox);
-        foundedLocationLable->setObjectName("foundedLocationLable");
-        foundedLocationLable->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedLocationLable->setMargin(9);
-
-        gridLayout_2->addWidget(foundedLocationLable, 2, 1, 1, 1);
-
-        searchTypeLabel = new QLabel(groupBox);
-        searchTypeLabel->setObjectName("searchTypeLabel");
-        searchTypeLabel->setFont(font1);
-        searchTypeLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-
-        gridLayout_2->addWidget(searchTypeLabel, 5, 0, 1, 1);
-
-        searchQuantityLabel = new QLabel(groupBox);
-        searchQuantityLabel->setObjectName("searchQuantityLabel");
-        searchQuantityLabel->setFont(font1);
-        searchQuantityLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
-
-        gridLayout_2->addWidget(searchQuantityLabel, 3, 0, 1, 1);
-
         searchMPNLineEdit = new QLineEdit(groupBox);
         searchMPNLineEdit->setObjectName("searchMPNLineEdit");
         searchMPNLineEdit->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
         gridLayout_2->addWidget(searchMPNLineEdit, 0, 1, 1, 1);
 
-        foundedFootprintLabel = new QLabel(groupBox);
-        foundedFootprintLabel->setObjectName("foundedFootprintLabel");
-        foundedFootprintLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
-        foundedFootprintLabel->setMargin(9);
+        searchTypeLabel = new QLabel(groupBox);
+        searchTypeLabel->setObjectName("searchTypeLabel");
+        searchTypeLabel->setFont(font1);
+        searchTypeLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
-        gridLayout_2->addWidget(foundedFootprintLabel, 4, 1, 1, 1);
+        gridLayout_2->addWidget(searchTypeLabel, 6, 0, 1, 1);
 
-        EditComponentPushButton = new QPushButton(groupBox);
-        EditComponentPushButton->setObjectName("EditComponentPushButton");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(EditComponentPushButton->sizePolicy().hasHeightForWidth());
-        EditComponentPushButton->setSizePolicy(sizePolicy2);
-        EditComponentPushButton->setMinimumSize(QSize(0, 35));
-        EditComponentPushButton->setFont(font1);
-        EditComponentPushButton->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
+        searchQuantityLabel = new QLabel(groupBox);
+        searchQuantityLabel->setObjectName("searchQuantityLabel");
+        searchQuantityLabel->setFont(font1);
+        searchQuantityLabel->setStyleSheet(QString::fromUtf8("font: 14pt \"Blinker\";"));
 
-        gridLayout_2->addWidget(EditComponentPushButton, 6, 1, 1, 1);
+        gridLayout_2->addWidget(searchQuantityLabel, 2, 0, 1, 1);
+
+        foundedQuantityLabel = new QLabel(groupBox);
+        foundedQuantityLabel->setObjectName("foundedQuantityLabel");
+        foundedQuantityLabel->setStyleSheet(QString::fromUtf8("background-color: rgb(230, 230, 230);"));
+        foundedQuantityLabel->setMargin(9);
+
+        gridLayout_2->addWidget(foundedQuantityLabel, 2, 1, 1, 1);
 
 
         verticalLayout_4->addLayout(gridLayout_2);
@@ -680,19 +716,21 @@ public:
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Lab Inventory", nullptr));
         appLogoLabel->setText(QString());
+        cleanPushButton_2->setText(QCoreApplication::translate("Widget", "   Reset", nullptr));
+        cleanPushButton->setText(QCoreApplication::translate("Widget", "Clean Table  ", nullptr));
+        savePushButton->setText(QCoreApplication::translate("Widget", " Import CSV", nullptr));
         importPushButton->setText(QCoreApplication::translate("Widget", "Import CSV  ", nullptr));
         exportPushButton->setText(QCoreApplication::translate("Widget", "Export CSV  ", nullptr));
-        cleanPushButton->setText(QCoreApplication::translate("Widget", "Clean Table  ", nullptr));
         inventoryTableGroupBox->setTitle(QCoreApplication::translate("Widget", "Inventory Table", nullptr));
         dataEnteryGroupBox->setTitle(QCoreApplication::translate("Widget", "Data Entery", nullptr));
         typeComboBox->setItemText(0, QCoreApplication::translate("Widget", "IC", nullptr));
-        typeComboBox->setItemText(1, QCoreApplication::translate("Widget", "Resistor ", nullptr));
-        typeComboBox->setItemText(2, QCoreApplication::translate("Widget", "Capacitor", nullptr));
-        typeComboBox->setItemText(3, QCoreApplication::translate("Widget", "Inductor", nullptr));
-        typeComboBox->setItemText(4, QCoreApplication::translate("Widget", "MOSFET", nullptr));
-        typeComboBox->setItemText(5, QCoreApplication::translate("Widget", "Transistor", nullptr));
-        typeComboBox->setItemText(6, QCoreApplication::translate("Widget", "Diode", nullptr));
-        typeComboBox->setItemText(7, QCoreApplication::translate("Widget", "Connector", nullptr));
+        typeComboBox->setItemText(1, QCoreApplication::translate("Widget", "MOSFET", nullptr));
+        typeComboBox->setItemText(2, QCoreApplication::translate("Widget", "Transistor", nullptr));
+        typeComboBox->setItemText(3, QCoreApplication::translate("Widget", "Connector", nullptr));
+        typeComboBox->setItemText(4, QCoreApplication::translate("Widget", "Resistor ", nullptr));
+        typeComboBox->setItemText(5, QCoreApplication::translate("Widget", "Capacitor", nullptr));
+        typeComboBox->setItemText(6, QCoreApplication::translate("Widget", "Inductor", nullptr));
+        typeComboBox->setItemText(7, QCoreApplication::translate("Widget", "Diode", nullptr));
 
         footprintPackageExternalButton->setText(QString());
         typeLabel->setText(QCoreApplication::translate("Widget", "Component Type:", nullptr));
@@ -835,11 +873,6 @@ public:
         clearPushButton->setText(QCoreApplication::translate("Widget", "Clear All", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(NewComponentTab), QCoreApplication::translate("Widget", "Add New Component", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("Widget", "Edit Component", nullptr));
-        editFootprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint", nullptr));
-        editMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
-        editQuantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
-        editLocationLabel->setText(QCoreApplication::translate("Widget", "Location of Component in Lab:", nullptr));
-        editTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type", nullptr));
         editTypeComboBox->setItemText(0, QCoreApplication::translate("Widget", "IC", nullptr));
         editTypeComboBox->setItemText(1, QCoreApplication::translate("Widget", "MOSFET", nullptr));
         editTypeComboBox->setItemText(2, QCoreApplication::translate("Widget", "Transistor", nullptr));
@@ -849,25 +882,33 @@ public:
         editTypeComboBox->setItemText(6, QCoreApplication::translate("Widget", "Inductor", nullptr));
         editTypeComboBox->setItemText(7, QCoreApplication::translate("Widget", "Diode", nullptr));
 
-        editFindpushButton->setText(QCoreApplication::translate("Widget", "Find Component", nullptr));
         applyEditspushButton->setText(QCoreApplication::translate("Widget", "Apply Edits", nullptr));
+        editTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type", nullptr));
+        editLocationLabel->setText(QCoreApplication::translate("Widget", "Location of Component in Lab:", nullptr));
+        editMPNLineEdit->setText(QString());
+        editMPNLineEdit->setPlaceholderText(QCoreApplication::translate("Widget", "Enter the Component's MPN", nullptr));
+        editFootprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint", nullptr));
+        editFindpushButton->setText(QCoreApplication::translate("Widget", "Find Component to Edit", nullptr));
+        editQuantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
+        editMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
+        deleteComponentpushButton->setText(QCoreApplication::translate("Widget", "Delete Component", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(EditComponentTab), QCoreApplication::translate("Widget", "Edit Component", nullptr));
         groupBox->setTitle(QCoreApplication::translate("Widget", "Search Component", nullptr));
-        searchFootprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint:", nullptr));
-        searchMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
+        foundedFootprintLabel->setText(QString());
         foundedTypeLable->setText(QString());
-        foundedQuantityLabel->setText(QString());
+        searchFootprintLabel->setText(QCoreApplication::translate("Widget", "Component Footprint:", nullptr));
+        EditComponentPushButton->setText(QCoreApplication::translate("Widget", "Edit Component", nullptr));
         searchLocationLabel->setText(QCoreApplication::translate("Widget", "Location of component in Lab:", nullptr));
-        findPushButton->setText(QCoreApplication::translate("Widget", "FInd Component", nullptr));
         foundedLocationLable->setText(QString());
-        searchTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type:", nullptr));
-        searchQuantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
+        searchMPNLabel->setText(QCoreApplication::translate("Widget", "Manufacturer part number:", nullptr));
+        findPushButton->setText(QCoreApplication::translate("Widget", "FInd Component", nullptr));
 #if QT_CONFIG(accessibility)
         searchMPNLineEdit->setAccessibleDescription(QString());
 #endif // QT_CONFIG(accessibility)
         searchMPNLineEdit->setPlaceholderText(QCoreApplication::translate("Widget", "Enter the component's MPN", nullptr));
-        foundedFootprintLabel->setText(QString());
-        EditComponentPushButton->setText(QCoreApplication::translate("Widget", "Edit Component", nullptr));
+        searchTypeLabel->setText(QCoreApplication::translate("Widget", "Component Type:", nullptr));
+        searchQuantityLabel->setText(QCoreApplication::translate("Widget", "Quantity:", nullptr));
+        foundedQuantityLabel->setText(QString());
         inventoryTabWidget->setTabText(inventoryTabWidget->indexOf(inventoryTableTab), QCoreApplication::translate("Widget", "Inventory Table", nullptr));
         createdbylabel->setText(QCoreApplication::translate("Widget", "This Application Created By: Ahmed Aboeita", nullptr));
     } // retranslateUi

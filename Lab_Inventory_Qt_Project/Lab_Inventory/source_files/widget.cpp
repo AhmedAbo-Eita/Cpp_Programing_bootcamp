@@ -2,10 +2,14 @@
 #include "./ui_widget.h"
 
 //Macros
+//number of colums of attributs in table
 #define quantityOfComponent     1
 #define typeOfComponent         2
 #define footprintOfComponent    3
 #define locationOfComponent     4
+
+//CSV databas path
+#define databasePath            ":/database/database/My_Inventory.csv"
 
 
 
@@ -19,6 +23,8 @@ Widget::Widget(QWidget *parent)
     //connect functions of widget
     widget_connect_func();
 
+    //load the local database csv file from resorce file
+    importTableFromCSVLocal(ui->inventoryTableWidget,databasePath ,this);
 
 }
 
@@ -313,10 +319,73 @@ void Widget::widget_connect_func()
     /*--------------------------------------------------------------------------------------------*/
     /**********************************************************************************************/
     /*--------------------------------------------------------------------------------------------*/
+
+    /**
+     * @brief Connect function while pressing the button of edit component from search tab
+     * all the info of the component move to the Edit tab to edit it and then update inventory
+     *
+     * @param signal from Edit component of search groupbox pushbutton button.
+     * @return display status of the component on edit group box
+     */
     connect(ui->EditComponentPushButton, &QPushButton::clicked,this,[=]()
     {
         ui->tabWidget->setCurrentIndex(1);
+        ui->editMPNLineEdit->setText(ui->searchMPNLineEdit->text());
 
+        //Disable search in Edit mode
+        ui->editMPNLineEdit->setDisabled(true);
+        ui->editFindpushButton->setDisabled(true);
+
+        //Set the editable values to current vlaues as start
+        ui->editQuantitySpinBox->setValue(ui->foundedQuantityLabel->text().toInt());
+        ui->editFootprintLineEdit->setText(ui->foundedFootprintLabel->text());
+        ui->editLocatioLineEdit->setText(ui->foundedLocationLable->text());
+        ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->foundedTypeLable->text().remove(' ').remove('\n')));
+    });
+
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+
+    connect(ui->editFindpushButton,&QPushButton::clicked,this,[=]()
+    {
+        //Searching on the component
+        std::optional<int> index = searchComponentsInTable(ui->editMPNLineEdit->text());
+
+
+        // Check if the component available in inventory or not
+        //if not let the user know
+        if(index != std::nullopt)
+        {
+            //show the location of component
+            ui->editLocatioLineEdit->setText(ui->inventoryTableWidget->item(*index,locationOfComponent)->text());
+            //show the Quantity of component
+            ui->editQuantitySpinBox->setValue(ui->inventoryTableWidget->item(*index,quantityOfComponent)->text().toInt());
+            //show the footprint of component
+            ui->editFootprintLineEdit->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
+            //show the type of component
+            ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->inventoryTableWidget->item(*index,typeOfComponent)->text().remove(' ').remove('\n')));
+        }
+        else if (ui->editMPNLineEdit->text().isEmpty())
+        {
+            QMessageBox::warning(this, tr("Component Search"),
+                                 tr("You didn't enter the MPN\n"
+                                    "Please insert it and try again"),
+                                 QMessageBox::Ok);
+        }
+        else
+        {
+            auto ret = QMessageBox::warning(this, tr("Component Search"),
+                                            tr("The MPN you Entered not in your inventory\n"
+                                               "Do you want to add it?"),
+                                            QMessageBox::Ok |QMessageBox::Cancel);
+            if(ret == QMessageBox::Ok)
+            {
+                ui->tabWidget->setCurrentIndex(0);//open add component widget
+                ui->MPNLineEdit->setText(ui->editMPNLineEdit->text());// copy the MPN to the tab of add
+                ui->locationLineEdit->setFocus();// move the pointer to Location
+            }
+        }
     });
 
 
@@ -343,6 +412,11 @@ void Widget::showComponentsInTable()
     }
 }
 
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
 std::optional<int> Widget::searchComponentsInTable(QString MPN){
     for(std::size_t component_index = 0 ; component_index < componentList.size();component_index++)
     {
@@ -357,6 +431,11 @@ std::optional<int> Widget::searchComponentsInTable(QString MPN){
     }
     return std::nullopt;
 }
+
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
 
 
 /**
@@ -410,6 +489,11 @@ void Widget::exportTableToCSV(QTableWidget *tableWidget, QWidget *parent)
     file.close();
     QMessageBox::information(parent, "Export Complete", "Inventory table was saved to CSV successfully.");
 }
+
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
 
 /**
  * @brief Imports data from a CSV file into a QTableWidget and updates the component list.
@@ -498,6 +582,110 @@ void Widget::importTableFromCSV(QTableWidget *tableWidget, QWidget *parent)
 }
 
 
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+
+/**
+ * @brief Imports data from a CSV file into a QTableWidget and updates the component list.
+ *
+ * This function:
+ * - Prompts user to select a CSV file.
+ * - Clears the table and component list.
+ * - Parses the CSV and populates the table.
+ * - Converts each row into a Component object and updates componentList.
+ *
+ * @param tableWidget Pointer to the QTableWidget to be filled.
+ * @param Path of CSV in resource file.
+ * @param parent Optional parent widget for dialogs.
+ */
+void Widget::importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,QWidget *parent)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(parent, "Unable to open file", file.errorString());
+        return;
+    }
+
+
+    QTextStream in(&file);
+
+    // Clear the existing table and component list
+    tableWidget->setRowCount(0);//set the table rows
+    tableWidget->setColumnCount(0);//set the table colomns
+    componentList.clear(); // clear all the data in component list
+
+    // Read headers
+    if (!in.atEnd()) {
+        QString headerLine = in.readLine();
+        QStringList headers = headerLine.split(',', Qt::KeepEmptyParts);
+        for (QString &header : headers)
+            header = header.remove('\"');
+        tableWidget->setColumnCount(headers.size());
+        tableWidget->setHorizontalHeaderLabels(headers);
+    }
+
+    // Read and parse each row
+    int row = 0;
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList cells = line.split(',', Qt::KeepEmptyParts);
+        if (cells.size() < 5) continue; // Skip incomplete rows
+
+        tableWidget->insertRow(row);
+
+        QString current_mpn        = cells[0].remove('\"');
+        QString current_quantity   = cells[1].remove('\"');
+        QString current_type       = cells[2].remove('\"');
+        QString current_footprint  = cells[3].remove('\"');
+        QString current_location   = cells[4].remove('\"');
+
+        // Fill the table
+        tableWidget->setItem(row, 0, new QTableWidgetItem(current_mpn));
+        tableWidget->setItem(row, 1, new QTableWidgetItem(current_quantity));
+        tableWidget->setItem(row, 2, new QTableWidgetItem(current_type));
+        tableWidget->setItem(row, 3, new QTableWidgetItem(current_footprint));
+        tableWidget->setItem(row, 4, new QTableWidgetItem(current_location));
+
+        // Add to componentList
+        Component c;
+        c.setMPN(current_mpn);
+        c.setQuantity(current_quantity.toInt());
+        c.setType(current_type);
+        c.setFootpint(current_footprint);
+        c.setLocation(current_location);
+        componentList.push_back(c);
+        ++row;
+    }
+    file.close();
+    //QMessageBox::information(parent, "Import Complete", "Inventory table and component list loaded from CSV.");
+}
+
+
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief function to return the value index of component type.
+ *
+ * @param Type of component as string.
+ * @return index value
+ */
+int Widget::getComponentTypeIndex(QString type)
+{
+    if(type == "IC")            return 0;
+    if(type == "MOSFET")        return 1;
+    if(type == "Transistor")    return 2;
+    if(type == "Connector")     return 3;
+    if(type == "Resistor")      return 4;
+    if(type == "Capacitor")     return 5;
+    if(type == "Inductor")      return 6;
+    if(type == "Diode")         return 7;
+    else                        return -1;
+}
 
 
 

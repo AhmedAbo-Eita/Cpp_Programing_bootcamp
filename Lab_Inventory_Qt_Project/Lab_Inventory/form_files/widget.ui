@@ -29,7 +29,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QLabel" name="appLogoLabel">
        <property name="sizePolicy">
@@ -62,108 +62,178 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>1138</width>
-         <height>20</height>
+         <width>308</width>
+         <height>78</height>
         </size>
        </property>
       </spacer>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QPushButton" name="importPushButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Blinker</family>
-           <pointsize>10</pointsize>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Import CSV  </string>
-         </property>
-         <property name="icon">
-          <iconset resource="../Resources.qrc">
-           <normaloff>:/inventoryMainIcons/Images/import.png</normaloff>:/inventoryMainIcons/Images/import.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="exportPushButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Blinker</family>
-           <pointsize>10</pointsize>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Export CSV  </string>
-         </property>
-         <property name="icon">
-          <iconset resource="../Resources.qrc">
-           <normaloff>:/inventoryMainIcons/Images/Export.png</normaloff>:/inventoryMainIcons/Images/Export.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="cleanPushButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="font">
-          <font>
-           <family>Blinker</family>
-           <pointsize>10</pointsize>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Clean Table  </string>
-         </property>
-         <property name="icon">
-          <iconset resource="../Resources.qrc">
-           <normaloff>:/inventoryMainIcons/Images/clean.png</normaloff>:/inventoryMainIcons/Images/clean.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QPushButton" name="cleanPushButton_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Blinker</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>   Reset</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/inventoryMainIcons/Images/return_10118885.png</normaloff>:/inventoryMainIcons/Images/return_10118885.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cleanPushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Blinker</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Clean Table  </string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/inventoryMainIcons/Images/clean.png</normaloff>:/inventoryMainIcons/Images/clean.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="savePushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>125</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Blinker</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string> Import CSV</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/inventoryMainIcons/Images/save_9584668.png</normaloff>:/inventoryMainIcons/Images/save_9584668.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>40</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="importPushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Blinker</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Import CSV  </string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/inventoryMainIcons/Images/import.png</normaloff>:/inventoryMainIcons/Images/import.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="exportPushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Blinker</family>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Export CSV  </string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/inventoryMainIcons/Images/Export.png</normaloff>:/inventoryMainIcons/Images/Export.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -190,7 +260,26 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTableWidget" name="inventoryTableWidget"/>
+           <widget class="QTableWidget" name="inventoryTableWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="baseSize">
+             <size>
+              <width>0</width>
+              <height>150</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -247,6 +336,21 @@
                       </item>
                       <item>
                        <property name="text">
+                        <string>MOSFET</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Transistor</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
+                        <string>Connector</string>
+                       </property>
+                      </item>
+                      <item>
+                       <property name="text">
                         <string>Resistor </string>
                        </property>
                       </item>
@@ -262,22 +366,7 @@
                       </item>
                       <item>
                        <property name="text">
-                        <string>MOSFET</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Transistor</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
                         <string>Diode</string>
-                       </property>
-                      </item>
-                      <item>
-                       <property name="text">
-                        <string>Connector</string>
                        </property>
                       </item>
                      </widget>
@@ -1111,52 +1200,8 @@
                <layout class="QHBoxLayout" name="horizontalLayout_8">
                 <item>
                  <layout class="QGridLayout" name="gridLayout_3">
-                  <item row="5" column="0">
-                   <widget class="QLabel" name="editFootprintLabel">
-                    <property name="text">
-                     <string>Component Footprint</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="editMPNLabel">
-                    <property name="text">
-                     <string>Manufacturer part number:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="editQuantityLabel">
-                    <property name="text">
-                     <string>Quantity:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QLineEdit" name="editMPNLineEdit"/>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="editLocationLabel">
-                    <property name="text">
-                     <string>Location of Component in Lab:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="6" column="0">
-                   <widget class="QLabel" name="editTypeLabel">
-                    <property name="text">
-                     <string>Component Type</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="1">
-                   <widget class="QLineEdit" name="editFootprintLineEdit"/>
-                  </item>
                   <item row="4" column="1">
                    <widget class="QLineEdit" name="editLocatioLineEdit"/>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QSpinBox" name="editQuantitySpinBox"/>
                   </item>
                   <item row="6" column="1">
                    <widget class="QComboBox" name="editTypeComboBox">
@@ -1202,17 +1247,78 @@
                     </item>
                    </widget>
                   </item>
-                  <item row="1" column="1">
-                   <widget class="QPushButton" name="editFindpushButton">
-                    <property name="text">
-                     <string>Find Component</string>
-                    </property>
-                   </widget>
-                  </item>
                   <item row="7" column="1">
                    <widget class="QPushButton" name="applyEditspushButton">
                     <property name="text">
                      <string>Apply Edits</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QLineEdit" name="editFootprintLineEdit"/>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="editTypeLabel">
+                    <property name="text">
+                     <string>Component Type</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="editLocationLabel">
+                    <property name="text">
+                     <string>Location of Component in Lab:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="editMPNLineEdit">
+                    <property name="text">
+                     <string/>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Enter the Component's MPN</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QSpinBox" name="editQuantitySpinBox"/>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="editFootprintLabel">
+                    <property name="text">
+                     <string>Component Footprint</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="editFindpushButton">
+                    <property name="text">
+                     <string>Find Component to Edit</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="editQuantityLabel">
+                    <property name="text">
+                     <string>Quantity:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="editMPNLabel">
+                    <property name="text">
+                     <string>Manufacturer part number:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="QPushButton" name="deleteComponentpushButton">
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(170, 0, 0);</string>
+                    </property>
+                    <property name="text">
+                     <string>Delete Component</string>
                     </property>
                    </widget>
                   </item>
@@ -1239,7 +1345,33 @@
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
              <layout class="QGridLayout" name="gridLayout_2">
-              <item row="4" column="0">
+              <item row="5" column="1">
+               <widget class="QLabel" name="foundedFootprintLabel">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLabel" name="foundedTypeLable">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
                <widget class="QLabel" name="searchFootprintLabel">
                 <property name="font">
                  <font>
@@ -1257,160 +1389,7 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="searchMPNLabel">
-                <property name="font">
-                 <font>
-                  <family>Blinker</family>
-                  <pointsize>14</pointsize>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>Manufacturer part number:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QLabel" name="foundedTypeLable">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(230, 230, 230);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="margin">
-                 <number>9</number>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLabel" name="foundedQuantityLabel">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(230, 230, 230);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="margin">
-                 <number>9</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="searchLocationLabel">
-                <property name="font">
-                 <font>
-                  <family>Blinker</family>
-                  <pointsize>14</pointsize>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>Location of component in Lab:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QPushButton" name="findPushButton">
-                <property name="styleSheet">
-                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>FInd Component</string>
-                </property>
-                <property name="autoDefault">
-                 <bool>true</bool>
-                </property>
-                <property name="default">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLabel" name="foundedLocationLable">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(230, 230, 230);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="margin">
-                 <number>9</number>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="searchTypeLabel">
-                <property name="font">
-                 <font>
-                  <family>Blinker</family>
-                  <pointsize>14</pointsize>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>Component Type:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="searchQuantityLabel">
-                <property name="font">
-                 <font>
-                  <family>Blinker</family>
-                  <pointsize>14</pointsize>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                </property>
-                <property name="text">
-                 <string>Quantity:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="searchMPNLineEdit">
-                <property name="accessibleDescription">
-                 <string/>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                </property>
-                <property name="placeholderText">
-                 <string>Enter the component's MPN</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QLabel" name="foundedFootprintLabel">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(230, 230, 230);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="margin">
-                 <number>9</number>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
+              <item row="7" column="1">
                <widget class="QPushButton" name="EditComponentPushButton">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -1437,6 +1416,133 @@
                 </property>
                 <property name="text">
                  <string>Edit Component</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="searchLocationLabel">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Location of component in Lab:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="foundedLocationLable">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="searchMPNLabel">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Manufacturer part number:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="findPushButton">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>FInd Component</string>
+                </property>
+                <property name="autoDefault">
+                 <bool>true</bool>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="searchMPNLineEdit">
+                <property name="accessibleDescription">
+                 <string/>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="placeholderText">
+                 <string>Enter the component's MPN</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="searchTypeLabel">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Component Type:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="searchQuantityLabel">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>14</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Quantity:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLabel" name="foundedQuantityLabel">
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(230, 230, 230);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="margin">
+                 <number>9</number>
                 </property>
                </widget>
               </item>

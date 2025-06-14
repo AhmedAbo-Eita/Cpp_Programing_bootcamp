@@ -45,6 +45,9 @@ private:
     std::optional<int> searchComponentsInTable(QString MPN);
     void exportTableToCSV(QTableWidget *tableWidget,QWidget *parent);
     void importTableFromCSV(QTableWidget *tableWidget, QWidget *parent);
+    void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,QWidget *parent);
+    int getComponentTypeIndex(QString type);
+
 
 
 
