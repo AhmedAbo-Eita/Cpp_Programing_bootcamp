@@ -16,6 +16,7 @@
 #include <QUrl>
 #include <QCoreApplication>
 #include <QTemporaryFile>
+#include <QStandardPaths>
 #include "component.h"
 
 
@@ -46,7 +47,9 @@ private:
     void exportTableToCSV(QTableWidget *tableWidget,QWidget *parent);
     void importTableFromCSV(QTableWidget *tableWidget, QWidget *parent);
     void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,QWidget *parent);
+    void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath ,QWidget *parent);
     int getComponentTypeIndex(QString type);
+    void checkCSV();
 
 
 

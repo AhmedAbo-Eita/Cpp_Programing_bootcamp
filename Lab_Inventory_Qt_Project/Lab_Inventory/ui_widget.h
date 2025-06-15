@@ -36,7 +36,7 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *appLogoLabel;
     QSpacerItem *horizontalSpacer;
-    QPushButton *cleanPushButton_2;
+    QPushButton *resetPushButton;
     QPushButton *cleanPushButton;
     QPushButton *savePushButton;
     QPushButton *importPushButton;
@@ -137,18 +137,18 @@ public:
 
         horizontalLayout_4->addItem(horizontalSpacer);
 
-        cleanPushButton_2 = new QPushButton(Widget);
-        cleanPushButton_2->setObjectName("cleanPushButton_2");
-        sizePolicy.setHeightForWidth(cleanPushButton_2->sizePolicy().hasHeightForWidth());
-        cleanPushButton_2->setSizePolicy(sizePolicy);
-        cleanPushButton_2->setMinimumSize(QSize(100, 50));
-        cleanPushButton_2->setFont(font);
+        resetPushButton = new QPushButton(Widget);
+        resetPushButton->setObjectName("resetPushButton");
+        sizePolicy.setHeightForWidth(resetPushButton->sizePolicy().hasHeightForWidth());
+        resetPushButton->setSizePolicy(sizePolicy);
+        resetPushButton->setMinimumSize(QSize(160, 50));
+        resetPushButton->setFont(font);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/inventoryMainIcons/Images/return_10118885.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        cleanPushButton_2->setIcon(icon);
-        cleanPushButton_2->setIconSize(QSize(40, 50));
+        resetPushButton->setIcon(icon);
+        resetPushButton->setIconSize(QSize(40, 50));
 
-        horizontalLayout_4->addWidget(cleanPushButton_2);
+        horizontalLayout_4->addWidget(resetPushButton);
 
         cleanPushButton = new QPushButton(Widget);
         cleanPushButton->setObjectName("cleanPushButton");
@@ -716,9 +716,9 @@ public:
     {
         Widget->setWindowTitle(QCoreApplication::translate("Widget", "Lab Inventory", nullptr));
         appLogoLabel->setText(QString());
-        cleanPushButton_2->setText(QCoreApplication::translate("Widget", "   Reset", nullptr));
+        resetPushButton->setText(QCoreApplication::translate("Widget", " Reset to Last Save", nullptr));
         cleanPushButton->setText(QCoreApplication::translate("Widget", "Clean Table  ", nullptr));
-        savePushButton->setText(QCoreApplication::translate("Widget", " Import CSV", nullptr));
+        savePushButton->setText(QCoreApplication::translate("Widget", " Save Table", nullptr));
         importPushButton->setText(QCoreApplication::translate("Widget", "Import CSV  ", nullptr));
         exportPushButton->setText(QCoreApplication::translate("Widget", "Export CSV  ", nullptr));
         inventoryTableGroupBox->setTitle(QCoreApplication::translate("Widget", "Inventory Table", nullptr));

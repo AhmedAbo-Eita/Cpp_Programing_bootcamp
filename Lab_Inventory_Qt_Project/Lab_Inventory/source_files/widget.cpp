@@ -1,6 +1,7 @@
 #include "../header_files/widget.h"
 #include "./ui_widget.h"
 
+
 //Macros
 //number of colums of attributs in table
 #define quantityOfComponent     1
@@ -8,9 +9,9 @@
 #define footprintOfComponent    3
 #define locationOfComponent     4
 
-//CSV databas path
-#define databasePath            ":/database/database/My_Inventory.csv"
-
+QString dataDirPath = QCoreApplication::applicationDirPath() + "/data";
+// Prepare CSV file path
+QString destPath = dataDirPath + "/My_Inventory.csv";
 
 
 Widget::Widget(QWidget *parent)
@@ -18,13 +19,19 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
+
     //Setup the inventory table
     inventoryTableStyleSetup();
+
     //connect functions of widget
     widget_connect_func();
 
-    //load the local database csv file from resorce file
-    importTableFromCSVLocal(ui->inventoryTableWidget,databasePath ,this);
+    //Check the CSV file
+    checkCSV();
+
+    //import the local CSV file to the application
+    importTableFromCSVLocal(ui->inventoryTableWidget,destPath ,this);
+
 
 }
 
@@ -35,48 +42,6 @@ Widget::~Widget()
 /*******************************************************************************************************************/
 /*******************************************************************************************************************/
 
-void Widget::inventoryTableStyleSetup()
-{
-    //Create the table rows and coloums
-    ui->inventoryTableWidget->setColumnCount(5);
-    //ui->inventoryTableWidget->setRowCount(100);
-
-    //Set Table Headers
-    QStringList headers {"Manufacturer part number","Quantity","Component Type","Footrpint","Location of Component"};
-    ui->inventoryTableWidget->setHorizontalHeaderLabels(headers);
-
-    // Stretch columns to fill the table width
-    ui->inventoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
-    // Allow sorting by clicking on headers
-    ui->inventoryTableWidget->setSortingEnabled(true);
-
-    // Make rows selectable as whole rows
-    ui->inventoryTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-    // Optional: Set table to read-only (no direct editing)
-    ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    //Styling of Coloums headers
-    ui->inventoryTableWidget->horizontalHeader()->setStyleSheet(
-        "QHeaderView::section {"
-        "background-color: green;"
-        "color: white;"            // optional: text color
-        "font-weight: bold;"       // optional: make text bold
-        "padding: 4px;"
-        "}"
-        );
-
-    //styling of row's numbers
-    ui->inventoryTableWidget->verticalHeader()->setStyleSheet(
-        "QHeaderView::section {"
-        "background-color: gray;"
-        "color: white;"            // optional: text color
-        "font-weight: bold;"       // optional: make text bold
-        "padding: 4px;"
-        "}"
-        );
-}
 
 void Widget::widget_connect_func()
 {
@@ -150,7 +115,7 @@ void Widget::widget_connect_func()
                                                  "Please cheack it"),QMessageBox:: Ok);
                     }
                 }
-            });
+    });
 
 
     /*--------------------------------------------------------------------------------------------*/
@@ -170,7 +135,7 @@ void Widget::widget_connect_func()
                 ui->typeComboBox->setCurrentIndex(0);
                 ui->footprintComboBox->setCurrentIndex(0);
                 ui->quantitySpinBox->setValue(0);
-            });
+    });
 
 
     /*--------------------------------------------------------------------------------------------*/
@@ -185,8 +150,70 @@ void Widget::widget_connect_func()
      * @return empty table
      */
     connect(ui->cleanPushButton, &QPushButton::clicked, this, [=](){
-        componentList = {};// clear all components in component list
-        showComponentsInTable();
+        // Message to make sure that the user need to clean the inventory tabto avoid cliking by accident
+        auto ret = QMessageBox::question(this, tr("Reset to the last save"),
+                                         tr("Do you want to Clear all the data in the inventory table?"),
+                                         QMessageBox::Ok | QMessageBox::Cancel);
+
+        if(ret == QMessageBox::Ok)
+        {
+            componentList = {};// clear all components in component list
+            showComponentsInTable();
+        }
+        else return;
+    });
+
+
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+
+
+    /**
+     * @brief This connect function to rest the table of lab inventory to the last save
+     *
+     * @param signal from reset button.
+     * @return load the last save of inventory
+     */
+    connect(ui->resetPushButton,&QPushButton::clicked,this,[=]()
+    {
+        // Message to make sure that the user need to resrt to avoid cliking by accident
+        auto ret = QMessageBox::question(this, tr("Reset to the last save"),
+                                tr("Do you want to reset all the changes to the last save?"),
+                                QMessageBox::Ok | QMessageBox::Cancel);
+
+        if (ret == QMessageBox::Ok)
+        {
+            componentList = {};// clear all components in component list
+            showComponentsInTable();
+            importTableFromCSVLocal(ui->inventoryTableWidget,destPath ,this);
+
+        }
+        else return;
+    });
+
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+
+    /**
+     * @brief This connect function to save the current table to the local CSV file
+     *
+     * @param signal from reset button.
+     * @return load the last save of inventory
+     */
+    connect(ui->savePushButton,&QPushButton::clicked,this,[=]()
+    {
+        // Message to make sure that the user need to Save to avoid cliking by accident
+        auto ret = QMessageBox::question(this, tr("Reset to the last save"),
+                                         tr("Do you want to reset all the changes to the last save?"),
+                                         QMessageBox::Ok | QMessageBox::Cancel);
+
+        if(ret == QMessageBox::Ok)
+        {
+            exportTableToCSVLocal(ui->inventoryTableWidget,destPath,this);
+        }
+        else return;
     });
 
     /*--------------------------------------------------------------------------------------------*/
@@ -347,6 +374,14 @@ void Widget::widget_connect_func()
     /**********************************************************************************************/
     /*--------------------------------------------------------------------------------------------*/
 
+    /**
+     * @brief Connect function while pressing the button of find component from edit tab
+     * all the info of the component move to the Edit tab to edit it and then update inventory
+     * Checking if the MPN in inventory or not if not ask the user to add it
+     *
+     * @param signal from Edit component of Edit groupbox pushbutton button.
+     * @return display status of the component on edit group box to help the user to edit it
+     */
     connect(ui->editFindpushButton,&QPushButton::clicked,this,[=]()
     {
         //Searching on the component
@@ -388,9 +423,59 @@ void Widget::widget_connect_func()
         }
     });
 
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+
 
 }
 
+void Widget::inventoryTableStyleSetup()
+{
+    //Create the table rows and coloums
+    ui->inventoryTableWidget->setColumnCount(5);
+    //ui->inventoryTableWidget->setRowCount(100);
+
+    //Set Table Headers
+    QStringList headers {"Manufacturer part number","Quantity","Component Type","Footrpint","Location of Component"};
+    ui->inventoryTableWidget->setHorizontalHeaderLabels(headers);
+
+    // Stretch columns to fill the table width
+    ui->inventoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    // Allow sorting by clicking on headers
+    ui->inventoryTableWidget->setSortingEnabled(true);
+
+    // Make rows selectable as whole rows
+    ui->inventoryTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+    // Optional: Set table to read-only (no direct editing)
+    ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //Styling of Coloums headers
+    ui->inventoryTableWidget->horizontalHeader()->setStyleSheet(
+        "QHeaderView::section {"
+        "background-color: green;"
+        "color: white;"            // optional: text color
+        "font-weight: bold;"       // optional: make text bold
+        "padding: 4px;"
+        "}"
+        );
+
+    //styling of row's numbers
+    ui->inventoryTableWidget->verticalHeader()->setStyleSheet(
+        "QHeaderView::section {"
+        "background-color: gray;"
+        "color: white;"            // optional: text color
+        "font-weight: bold;"       // optional: make text bold
+        "padding: 4px;"
+        "}"
+        );
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
 
 void Widget::showComponentsInTable()
 {
@@ -432,7 +517,6 @@ std::optional<int> Widget::searchComponentsInTable(QString MPN){
     return std::nullopt;
 }
 
-
 /*--------------------------------------------------------------------------------------------*/
 /**********************************************************************************************/
 /*--------------------------------------------------------------------------------------------*/
@@ -458,6 +542,59 @@ void Widget::exportTableToCSV(QTableWidget *tableWidget, QWidget *parent)
 
     //create a QFile to write the file needed
     QFile file(fileName);
+
+    //
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::warning(parent, "Unable to open file", file.errorString());
+        return;
+    }
+
+    // QTextStream handles formatted text output to the file
+    QTextStream out(&file);
+
+    // Write headers
+    QStringList headers;
+    for (int col = 0; col < tableWidget->columnCount(); col++) {
+        QTableWidgetItem *headerItem = tableWidget->horizontalHeaderItem(col);
+        headers << (headerItem ? "\"" + headerItem->text() + "\"" : "\"\"");
+    }
+    out << headers.join(",") << "\n";
+
+    // Write table content
+    for (int row = 0; row < tableWidget->rowCount(); ++row) {
+        QStringList rowContents;
+        for (int col = 0; col < tableWidget->columnCount(); col++) {
+            QTableWidgetItem *item = tableWidget->item(row, col);
+            rowContents << "\"" + (item ? item->text() : "") + "\"";
+        }
+        out << rowContents.join(",") << "\n";
+    }
+
+    file.close();
+    QMessageBox::information(parent, "Export Complete", "Inventory table was saved to CSV successfully.");
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief Exports the contents of a QTableWidget to a CSV Local file.
+ * writes the table's header and contents row-by-row into a properly formatted
+ * CSV (Comma-Separated Values) file.
+ *
+ * @param tableWidget Pointer to the QTableWidget containing the data to export.
+ * @param parent Optional parent widget, used for file dialog and message boxes.
+ * @param filePath: this is the path of the local CSV file
+ */
+void Widget::exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath ,QWidget *parent)
+{
+    //if user click cancel --> do nothing
+    if (filePath.isEmpty()) return;
+
+    //create a QFile to write the file needed
+    QFile file(filePath);
 
     //
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -688,6 +825,43 @@ int Widget::getComponentTypeIndex(QString type)
 }
 
 
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief function to check the local database CSV file.
+ *
+ * @param
+ * @return
+ */
+
+void Widget::checkCSV()
+{
+    //load the local database csv file from resorce file
+    // Prepare data directory path next to executable
+
+    QDir dir(dataDirPath);
+    if (!dir.exists()) {
+        dir.mkpath(".");
+    }
+
+    if (!QFile::exists(destPath)) {
+        QFile file(destPath);
+
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QMessageBox::warning(this, "Error", "Unable to create My_Inventory.csv:\n" + file.errorString());
+            return;
+        }
+        QTextStream out(&file);
+        // Write fixed headers
+        out << "\"Manufacturer part number\",\"Quantity\",\"Component Type\",\"Footrpint\",\"Location of Component\"\n";
+        file.close();
+
+        QMessageBox::information(this, "Info", "New My_Inventory.csv created successfully.");
+    }
+
+}
 
 
 

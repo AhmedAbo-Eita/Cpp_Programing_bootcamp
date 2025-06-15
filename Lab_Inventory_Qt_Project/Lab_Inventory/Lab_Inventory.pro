@@ -24,6 +24,8 @@ FORMS += \
 RESOURCES += \
     Resources.qrc
 
+DISTFILES += \
+    data/My_Inventory.csv
 
 RC_FILE = Lab_Inventory.rc
 

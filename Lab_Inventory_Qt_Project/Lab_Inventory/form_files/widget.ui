@@ -69,7 +69,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="cleanPushButton_2">
+      <widget class="QPushButton" name="resetPushButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -78,7 +78,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
+         <width>160</width>
          <height>50</height>
         </size>
        </property>
@@ -91,7 +91,7 @@
         </font>
        </property>
        <property name="text">
-        <string>   Reset</string>
+        <string> Reset to Last Save</string>
        </property>
        <property name="icon">
         <iconset resource="../Resources.qrc">
@@ -159,7 +159,7 @@
         </font>
        </property>
        <property name="text">
-        <string> Import CSV</string>
+        <string> Save Table</string>
        </property>
        <property name="icon">
         <iconset resource="../Resources.qrc">

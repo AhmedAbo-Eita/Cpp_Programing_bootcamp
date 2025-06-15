@@ -13,11 +13,7 @@
         <file>Images/return_10118885.png</file>
         <file>Images/save_9584668.png</file>
     </qresource>
-    <qresource prefix="/footprint">
-        <file>footprint/SMDDimensionSelectionGuide.pdf</file>
+    <qresource prefix="/data">
+        <file>data/My_Inventory.csv</file>
     </qresource>
-    <qresource prefix="/database">
-        <file>database/My_Inventory.csv</file>
-    </qresource>
-    <qresource prefix="/new/prefix1"/>
 </RCC>
