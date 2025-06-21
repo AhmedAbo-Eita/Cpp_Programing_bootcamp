@@ -9,13 +9,6 @@
 #define footprintOfComponent    3
 #define locationOfComponent     4
 
-//Global Variables
-std::optional<int> updatedIndex;
-
-QString dataDirPath = QCoreApplication::applicationDirPath() + "/data";
-// Prepare CSV file path
-QString destPath = dataDirPath + "/My_Inventory.csv";
-
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -23,18 +16,20 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //Check the CSV file
+    checkCSV(dataDirPath,destPath);
+
+    //import the local CSV file to the application
+    importTableFromCSVLocal(ui->inventoryTableWidget,destPath ,this);
+
+    //Component list of last save
+    componentListoldSave = componentList;
+
     //Setup the inventory table
     inventoryTableStyleSetup();
 
     //connect functions of widget
     widget_connect_func();
-
-    //Check the CSV file
-    checkCSV();
-
-    //import the local CSV file to the application
-    importTableFromCSVLocal(ui->inventoryTableWidget,destPath ,this);
-
 
 }
 
@@ -90,7 +85,7 @@ void Widget::widget_connect_func()
 
                     //creat an object from user input values
                     Component user_component;
-                    user_component.setMPN(user_MPN);
+                    user_component.setMPN(user_MPN.remove(' ').remove('\n'));
                     user_component.setLocation(user_location);
                     user_component.setType(user_type);
                     user_component.setFootpint(user_footprint);
@@ -154,7 +149,7 @@ void Widget::widget_connect_func()
      */
     connect(ui->cleanPushButton, &QPushButton::clicked, this, [=](){
         // Message to make sure that the user need to clean the inventory tabto avoid cliking by accident
-        auto ret = QMessageBox::question(this, tr("Reset to the last save"),
+        auto ret = QMessageBox::critical(this, tr("Clear all data in inventory table"),
                                          tr("Do you want to Clear all the data in the inventory table?"),
                                          QMessageBox::Ok | QMessageBox::Cancel);
 
@@ -162,6 +157,8 @@ void Widget::widget_connect_func()
         {
             componentList = {};// clear all components in component list
             showComponentsInTable();
+            exportTableToCSVLocal(ui->inventoryTableWidget,destPath,this); // store on the local CSV
+
         }
         else return;
     });
@@ -208,13 +205,15 @@ void Widget::widget_connect_func()
     connect(ui->savePushButton,&QPushButton::clicked,this,[=]()
     {
         // Message to make sure that the user need to Save to avoid cliking by accident
-        auto ret = QMessageBox::question(this, tr("Reset to the last save"),
-                                         tr("Do you want to reset all the changes to the last save?"),
+        auto ret = QMessageBox::question(this, tr("Save the inventory table"),
+                                         tr("Do you want to save all the changes of inventory table?"),
                                          QMessageBox::Ok | QMessageBox::Cancel);
 
         if(ret == QMessageBox::Ok)
         {
             exportTableToCSVLocal(ui->inventoryTableWidget,destPath,this);
+            componentListoldSave = componentList;
+            QMessageBox::information(this, "Export Complete", "Inventory table was saved to CSV successfully.");
         }
         else return;
     });
@@ -246,6 +245,7 @@ void Widget::widget_connect_func()
      */
     connect(ui->importPushButton,&QPushButton::clicked,this,[=](){
         importTableFromCSV(ui->inventoryTableWidget,this);
+        exportTableToCSVLocal(ui->inventoryTableWidget,destPath,this); // store on the local CSV
     });
 
 
@@ -374,6 +374,14 @@ void Widget::widget_connect_func()
         ui->editLocatioLineEdit->setText(ui->foundedLocationLable->text());
         ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->foundedTypeLable->text().remove(' ').remove('\n')));
 
+        //set the edit area to be enabled
+        ui->editLocatioLineEdit->setDisabled(false);
+        ui->editQuantitySpinBox->setDisabled(false);
+        ui->editFootprintLineEdit->setDisabled(false);
+        ui->editTypeComboBox->setDisabled(false);
+        ui->applyEditspushButton->setDisabled(false);
+        ui->deleteComponentpushButton->setDisabled(false);
+
         //reset the search tabs values
         ui->foundedFootprintLabel->clear();
         ui->foundedLocationLable->clear();
@@ -415,6 +423,13 @@ void Widget::widget_connect_func()
             //disable editing on component
             ui->editMPNLineEdit->setDisabled(true);
             ui->editFindpushButton->setDisabled(true);
+            //enable editiong parameters
+            ui->editLocatioLineEdit->setDisabled(false);
+            ui->editQuantitySpinBox->setDisabled(false);
+            ui->editFootprintLineEdit->setDisabled(false);
+            ui->editTypeComboBox->setDisabled(false);
+            ui->applyEditspushButton->setDisabled(false);
+            ui->deleteComponentpushButton->setDisabled(false);
         }
         else if (ui->editMPNLineEdit->text().isEmpty())
         {
@@ -450,29 +465,42 @@ void Widget::widget_connect_func()
      */
     connect(ui->applyEditspushButton,&QPushButton::clicked,this,[=]()
     {
-        //update table widget
-        ui->inventoryTableWidget->item(*updatedIndex,locationOfComponent)->setText(ui->editLocatioLineEdit->text());
-        ui->inventoryTableWidget->item(*updatedIndex,footprintOfComponent)->setText(ui->editFootprintLineEdit->text());
-        ui->inventoryTableWidget->item(*updatedIndex,quantityOfComponent)->setText(ui->editQuantitySpinBox->text());
-        ui->inventoryTableWidget->item(*updatedIndex,typeOfComponent)->setText(ui->editTypeComboBox->currentText());
+        if(updatedIndex != std::nullopt)
+        {
+            //update table widget
+            ui->inventoryTableWidget->item(*updatedIndex,locationOfComponent)->setText(ui->editLocatioLineEdit->text());
+            ui->inventoryTableWidget->item(*updatedIndex,footprintOfComponent)->setText(ui->editFootprintLineEdit->text());
+            ui->inventoryTableWidget->item(*updatedIndex,quantityOfComponent)->setText(ui->editQuantitySpinBox->text());
+            ui->inventoryTableWidget->item(*updatedIndex,typeOfComponent)->setText(ui->editTypeComboBox->currentText());
 
-        //update Component list
-        componentList.at(*updatedIndex).setLocation(ui->editLocatioLineEdit->text());
-        componentList.at(*updatedIndex).setFootpint(ui->editFootprintLineEdit->text());
-        componentList.at(*updatedIndex).setQuantity(ui->editQuantitySpinBox->text().toInt());
-        componentList.at(*updatedIndex).setType(ui->editTypeComboBox->currentText());
+            //update Component list
+            componentList.at(*updatedIndex).setLocation(ui->editLocatioLineEdit->text());
+            componentList.at(*updatedIndex).setFootpint(ui->editFootprintLineEdit->text());
+            componentList.at(*updatedIndex).setQuantity(ui->editQuantitySpinBox->text().toInt());
+            componentList.at(*updatedIndex).setType(ui->editTypeComboBox->currentText());
 
-        //clear editline
-        ui->editFootprintLineEdit->clear();
-        ui->editLocatioLineEdit->clear();
-        ui->editMPNLineEdit->clear();
-        ui->editQuantitySpinBox->setValue(0);
-        ui->editTypeComboBox->setCurrentIndex(0);
+            //clear editline
+            ui->editFootprintLineEdit->clear();
+            ui->editLocatioLineEdit->clear();
+            ui->editMPNLineEdit->clear();
+            ui->editQuantitySpinBox->setValue(0);
+            ui->editTypeComboBox->setCurrentIndex(0);
 
-        // Enable to find component
-        //disable editing on component
-        ui->editMPNLineEdit->setDisabled(false);
-        ui->editFindpushButton->setDisabled(false);
+            // Enable to find component
+            //disable editing on component
+            ui->editMPNLineEdit->setDisabled(false);
+            ui->editFindpushButton->setDisabled(false);
+            ui->editFootprintLineEdit->setDisabled(true);
+            ui->editLocatioLineEdit->setDisabled(true);
+            ui->editQuantitySpinBox->setDisabled(true);
+            ui->editTypeComboBox->setDisabled(true);
+            ui->applyEditspushButton->setDisabled(true);
+            ui->deleteComponentpushButton->setDisabled(true);
+
+            //reset index ptr
+            updatedIndex = std::nullopt;
+        }
+        else return;
     });
 
     /*--------------------------------------------------------------------------------------------*/
@@ -491,7 +519,7 @@ void Widget::widget_connect_func()
                              tr("Are you sure, Do you want to delete this component?"),
                              QMessageBox::Ok | QMessageBox::Cancel );
 
-        if(ret == QMessageBox::Ok)
+        if(ret == QMessageBox::Ok && updatedIndex != std::nullopt)
         {
             int index = *updatedIndex;
             ui->inventoryTableWidget->removeRow(*updatedIndex);
@@ -507,10 +535,95 @@ void Widget::widget_connect_func()
             //disable editing on component
             ui->editMPNLineEdit->setDisabled(false);
             ui->editFindpushButton->setDisabled(false);
+            ui->editFootprintLineEdit->setDisabled(true);
+            ui->editLocatioLineEdit->setDisabled(true);
+            ui->editQuantitySpinBox->setDisabled(true);
+            ui->editTypeComboBox->setDisabled(true);
+            ui->applyEditspushButton->setDisabled(true);
+            ui->deleteComponentpushButton->setDisabled(true);
+            updatedIndex = std::nullopt;
         }
         else return;
     });
 
+    connect(ui->saveExamplePushButton,&QPushButton::clicked,this, [=]()
+    {
+        //need improvment
+        QTableWidget* temp = new QTableWidget(this);
+        importTableFromCSVLocal(temp,":/data/data/My_Inventory.csv",this);
+        exportTableToCSV(temp,this);
+        importTableFromCSVLocal(ui->inventoryTableWidget,destPath,this);
+    });
+
+
+    connect(ui->tabWidget,&QTabWidget::currentChanged,this,[=](int tabindex)
+    {
+        if(tabindex == 1 )
+        {
+            ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::DoubleClicked);
+        }
+        if(tabindex==0 || tabindex == 2)
+        {
+            ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        }
+    });
+
+    connect(ui->inventoryTableWidget, &QTableWidget::cellClicked, this, [=](int row)
+    {
+        updatedIndex = row;
+        //copy data from table to edit tab
+        ui->editMPNLineEdit->setText(ui->inventoryTableWidget->item(row,0)->text());
+        ui->editFootprintLineEdit->setText(ui->inventoryTableWidget->item(row,footprintOfComponent)->text());
+        ui->editLocatioLineEdit->setText(ui->inventoryTableWidget->item(row,locationOfComponent)->text());
+        ui->editQuantitySpinBox->setValue(ui->inventoryTableWidget->item(row,quantityOfComponent)->text().toInt());
+        ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->inventoryTableWidget->item(row,typeOfComponent)->text().remove(' ').remove('\n')));
+        //disable editing on component
+        ui->editMPNLineEdit->setDisabled(true);
+        ui->editFindpushButton->setDisabled(true);
+        //enable editiong parameters
+        ui->editLocatioLineEdit->setDisabled(false);
+        ui->editQuantitySpinBox->setDisabled(false);
+        ui->editFootprintLineEdit->setDisabled(false);
+        ui->editTypeComboBox->setDisabled(false);
+        ui->applyEditspushButton->setDisabled(false);
+        ui->deleteComponentpushButton->setDisabled(false);
+    });
+
+    connect(ui->inventoryTableWidget,&QTableWidget::cellChanged,this,[=](int row,int column)
+    {
+        //update the component list
+    if (row >= 0 && row < static_cast<int>(componentList.size()))
+    {
+        switch (column) {
+            case 1:
+                componentList.at(row).setQuantity(ui->inventoryTableWidget->item(row,column)->text().toInt());
+                break;
+            case 2:
+                componentList.at(row).setType(ui->inventoryTableWidget->item(row,column)->text());
+                break;
+            case 3:
+                componentList.at(row).setFootpint(ui->inventoryTableWidget->item(row,column)->text());
+                break;
+            case 4:
+                componentList.at(row).setLocation(ui->inventoryTableWidget->item(row,column)->text());
+                break;
+        }
+        //showVectorOfComponents(componentList);
+    }
+    });
+    connect(ui->editClearSearchpushButton,&QPushButton::clicked,this,[=]()
+    {
+        ui->editMPNLineEdit->clear();
+        ui->editMPNLineEdit->setDisabled(false);
+        ui->editFindpushButton->setDisabled(false);
+        ui->editFootprintLineEdit->setDisabled(true);
+        ui->editLocatioLineEdit->setDisabled(true);
+        ui->editQuantitySpinBox->setDisabled(true);
+        ui->editTypeComboBox->setDisabled(true);
+        ui->applyEditspushButton->setDisabled(true);
+        ui->deleteComponentpushButton->setDisabled(true);
+
+    });
 }
 
 void Widget::inventoryTableStyleSetup()
@@ -707,7 +820,7 @@ void Widget::exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath ,Q
     }
 
     file.close();
-    QMessageBox::information(parent, "Export Complete", "Inventory table was saved to CSV successfully.");
+    componentListoldSave = componentList;
 }
 
 
@@ -918,8 +1031,7 @@ int Widget::getComponentTypeIndex(QString type)
  * @param
  * @return
  */
-
-void Widget::checkCSV()
+void Widget::checkCSV(QString dataDirPath,QString destPath)
 {
     //load the local database csv file from resorce file
     // Prepare data directory path next to executable
@@ -946,7 +1058,42 @@ void Widget::checkCSV()
 
 }
 
+void Widget::closeEvent(QCloseEvent *event)
+{
+    if(componentListoldSave != componentList)
+    {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Save Changes",
+                                      "You have unsaved changes. Do you want to save before closing?",
+                                      QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
 
+        if (reply == QMessageBox::Yes)
+        {
+            // Calling save function
+            exportTableToCSVLocal(ui->inventoryTableWidget,destPath,this);
+            event->accept();
+        }
+        else if (reply == QMessageBox::No)
+        {
+            // Close without saving
+            event->accept();
+        }
+        else
+        {
+            // Cancel closing
+            event->ignore();
+        }
+    }
+    else event->accept();
+}
 
-
+void Widget::showVectorOfComponents(std::vector<Component> list)
+{
+    for(size_t counter = 0; counter<list.size(); counter++ )
+    {
+        Component c = list.at(counter);
+        qDebug() << "MPN: " << c.getMPN() << " Quantity: " << c.getQuantity()<< " Type:  "<< c.getQuantity()
+                 << " Footprint:  "<<c.getFootprint() << " Location: "<< c.getLocation();
+    }
+}
 

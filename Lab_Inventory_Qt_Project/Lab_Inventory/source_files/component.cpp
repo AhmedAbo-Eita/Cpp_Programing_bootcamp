@@ -17,3 +17,11 @@ int Component::getQuantity(){return m_quantity;}
 QString Component::getFootprint(){return m_footprint;}
 QString Component::getType(){return m_type;}
 QString Component::getLocation(){return m_location;}
+
+bool Component::operator==(const Component& other) const {
+    return m_MPN == other.m_MPN &&
+           m_quantity == other.m_quantity &&
+           m_footprint == other.m_footprint &&
+           m_type == other.m_type &&
+           m_location == other.m_location;
+}

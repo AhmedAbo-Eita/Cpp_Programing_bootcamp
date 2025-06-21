@@ -17,6 +17,7 @@
 #include <QCoreApplication>
 #include <QTemporaryFile>
 #include <QStandardPaths>
+#include <QCloseEvent>
 #include "component.h"
 
 
@@ -35,11 +36,14 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
-
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     Ui::Widget *ui;
     std::vector<Component> componentList;
+    std::vector<Component> componentListoldSave;
+    std::optional<int> updatedIndex = std::nullopt;
     void inventoryTableStyleSetup();
     void widget_connect_func();
     void showComponentsInTable();
@@ -49,7 +53,11 @@ private:
     void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,QWidget *parent);
     void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath ,QWidget *parent);
     int getComponentTypeIndex(QString type);
-    void checkCSV();
+    void checkCSV(QString dataDirPath,QString destPath);
+    QString dataDirPath = QCoreApplication::applicationDirPath() + "/data";
+    // Prepare CSV file path
+    QString destPath = dataDirPath + "/My_Inventory.csv";
+    void showVectorOfComponents(std::vector<Component> list);
 
 
 

@@ -12,6 +12,7 @@
         <file>Images/Lab_Inventory.ico</file>
         <file>Images/return_10118885.png</file>
         <file>Images/save_9584668.png</file>
+        <file>Images/download_10255197.png</file>
     </qresource>
     <qresource prefix="/data">
         <file>data/My_Inventory.csv</file>

@@ -8,6 +8,9 @@ public:
     //construtor
     Component();
 
+    // Comparison operator
+    bool operator==(const Component& other) const;
+
     // distractor
     ~Component();
 

@@ -69,6 +69,29 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="saveExamplePushButton">
+       <property name="minimumSize">
+        <size>
+         <width>210</width>
+         <height>78</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>   Save CSV File Example </string>
+       </property>
+       <property name="icon">
+        <iconset resource="../Resources.qrc">
+         <normaloff>:/inventoryMainIcons/Images/download_10255197.png</normaloff>:/inventoryMainIcons/Images/download_10255197.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>60</width>
+         <height>60</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="footprintPackageExternalButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -77,7 +100,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string/>
+        <string>Footprints of Components     </string>
        </property>
        <property name="icon">
         <iconset resource="../Resources.qrc">
@@ -162,7 +185,7 @@
                   <property name="currentIndex">
                    <number>0</number>
                   </property>
-                  <widget class="QWidget" name="EditComponentTab_2">
+                  <widget class="QWidget" name="addComponentTab">
                    <attribute name="title">
                     <string>Add New Component</string>
                    </attribute>
@@ -287,13 +310,117 @@
                              </property>
                             </widget>
                            </item>
-                           <item row="4" column="1" colspan="2">
+                           <item row="4" column="0">
+                            <widget class="QLabel" name="footprintLabel">
+                             <property name="font">
+                              <font>
+                               <family>Blinker</family>
+                               <pointsize>14</pointsize>
+                               <italic>false</italic>
+                               <bold>false</bold>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                             </property>
+                             <property name="text">
+                              <string>Component Footprint:</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="6" column="2" colspan="2">
+                            <widget class="QPushButton" name="addPushButton">
+                             <property name="styleSheet">
+                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                             </property>
+                             <property name="text">
+                              <string>Add Component</string>
+                             </property>
+                             <property name="autoDefault">
+                              <bool>true</bool>
+                             </property>
+                             <property name="default">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="8" column="2" colspan="2">
+                            <widget class="QPushButton" name="clearPushButton">
+                             <property name="styleSheet">
+                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                             </property>
+                             <property name="text">
+                              <string>Clear All</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="2" column="1" colspan="3">
+                            <widget class="QSpinBox" name="quantitySpinBox">
+                             <property name="styleSheet">
+                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                             </property>
+                             <property name="maximum">
+                              <number>99999</number>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="3" column="1" colspan="3">
+                            <widget class="QComboBox" name="typeComboBox">
+                             <property name="styleSheet">
+                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                             </property>
+                             <item>
+                              <property name="text">
+                               <string>IC</string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>MOSFET</string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>Transistor</string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>Connector</string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>Resistor </string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>Capacitor</string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>Inductor</string>
+                              </property>
+                             </item>
+                             <item>
+                              <property name="text">
+                               <string>Diode</string>
+                              </property>
+                             </item>
+                            </widget>
+                           </item>
+                           <item row="4" column="1" colspan="3">
                             <widget class="QComboBox" name="footprintComboBox">
                              <property name="enabled">
                               <bool>true</bool>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
+                             </property>
+                             <property name="editable">
+                              <bool>true</bool>
                              </property>
                              <item>
                               <property name="text">
@@ -922,107 +1049,6 @@
                              </item>
                             </widget>
                            </item>
-                           <item row="4" column="0">
-                            <widget class="QLabel" name="footprintLabel">
-                             <property name="font">
-                              <font>
-                               <family>Blinker</family>
-                               <pointsize>14</pointsize>
-                               <italic>false</italic>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                             </property>
-                             <property name="text">
-                              <string>Component Footprint:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="6" column="2" colspan="2">
-                            <widget class="QPushButton" name="addPushButton">
-                             <property name="styleSheet">
-                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                             </property>
-                             <property name="text">
-                              <string>Add Component</string>
-                             </property>
-                             <property name="autoDefault">
-                              <bool>true</bool>
-                             </property>
-                             <property name="default">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="8" column="2" colspan="2">
-                            <widget class="QPushButton" name="clearPushButton">
-                             <property name="styleSheet">
-                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                             </property>
-                             <property name="text">
-                              <string>Clear All</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="1" colspan="3">
-                            <widget class="QSpinBox" name="quantitySpinBox">
-                             <property name="styleSheet">
-                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                             </property>
-                             <property name="maximum">
-                              <number>99999</number>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="1" colspan="3">
-                            <widget class="QComboBox" name="typeComboBox">
-                             <property name="styleSheet">
-                              <string notr="true">font: 14pt &quot;Blinker&quot;;</string>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>IC</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>MOSFET</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Transistor</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Connector</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Resistor </string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Capacitor</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Inductor</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Diode</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
                           </layout>
                          </item>
                         </layout>
@@ -1045,45 +1071,21 @@
                       <layout class="QVBoxLayout" name="verticalLayout_5">
                        <item>
                         <layout class="QGridLayout" name="gridLayout_3">
-                         <item row="0" column="0">
-                          <widget class="QLabel" name="editMPNLabel">
-                           <property name="text">
-                            <string>Manufacturer part number:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="6" column="0">
+                         <item row="7" column="0">
                           <widget class="QLabel" name="editTypeLabel">
                            <property name="text">
                             <string>Component Type</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="3" column="0">
-                          <widget class="QLabel" name="editQuantityLabel">
-                           <property name="text">
-                            <string>Quantity:</string>
+                         <item row="4" column="1" colspan="2">
+                          <widget class="QSpinBox" name="editQuantitySpinBox">
+                           <property name="enabled">
+                            <bool>false</bool>
                            </property>
                           </widget>
                          </item>
-                         <item row="0" column="1" colspan="2">
-                          <widget class="QLineEdit" name="editMPNLineEdit">
-                           <property name="text">
-                            <string/>
-                           </property>
-                           <property name="placeholderText">
-                            <string>Enter the Component's MPN</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="4" column="0">
-                          <widget class="QLabel" name="editLocationLabel">
-                           <property name="text">
-                            <string>Location of Component in Lab:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="5" column="0">
+                         <item row="6" column="0">
                           <widget class="QLabel" name="editFootprintLabel">
                            <property name="text">
                             <string>Component Footprint</string>
@@ -1091,10 +1093,68 @@
                           </widget>
                          </item>
                          <item row="5" column="1" colspan="2">
-                          <widget class="QLineEdit" name="editFootprintLineEdit"/>
+                          <widget class="QLineEdit" name="editLocatioLineEdit">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="0">
+                          <widget class="QLabel" name="editMPNLabel">
+                           <property name="text">
+                            <string>Manufacturer part number:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="10" column="2">
+                          <widget class="QPushButton" name="deleteComponentpushButton">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="styleSheet">
+                            <string notr="true">color: rgb(170, 0, 0);</string>
+                           </property>
+                           <property name="text">
+                            <string>Delete Component</string>
+                           </property>
+                          </widget>
                          </item>
                          <item row="6" column="1" colspan="2">
+                          <widget class="QLineEdit" name="editFootprintLineEdit">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="9" column="2">
+                          <widget class="QPushButton" name="applyEditspushButton">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
+                           <property name="text">
+                            <string>Apply Edits</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="5" column="0">
+                          <widget class="QLabel" name="editLocationLabel">
+                           <property name="text">
+                            <string>Location of Component in Lab:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="4" column="0">
+                          <widget class="QLabel" name="editQuantityLabel">
+                           <property name="text">
+                            <string>Quantity:</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="7" column="1" colspan="2">
                           <widget class="QComboBox" name="editTypeComboBox">
+                           <property name="enabled">
+                            <bool>false</bool>
+                           </property>
                            <item>
                             <property name="text">
                              <string>IC</string>
@@ -1137,33 +1197,27 @@
                            </item>
                           </widget>
                          </item>
-                         <item row="3" column="1" colspan="2">
-                          <widget class="QSpinBox" name="editQuantitySpinBox"/>
+                         <item row="0" column="1" colspan="2">
+                          <widget class="QLineEdit" name="editMPNLineEdit">
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="placeholderText">
+                            <string>Enter the Component's MPN</string>
+                           </property>
+                          </widget>
                          </item>
-                         <item row="4" column="1" colspan="2">
-                          <widget class="QLineEdit" name="editLocatioLineEdit"/>
-                         </item>
-                         <item row="1" column="1" colspan="2">
+                         <item row="2" column="1">
                           <widget class="QPushButton" name="editFindpushButton">
                            <property name="text">
                             <string>Find Component to Edit</string>
                            </property>
                           </widget>
                          </item>
-                         <item row="8" column="2">
-                          <widget class="QPushButton" name="applyEditspushButton">
+                         <item row="2" column="2">
+                          <widget class="QPushButton" name="editClearSearchpushButton">
                            <property name="text">
-                            <string>Apply Edits</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="9" column="2">
-                          <widget class="QPushButton" name="deleteComponentpushButton">
-                           <property name="styleSheet">
-                            <string notr="true">color: rgb(170, 0, 0);</string>
-                           </property>
-                           <property name="text">
-                            <string>Delete Component</string>
+                            <string>Clear Search</string>
                            </property>
                           </widget>
                          </item>
@@ -1174,7 +1228,7 @@
                     </item>
                    </layout>
                   </widget>
-                  <widget class="QWidget" name="tab">
+                  <widget class="QWidget" name="searchComponentTab">
                    <attribute name="title">
                     <string>Search Component</string>
                    </attribute>
