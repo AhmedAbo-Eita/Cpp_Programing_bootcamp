@@ -9,6 +9,9 @@
 #define footprintOfComponent    3
 #define locationOfComponent     4
 
+//Global Variables
+std::optional<int> updatedIndex;
+
 QString dataDirPath = QCoreApplication::applicationDirPath() + "/data";
 // Prepare CSV file path
 QString destPath = dataDirPath + "/My_Inventory.csv";
@@ -306,6 +309,7 @@ void Widget::widget_connect_func()
     {
         //component search and return its row index value
         std::optional<int> index = searchComponentsInTable(ui->searchMPNLineEdit->text());
+        updatedIndex = index;
 
 
         // Check if the component available in inventory or not
@@ -339,6 +343,7 @@ void Widget::widget_connect_func()
                 ui->tabWidget->setCurrentIndex(0);//open add component widget
                 ui->MPNLineEdit->setText(ui->searchMPNLineEdit->text());// copy the MPN to the tab of add
                 ui->locationLineEdit->setFocus();// move the pointer to Location
+                ui->searchMPNLineEdit->clear();//clear the search editline
             }
         }
     });
@@ -368,6 +373,13 @@ void Widget::widget_connect_func()
         ui->editFootprintLineEdit->setText(ui->foundedFootprintLabel->text());
         ui->editLocatioLineEdit->setText(ui->foundedLocationLable->text());
         ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->foundedTypeLable->text().remove(' ').remove('\n')));
+
+        //reset the search tabs values
+        ui->foundedFootprintLabel->clear();
+        ui->foundedLocationLable->clear();
+        ui->foundedQuantityLabel->clear();
+        ui->foundedTypeLable->clear();
+        ui->searchMPNLineEdit->clear();
     });
 
     /*--------------------------------------------------------------------------------------------*/
@@ -379,14 +391,14 @@ void Widget::widget_connect_func()
      * all the info of the component move to the Edit tab to edit it and then update inventory
      * Checking if the MPN in inventory or not if not ask the user to add it
      *
-     * @param signal from Edit component of Edit groupbox pushbutton button.
+     * @param signal from find component of Edit groupbox pushbutton button.
      * @return display status of the component on edit group box to help the user to edit it
      */
     connect(ui->editFindpushButton,&QPushButton::clicked,this,[=]()
     {
         //Searching on the component
         std::optional<int> index = searchComponentsInTable(ui->editMPNLineEdit->text());
-
+        updatedIndex = index;
 
         // Check if the component available in inventory or not
         //if not let the user know
@@ -400,6 +412,9 @@ void Widget::widget_connect_func()
             ui->editFootprintLineEdit->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
             //show the type of component
             ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->inventoryTableWidget->item(*index,typeOfComponent)->text().remove(' ').remove('\n')));
+            //disable editing on component
+            ui->editMPNLineEdit->setDisabled(true);
+            ui->editFindpushButton->setDisabled(true);
         }
         else if (ui->editMPNLineEdit->text().isEmpty())
         {
@@ -421,12 +436,80 @@ void Widget::widget_connect_func()
                 ui->locationLineEdit->setFocus();// move the pointer to Location
             }
         }
+
     });
 
     /*--------------------------------------------------------------------------------------------*/
     /**********************************************************************************************/
     /*--------------------------------------------------------------------------------------------*/
+    /**
+     * @brief Connect function that update the data of inventory table
+     *
+     * @param signal from Edit component of Edit groupbox pushbutton button.
+     * @return change the values according to user input and save it in table and component list
+     */
+    connect(ui->applyEditspushButton,&QPushButton::clicked,this,[=]()
+    {
+        //update table widget
+        ui->inventoryTableWidget->item(*updatedIndex,locationOfComponent)->setText(ui->editLocatioLineEdit->text());
+        ui->inventoryTableWidget->item(*updatedIndex,footprintOfComponent)->setText(ui->editFootprintLineEdit->text());
+        ui->inventoryTableWidget->item(*updatedIndex,quantityOfComponent)->setText(ui->editQuantitySpinBox->text());
+        ui->inventoryTableWidget->item(*updatedIndex,typeOfComponent)->setText(ui->editTypeComboBox->currentText());
 
+        //update Component list
+        componentList.at(*updatedIndex).setLocation(ui->editLocatioLineEdit->text());
+        componentList.at(*updatedIndex).setFootpint(ui->editFootprintLineEdit->text());
+        componentList.at(*updatedIndex).setQuantity(ui->editQuantitySpinBox->text().toInt());
+        componentList.at(*updatedIndex).setType(ui->editTypeComboBox->currentText());
+
+        //clear editline
+        ui->editFootprintLineEdit->clear();
+        ui->editLocatioLineEdit->clear();
+        ui->editMPNLineEdit->clear();
+        ui->editQuantitySpinBox->setValue(0);
+        ui->editTypeComboBox->setCurrentIndex(0);
+
+        // Enable to find component
+        //disable editing on component
+        ui->editMPNLineEdit->setDisabled(false);
+        ui->editFindpushButton->setDisabled(false);
+    });
+
+    /*--------------------------------------------------------------------------------------------*/
+    /**********************************************************************************************/
+    /*--------------------------------------------------------------------------------------------*/
+    /**
+     * @brief Connect function that delete a component from inventory table
+     *
+     * @param signal from delete component of Edit groupbox pushbutton button.
+     * @return remove component
+     */
+
+    connect(ui->deleteComponentpushButton,&QPushButton::clicked,this,[=]()
+    {
+        auto ret = QMessageBox::information(this, tr("Component Delete"),
+                             tr("Are you sure, Do you want to delete this component?"),
+                             QMessageBox::Ok | QMessageBox::Cancel );
+
+        if(ret == QMessageBox::Ok)
+        {
+            int index = *updatedIndex;
+            ui->inventoryTableWidget->removeRow(*updatedIndex);
+            componentList.erase(componentList.begin() + index);
+            //clear editline
+            ui->editFootprintLineEdit->clear();
+            ui->editLocatioLineEdit->clear();
+            ui->editMPNLineEdit->clear();
+            ui->editQuantitySpinBox->setValue(0);
+            ui->editTypeComboBox->setCurrentIndex(0);
+
+            // Enable to find component
+            //disable editing on component
+            ui->editMPNLineEdit->setDisabled(false);
+            ui->editFindpushButton->setDisabled(false);
+        }
+        else return;
+    });
 
 }
 

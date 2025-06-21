@@ -16,4 +16,7 @@
     <qresource prefix="/data">
         <file>data/My_Inventory.csv</file>
     </qresource>
+    <qresource prefix="/footprint">
+        <file>footprint/SMDDimensionSelectionGuide.pdf</file>
+    </qresource>
 </RCC>
