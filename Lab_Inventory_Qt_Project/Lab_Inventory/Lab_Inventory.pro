@@ -11,10 +11,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
+    source_files/import_export_handler.cpp \
     source_files/widget.cpp \
     source_files/component.cpp
 
 HEADERS += \
+    header_files/import_export_handler.h \
     header_files/widget.h \
     header_files/component.h
 

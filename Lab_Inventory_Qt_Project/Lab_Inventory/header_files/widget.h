@@ -18,6 +18,7 @@
 #include <QTemporaryFile>
 #include <QStandardPaths>
 #include <QCloseEvent>
+#include "import_export_handler.h"
 #include "component.h"
 
 
@@ -48,19 +49,12 @@ private:
     void widget_connect_func();
     void showComponentsInTable();
     std::optional<int> searchComponentsInTable(QString MPN);
-    void exportTableToCSV(QTableWidget *tableWidget,QWidget *parent);
-    void importTableFromCSV(QTableWidget *tableWidget, QWidget *parent);
-    void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,QWidget *parent);
-    void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath ,QWidget *parent);
     int getComponentTypeIndex(QString type);
     void checkCSV(QString dataDirPath,QString destPath);
     QString dataDirPath = QCoreApplication::applicationDirPath() + "/data";
     // Prepare CSV file path
     QString destPath = dataDirPath + "/My_Inventory.csv";
     void showVectorOfComponents(std::vector<Component> list);
-
-
-
 
 };
 #endif // WIDGET_H
