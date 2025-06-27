@@ -1,5 +1,6 @@
 #include "../header_files/widget.h"
 #include "./ui_widget.h"
+#include "header_files/import_export_handler.h"
 
 
 //Macros
@@ -14,7 +15,6 @@ Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget)
 {
-    showVectorOfComponents(componentList);
     ui->setupUi(this);
 
     //Check the CSV file
@@ -246,6 +246,7 @@ void Widget::widget_connect_func()
     connect(ui->importPushButton,&QPushButton::clicked,this,[=](){
         importTableFromCSV(ui->inventoryTableWidget,componentList,this);
         exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this); // store on the local CSV
+        showVectorOfComponents(componentList);
     });
 
 
@@ -717,12 +718,6 @@ std::optional<int> Widget::searchComponentsInTable(QString MPN){
 /**********************************************************************************************/
 /*--------------------------------------------------------------------------------------------*/
 
-
-
-/*--------------------------------------------------------------------------------------------*/
-/**********************************************************************************************/
-/*--------------------------------------------------------------------------------------------*/
-
 /**
  * @brief function to return the value index of component type.
  *
@@ -816,6 +811,10 @@ void Widget::showVectorOfComponents(std::vector<Component> list)
         Component c = list.at(counter);
         qDebug() << "MPN: " << c.getMPN() << " Quantity: " << c.getQuantity()<< " Type:  "<< c.getQuantity()
                  << " Footprint:  "<<c.getFootprint() << " Location: "<< c.getLocation();
+    }
+    if (list.empty())
+    {
+        qDebug() << "List is empity";
     }
 }
 

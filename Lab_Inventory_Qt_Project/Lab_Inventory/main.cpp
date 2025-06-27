@@ -4,6 +4,7 @@
 #include <QScreen>
 
 
+
 Widget *initialize_mainWindow();
 
 int main(int argc, char *argv[])

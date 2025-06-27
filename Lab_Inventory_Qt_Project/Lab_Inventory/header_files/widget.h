@@ -18,7 +18,6 @@
 #include <QTemporaryFile>
 #include <QStandardPaths>
 #include <QCloseEvent>
-#include "import_export_handler.h"
 #include "component.h"
 
 

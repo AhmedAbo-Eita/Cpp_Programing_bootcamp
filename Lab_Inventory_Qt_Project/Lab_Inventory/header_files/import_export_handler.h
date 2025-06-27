@@ -8,12 +8,12 @@
 #include "component.h"
 
 
-void importTableFromCSV(QTableWidget *tableWidget, std::vector<Component> componentList, QWidget *parent);
+void importTableFromCSV(QTableWidget *tableWidget, std::vector<Component> &componentList, QWidget *parent);
 void exportTableToCSV(QTableWidget *tableWidget,QWidget *parent);
 void importTableFromCSVLocal(QTableWidget *tableWidget,QString filePath,
-                             std::vector <Component> componentList,QWidget *parent);
+                             std::vector <Component> &componentList,QWidget *parent);
 void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath,
-                           std::vector <Component> componentListoldSave,
-                           std::vector <Component> componentList ,QWidget *parent);
+                           std::vector <Component> &componentListoldSave,
+                           std::vector <Component> &componentList ,QWidget *parent);
 
 #endif // IMPORT_EXPORT_HANDLER_H

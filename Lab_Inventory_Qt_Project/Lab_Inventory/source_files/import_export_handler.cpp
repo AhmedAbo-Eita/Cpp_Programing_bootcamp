@@ -69,8 +69,8 @@ void exportTableToCSV(QTableWidget *tableWidget, QWidget *parent)
  * @param parent Optional parent widget, used for file dialog and message boxes.
  * @param filePath: this is the path of the local CSV file
  */
-void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath,std::vector <Component> componentListoldSave
-                           ,std::vector <Component> componentList ,QWidget *parent)
+void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath,std::vector <Component> &componentListoldSave
+                           ,std::vector <Component> &componentList ,QWidget *parent)
 {
     //if user click cancel --> do nothing
     if (filePath.isEmpty()) return;
@@ -126,7 +126,7 @@ void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath,std::vecto
  * @param tableWidget Pointer to the QTableWidget to be filled.
  * @param parent Optional parent widget for dialogs.
  */
-void importTableFromCSV(QTableWidget *tableWidget, std::vector <Component> componentList,QWidget *parent)
+void importTableFromCSV(QTableWidget *tableWidget, std::vector <Component> &componentList,QWidget *parent)
 {
     //Dialoge to get the path of CSV file and store it in fileName
     QString fileName = QFileDialog::getOpenFileName(parent,
@@ -220,7 +220,7 @@ void importTableFromCSV(QTableWidget *tableWidget, std::vector <Component> compo
  * @param parent Optional parent widget for dialogs.
  */
 void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,
-                             std::vector<Component> componentList, QWidget *parent)
+                             std::vector<Component> &componentList, QWidget *parent)
 {
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -247,7 +247,7 @@ void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,
     }
 
     // Read and parse each row
-    int row = 0;
+    int row = tableWidget->rowCount();
     while (!in.atEnd()) {
         QString line = in.readLine();
         QStringList cells = line.split(',', Qt::KeepEmptyParts);
