@@ -282,4 +282,40 @@ void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,
     //QMessageBox::information(parent, "Import Complete", "Inventory table and component list loaded from CSV.");
 }
 
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+/**
+ * @brief function to check the local database CSV file.
+ *
+ * @param
+ * @return
+ */
+void checkCSV(QString dataDirPath,QString destPath,QWidget *parent)
+{
+    //load the local database csv file from resorce file
+    // Prepare data directory path next to executable
+
+    QDir dir(dataDirPath);
+    if (!dir.exists()) {
+        dir.mkpath(".");
+    }
+
+    if (!QFile::exists(destPath)) {
+        QFile file(destPath);
+
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QMessageBox::warning(parent, "Error", "Unable to create My_Inventory.csv:\n" + file.errorString());
+            return;
+        }
+        QTextStream out(&file);
+        // Write fixed headers
+        out << "\"Manufacturer part number\",\"Quantity\",\"Component Type\",\"Footrpint\",\"Location of Component\"\n";
+        file.close();
+
+        QMessageBox::information(parent, "Info", "New My_Inventory.csv created successfully.");
+    }
+
+}
+
 

@@ -15,5 +15,6 @@ void importTableFromCSVLocal(QTableWidget *tableWidget,QString filePath,
 void exportTableToCSVLocal(QTableWidget *tableWidget,QString filePath,
                            std::vector <Component> &componentListoldSave,
                            std::vector <Component> &componentList ,QWidget *parent);
+void checkCSV(QString dataDirPath, QString destPath, QWidget *parent);
 
 #endif // IMPORT_EXPORT_HANDLER_H
