@@ -38,6 +38,19 @@ public:
 
 private slots:
     void onAddPushButtonClicked();
+    void onClearPushButtonClicked();
+    void onCleanPushButtonClicked();
+    void onResetPushButtonClicked();
+    void onSavePushButtonClicked();
+    void onImportPushButtonClicked();
+    void onFootprintPackageExternalButtonClicked();
+    void onSaveExamplePushButtonClicked();
+    void onFindPushButtonClicked();
+    void onEditComponentPushButtonClicked();
+    void onEditFindpushButtonClicked();
+    void onApplyEditspushButtonClicked();
+    void onDeleteComponentpushButtonClicked();
+
 
 
 protected:

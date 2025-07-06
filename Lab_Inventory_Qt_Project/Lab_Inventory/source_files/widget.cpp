@@ -44,463 +44,43 @@ Widget::~Widget()
 
 void Widget::widget_connect_func()
 {
+    //connect function for main buttons of application
+    connect(ui->footprintPackageExternalButton,&QPushButton::clicked,this,&Widget::onFootprintPackageExternalButtonClicked);
+    connect(ui->saveExamplePushButton,&QPushButton::clicked,this,&Widget::onSaveExamplePushButtonClicked);
 
+    //connect functions for the new main inventory lab tab
+    connect(ui->cleanPushButton,&QPushButton::clicked,this,&Widget::onCleanPushButtonClicked);
+    connect(ui->resetPushButton,&QPushButton::clicked,this,&Widget::onResetPushButtonClicked);
+    connect(ui->savePushButton,&QPushButton::clicked,this,&Widget::onSavePushButtonClicked);
+    connect(ui->importPushButton,&QPushButton::clicked,this,&Widget::onImportPushButtonClicked);
+    connect(ui->exportPushButton,&QPushButton::clicked,this,[=](){exportTableToCSV(ui->inventoryTableWidget,this);});
+
+    //connect functions for add tab widget buttons
     connect(ui->addPushButton,&QPushButton::clicked,this,&Widget::onAddPushButtonClicked);
+    connect(ui->clearPushButton,&QPushButton::clicked,this,&Widget::onClearPushButtonClicked);
+
+    // connect functiuons for Edit tab widget pushbutton
+    connect(ui->editFindpushButton,&QPushButton::clicked,this,&Widget::onEditFindpushButtonClicked);
+    connect(ui->applyEditspushButton,&QPushButton::clicked,this,&Widget::onApplyEditspushButtonClicked);
+    connect(ui->deleteComponentpushButton,&QPushButton::clicked,this,&Widget::onDeleteComponentpushButtonClicked);
 
 
+    //connect functions for search tab widget buttons
+    connect(ui->findPushButton,&QPushButton::clicked,this,&Widget::onFindPushButtonClicked);
+    connect(ui->EditComponentPushButton, &QPushButton::clicked,this,&Widget::onEditComponentPushButtonClicked);
 
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief reset all the parameters of user data
-     *
-     * @param signal from clear button.
-     * @return default values.
-     */
-    connect(ui->clearPushButton,&QPushButton::clicked,this,[=]()
-            {
-                ui->MPNLineEdit->clear();
-                ui->locationLineEdit->clear();
-                ui->typeComboBox->setCurrentIndex(0);
-                ui->footprintComboBox->setCurrentIndex(0);
-                ui->quantitySpinBox->setValue(0);
-            });
-
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief this function clear all the data in table dependent on signal
-     * from clear pushBotton using connect function
-     *
-     * @param signal from clean button.
-     * @return empty table
-     */
-    connect(ui->cleanPushButton, &QPushButton::clicked, this, [=](){
-        // Message to make sure that the user need to clean the inventory tabto avoid cliking by accident
-        auto ret = QMessageBox::critical(this, tr("Clear all data in inventory table"),
-                                         tr("Do you want to Clear all the data in the inventory table?"),
-                                         QMessageBox::Ok | QMessageBox::Cancel);
-
-        if(ret == QMessageBox::Ok)
-        {
-            componentList = {};// clear all components in component list
-            showComponentsInTable();
-            exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this); // store on the local CSV
-        }
-        else return;
-    });
-
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-
-    /**
-     * @brief This connect function to rest the table of lab inventory to the last save
-     *
-     * @param signal from reset button.
-     * @return load the last save of inventory
-     */
-    connect(ui->resetPushButton,&QPushButton::clicked,this,[=]()
-            {
-                // Message to make sure that the user need to resrt to avoid cliking by accident
-                auto ret = QMessageBox::question(this, tr("Reset to the last save"),
-                                                 tr("Do you want to reset all the changes to the last save?"),
-                                                 QMessageBox::Ok | QMessageBox::Cancel);
-
-                if (ret == QMessageBox::Ok)
-                {
-                    componentList = {};// clear all components in component list
-                    showComponentsInTable();
-                    importTableFromCSVLocal(ui->inventoryTableWidget,destPath,componentList,this);
-
-                }
-                else return;
-            });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief This connect function to save the current table to the local CSV file
-     *
-     * @param signal from reset button.
-     * @return load the last save of inventory
-     */
-    connect(ui->savePushButton,&QPushButton::clicked,this,[=]()
-            {
-                // Message to make sure that the user need to Save to avoid cliking by accident
-                auto ret = QMessageBox::question(this, tr("Save the inventory table"),
-                                                 tr("Do you want to save all the changes of inventory table?"),
-                                                 QMessageBox::Ok | QMessageBox::Cancel);
-
-                if(ret == QMessageBox::Ok)
-                {
-                    exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this);
-                    componentListoldSave = componentList;
-                    QMessageBox::information(this, "Export Complete", "Inventory table was saved to CSV successfully.");
-                }
-                else return;
-            });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief Export the inventory table as CSV.
-     *
-     * @param signal from Export button.
-     * @return non
-     */
-    connect(ui->exportPushButton,&QPushButton::clicked,this,[=](){
-        exportTableToCSV(ui->inventoryTableWidget,this);
-    });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief Import Data from CSV file and put it in vector component list
-     * then show it in the taple.
-     *
-     * @param signal from import button.
-     * @return non
-     */
-    connect(ui->importPushButton,&QPushButton::clicked,this,[=](){
-        importTableFromCSV(ui->inventoryTableWidget,componentList,this);
-        exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this); // store on the local CSV
-        showVectorOfComponents(componentList);
-    });
-
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief show the PDF of the footprint packages externally
-     *
-     * @param signal from footprintPackageExternalButton button.
-     * @return open the PDF
-     */
-    connect(ui->footprintPackageExternalButton,&QPushButton::clicked,this,[=](){
-        //create a string includes the pdfPath
-        QString pdfPath = ":/footprint/footprint/SMDDimensionSelectionGuide.pdf";
-
-        //crating pdfFile
-        QFile pdfFile(pdfPath);
-
-        if (!pdfFile.open(QIODevice::ReadOnly)) {
-            QMessageBox::warning(this, "Error", "Failed to load embedded PDF.");
-            return;
-        }
-
-        // Write to a temporary file
-        QTemporaryFile tempFile(QDir::tempPath() + "/XXXXXX.pdf");
-        if (!tempFile.open()) {
-            QMessageBox::warning(this, "Error", "Could not create a temporary file.");
-            return;
-        }
-
-        tempFile.write(pdfFile.readAll());
-        tempFile.flush(); // Ensure all data is written
-
-        // Ensure the file stays after the function ends
-        QString tempFilePath = tempFile.fileName();
-        tempFile.setAutoRemove(false); // Optional: remove manually later if needed
-
-        // Open the PDF
-        bool opened = QDesktopServices::openUrl(QUrl::fromLocalFile(tempFilePath));
-        if (!opened) {
-            QMessageBox::warning(this, "Error", "Could not open the PDF file.");
-        }
-
-
-    });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief Search on component in lab inventory by MPN
-     *
-     * @param signal from Search pushbutton button.
-     * @return display status of the component on Ui
-     */
-
-    connect(ui->findPushButton,&QPushButton::clicked,this,[=]()
-            {
-                //component search and return its row index value
-                std::optional<int> index = searchComponentsInTable(ui->searchMPNLineEdit->text());
-                updatedIndex = index;
-
-
-                // Check if the component available in inventory or not
-                //if not let the user know
-                if(index != std::nullopt)
-                {
-                    //show the location of component
-                    ui->foundedLocationLable->setText(ui->inventoryTableWidget->item(*index,locationOfComponent)->text());
-                    //show the Quantity of component
-                    ui->foundedQuantityLabel->setText(ui->inventoryTableWidget->item(*index,quantityOfComponent)->text());
-                    //show the footprint of component
-                    ui->foundedFootprintLabel->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
-                    //show the type of component
-                    ui->foundedTypeLable->setText(ui->inventoryTableWidget->item(*index,typeOfComponent)->text());
-                }
-                else if (ui->searchMPNLineEdit->text().isEmpty())
-                {
-                    QMessageBox::warning(this, tr("Component Search"),
-                                         tr("You didn't enter the MPN\n"
-                                            "Please insert it and try again"),
-                                         QMessageBox::Ok);
-                }
-                else
-                {
-                    auto ret = QMessageBox::warning(this, tr("Component Search"),
-                                                    tr("The MPN you Entered not in your inventory\n"
-                                                       "Do you want to add it?"),
-                                                    QMessageBox::Ok |QMessageBox::Cancel);
-                    if(ret == QMessageBox::Ok)
-                    {
-                        ui->tabWidget->setCurrentIndex(0);//open add component widget
-                        ui->MPNLineEdit->setText(ui->searchMPNLineEdit->text());// copy the MPN to the tab of add
-                        ui->locationLineEdit->setFocus();// move the pointer to Location
-                        ui->searchMPNLineEdit->clear();//clear the search editline
-                    }
-                }
-            });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief Connect function while pressing the button of edit component from search tab
-     * all the info of the component move to the Edit tab to edit it and then update inventory
-     *
-     * @param signal from Edit component of search groupbox pushbutton button.
-     * @return display status of the component on edit group box
-     */
-    connect(ui->EditComponentPushButton, &QPushButton::clicked,this,[=]()
-            {
-                ui->tabWidget->setCurrentIndex(1);
-                ui->editMPNLineEdit->setText(ui->searchMPNLineEdit->text());
-
-                //Disable search in Edit mode
-                ui->editMPNLineEdit->setDisabled(true);
-                ui->editFindpushButton->setDisabled(true);
-
-                //Set the editable values to current vlaues as start
-                ui->editQuantitySpinBox->setValue(ui->foundedQuantityLabel->text().toInt());
-                ui->editFootprintLineEdit->setText(ui->foundedFootprintLabel->text());
-                ui->editLocatioLineEdit->setText(ui->foundedLocationLable->text());
-                ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->foundedTypeLable->text().remove(' ').remove('\n')));
-
-                //set the edit area to be enabled
-                ui->editLocatioLineEdit->setDisabled(false);
-                ui->editQuantitySpinBox->setDisabled(false);
-                ui->editFootprintLineEdit->setDisabled(false);
-                ui->editTypeComboBox->setDisabled(false);
-                ui->applyEditspushButton->setDisabled(false);
-                ui->deleteComponentpushButton->setDisabled(false);
-
-                //reset the search tabs values
-                ui->foundedFootprintLabel->clear();
-                ui->foundedLocationLable->clear();
-                ui->foundedQuantityLabel->clear();
-                ui->foundedTypeLable->clear();
-                ui->searchMPNLineEdit->clear();
-            });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-
-    /**
-     * @brief Connect function while pressing the button of find component from edit tab
-     * all the info of the component move to the Edit tab to edit it and then update inventory
-     * Checking if the MPN in inventory or not if not ask the user to add it
-     *
-     * @param signal from find component of Edit groupbox pushbutton button.
-     * @return display status of the component on edit group box to help the user to edit it
-     */
-    connect(ui->editFindpushButton,&QPushButton::clicked,this,[=]()
-            {
-                //Searching on the component
-                std::optional<int> index = searchComponentsInTable(ui->editMPNLineEdit->text());
-                updatedIndex = index;
-
-                // Check if the component available in inventory or not
-                //if not let the user know
-                if(index != std::nullopt)
-                {
-                    //show the location of component
-                    ui->editLocatioLineEdit->setText(ui->inventoryTableWidget->item(*index,locationOfComponent)->text());
-                    //show the Quantity of component
-                    ui->editQuantitySpinBox->setValue(ui->inventoryTableWidget->item(*index,quantityOfComponent)->text().toInt());
-                    //show the footprint of component
-                    ui->editFootprintLineEdit->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
-                    //show the type of component
-                    ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->inventoryTableWidget->item(*index,typeOfComponent)->text().remove(' ').remove('\n')));
-                    //disable editing on component
-                    ui->editMPNLineEdit->setDisabled(true);
-                    ui->editFindpushButton->setDisabled(true);
-                    //enable editiong parameters
-                    ui->editLocatioLineEdit->setDisabled(false);
-                    ui->editQuantitySpinBox->setDisabled(false);
-                    ui->editFootprintLineEdit->setDisabled(false);
-                    ui->editTypeComboBox->setDisabled(false);
-                    ui->applyEditspushButton->setDisabled(false);
-                    ui->deleteComponentpushButton->setDisabled(false);
-                }
-                else if (ui->editMPNLineEdit->text().isEmpty())
-                {
-                    QMessageBox::warning(this, tr("Component Search"),
-                                         tr("You didn't enter the MPN\n"
-                                            "Please insert it and try again"),
-                                         QMessageBox::Ok);
-                }
-                else
-                {
-                    auto ret = QMessageBox::warning(this, tr("Component Search"),
-                                                    tr("The MPN you Entered not in your inventory\n"
-                                                       "Do you want to add it?"),
-                                                    QMessageBox::Ok |QMessageBox::Cancel);
-                    if(ret == QMessageBox::Ok)
-                    {
-                        ui->tabWidget->setCurrentIndex(0);//open add component widget
-                        ui->MPNLineEdit->setText(ui->editMPNLineEdit->text());// copy the MPN to the tab of add
-                        ui->locationLineEdit->setFocus();// move the pointer to Location
-                    }
-                }
-
-            });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-    /**
-     * @brief Connect function that update the data of inventory table
-     *
-     * @param signal from Edit component of Edit groupbox pushbutton button.
-     * @return change the values according to user input and save it in table and component list
-     */
-    connect(ui->applyEditspushButton,&QPushButton::clicked,this,[=]()
-            {
-                if(updatedIndex != std::nullopt)
-                {
-                    //update table widget
-                    ui->inventoryTableWidget->item(*updatedIndex,locationOfComponent)->setText(ui->editLocatioLineEdit->text());
-                    ui->inventoryTableWidget->item(*updatedIndex,footprintOfComponent)->setText(ui->editFootprintLineEdit->text());
-                    ui->inventoryTableWidget->item(*updatedIndex,quantityOfComponent)->setText(ui->editQuantitySpinBox->text());
-                    ui->inventoryTableWidget->item(*updatedIndex,typeOfComponent)->setText(ui->editTypeComboBox->currentText());
-
-                    //update Component list
-                    componentList.at(*updatedIndex).setLocation(ui->editLocatioLineEdit->text());
-                    componentList.at(*updatedIndex).setFootpint(ui->editFootprintLineEdit->text());
-                    componentList.at(*updatedIndex).setQuantity(ui->editQuantitySpinBox->text().toInt());
-                    componentList.at(*updatedIndex).setType(ui->editTypeComboBox->currentText());
-
-                    //clear editline
-                    ui->editFootprintLineEdit->clear();
-                    ui->editLocatioLineEdit->clear();
-                    ui->editMPNLineEdit->clear();
-                    ui->editQuantitySpinBox->setValue(0);
-                    ui->editTypeComboBox->setCurrentIndex(0);
-
-                    // Enable to find component
-                    //disable editing on component
-                    ui->editMPNLineEdit->setDisabled(false);
-                    ui->editFindpushButton->setDisabled(false);
-                    ui->editFootprintLineEdit->setDisabled(true);
-                    ui->editLocatioLineEdit->setDisabled(true);
-                    ui->editQuantitySpinBox->setDisabled(true);
-                    ui->editTypeComboBox->setDisabled(true);
-                    ui->applyEditspushButton->setDisabled(true);
-                    ui->deleteComponentpushButton->setDisabled(true);
-
-                    //reset index ptr
-                    updatedIndex = std::nullopt;
-                }
-                else return;
-            });
-
-    /*--------------------------------------------------------------------------------------------*/
-    /**********************************************************************************************/
-    /*--------------------------------------------------------------------------------------------*/
-    /**
-     * @brief Connect function that delete a component from inventory table
-     *
-     * @param signal from delete component of Edit groupbox pushbutton button.
-     * @return remove component
-     */
-
-    connect(ui->deleteComponentpushButton,&QPushButton::clicked,this,[=]()
-            {
-                auto ret = QMessageBox::information(this, tr("Component Delete"),
-                                                    tr("Are you sure, Do you want to delete this component?"),
-                                                    QMessageBox::Ok | QMessageBox::Cancel );
-
-                if(ret == QMessageBox::Ok && updatedIndex != std::nullopt)
-                {
-                    int index = *updatedIndex;
-                    ui->inventoryTableWidget->removeRow(*updatedIndex);
-                    componentList.erase(componentList.begin() + index);
-                    //clear editline
-                    ui->editFootprintLineEdit->clear();
-                    ui->editLocatioLineEdit->clear();
-                    ui->editMPNLineEdit->clear();
-                    ui->editQuantitySpinBox->setValue(0);
-                    ui->editTypeComboBox->setCurrentIndex(0);
-
-                    // Enable to find component
-                    //disable editing on component
-                    ui->editMPNLineEdit->setDisabled(false);
-                    ui->editFindpushButton->setDisabled(false);
-                    ui->editFootprintLineEdit->setDisabled(true);
-                    ui->editLocatioLineEdit->setDisabled(true);
-                    ui->editQuantitySpinBox->setDisabled(true);
-                    ui->editTypeComboBox->setDisabled(true);
-                    ui->applyEditspushButton->setDisabled(true);
-                    ui->deleteComponentpushButton->setDisabled(true);
-                    updatedIndex = std::nullopt;
-                }
-                else return;
-            });
-
-    connect(ui->saveExamplePushButton,&QPushButton::clicked,this, [=]()
-            {
-                //need improvment
-                QTableWidget* temp = new QTableWidget(this);
-                importTableFromCSVLocal(temp,":/data/data/My_Inventory.csv",componentList,this);
-                exportTableToCSV(temp,this);
-                importTableFromCSVLocal(ui->inventoryTableWidget,destPath,componentList,this);
-            });
-
-
+    //connect function for table
     connect(ui->tabWidget,&QTabWidget::currentChanged,this,[=](int tabindex)
-            {
-                if(tabindex == 1 )
-                {
-                    ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::DoubleClicked);
-                }
-                if(tabindex==0 || tabindex == 2)
-                {
-                    ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-                }
-            });
-
+    {
+        if(tabindex == 1 )
+        {
+            ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::DoubleClicked);
+        }
+        if(tabindex==0 || tabindex == 2)
+        {
+            ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        }
+    });
     connect(ui->inventoryTableWidget, &QTableWidget::cellClicked, this, [=](int row)
             {
                 updatedIndex = row;
@@ -521,7 +101,6 @@ void Widget::widget_connect_func()
                 ui->applyEditspushButton->setDisabled(false);
                 ui->deleteComponentpushButton->setDisabled(false);
             });
-
     connect(ui->inventoryTableWidget,&QTableWidget::cellChanged,this,[=](int row,int column)
             {
                 //update the component list
@@ -718,7 +297,9 @@ void Widget::showVectorOfComponents(std::vector<Component> list)
         qDebug() << "List is empity";
     }
 }
-
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
 
 /**
  * @brief add the input data from user to component list
@@ -727,6 +308,7 @@ void Widget::showVectorOfComponents(std::vector<Component> list)
  * @param signal from add button.
  * @return
  */
+
 void Widget::onAddPushButtonClicked()
 {
     if(ui->MPNLineEdit->text().isEmpty() && ui->locationLineEdit->text().isEmpty())
@@ -790,4 +372,433 @@ void Widget::onAddPushButtonClicked()
 /*--------------------------------------------------------------------------------------------*/
 /**********************************************************************************************/
 /*--------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief reset all the parameters of user data
+ *
+ * @param signal from clear button.
+ * @return default values.
+ */
+
+void Widget::onClearPushButtonClicked()
+{
+    ui->MPNLineEdit->clear();
+    ui->locationLineEdit->clear();
+    ui->typeComboBox->setCurrentIndex(0);
+    ui->footprintComboBox->setCurrentIndex(0);
+    ui->quantitySpinBox->setValue(0);
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+ * @brief this function clear all the data in table dependent on signal
+ * from clear pushBotton using connect function
+ *
+ * @param signal from clean button.
+ * @return empty table
+ */
+
+void Widget::onCleanPushButtonClicked()
+{
+    // Message to make sure that the user need to clean the inventory tabto avoid cliking by accident
+    auto ret = QMessageBox::critical(this, tr("Clear all data in inventory table"),
+                                     tr("Do you want to Clear all the data in the inventory table?"),
+                                     QMessageBox::Ok | QMessageBox::Cancel);
+
+    if(ret == QMessageBox::Ok)
+    {
+        componentList = {};// clear all components in component list
+        showComponentsInTable();
+        exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this); // store on the local CSV
+    }
+    else return;
+}
+
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief This connect function to rest the table of lab inventory to the last save
+*
+* @param signal from reset button.
+* @return load the last save of inventory
+*/
+void Widget::onResetPushButtonClicked()
+{
+    // Message to make sure that the user need to resrt to avoid cliking by accident
+    auto ret = QMessageBox::question(this, tr("Reset to the last save"),
+                                     tr("Do you want to reset all the changes to the last save?"),
+                                     QMessageBox::Ok | QMessageBox::Cancel);
+
+    if (ret == QMessageBox::Ok)
+    {
+        componentList = {};// clear all components in component list
+        showComponentsInTable();
+        importTableFromCSVLocal(ui->inventoryTableWidget,destPath,componentList,this);
+    }
+    else return;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief This connect function to save the current table to the local CSV file
+*
+* @param signal from reset button.
+* @return load the last save of inventory
+*/
+void Widget::onSavePushButtonClicked()
+{
+    // Message to make sure that the user need to Save to avoid cliking by accident
+    auto ret = QMessageBox::question(this, tr("Save the inventory table"),
+                                     tr("Do you want to save all the changes of inventory table?"),
+                                     QMessageBox::Ok | QMessageBox::Cancel);
+
+    if(ret == QMessageBox::Ok)
+    {
+        exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this);
+        componentListoldSave = componentList;
+        QMessageBox::information(this, "Export Complete", "Inventory table was saved to CSV successfully.");
+    }
+    else return;
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief Import Data from CSV file and put it in vector component list
+* then show it in the taple.
+*
+* @param signal from import button.
+* @return non
+*/
+void Widget::onImportPushButtonClicked()
+{
+    importTableFromCSV(ui->inventoryTableWidget,componentList,this);
+    exportTableToCSVLocal(ui->inventoryTableWidget,destPath,componentList,componentListoldSave,this); // store on the local CSV
+    showVectorOfComponents(componentList);
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief show the PDF of the footprint packages externally
+*
+* @param signal from footprintPackageExternalButton button.
+* @return open the PDF
+*/
+void Widget::onFootprintPackageExternalButtonClicked()
+{
+    //create a string includes the pdfPath
+    QString pdfPath = ":/footprint/footprint/SMDDimensionSelectionGuide.pdf";
+
+    //crating pdfFile
+    QFile pdfFile(pdfPath);
+
+    if (!pdfFile.open(QIODevice::ReadOnly)) {
+        QMessageBox::warning(this, "Error", "Failed to load embedded PDF.");
+        return;
+    }
+
+    // Write to a temporary file
+    QTemporaryFile tempFile(QDir::tempPath() + "/XXXXXX.pdf");
+    if (!tempFile.open()) {
+        QMessageBox::warning(this, "Error", "Could not create a temporary file.");
+        return;
+    }
+
+    tempFile.write(pdfFile.readAll());
+    tempFile.flush(); // Ensure all data is written
+
+    // Ensure the file stays after the function ends
+    QString tempFilePath = tempFile.fileName();
+    tempFile.setAutoRemove(false); // Optional: remove manually later if needed
+
+    // Open the PDF
+    bool opened = QDesktopServices::openUrl(QUrl::fromLocalFile(tempFilePath));
+    if (!opened) {
+        QMessageBox::warning(this, "Error", "Could not open the PDF file.");
+    }
+}
+
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief Function to export a tempelete of inventory CSV
+*
+* @param signal from SaveExamplePushButton.
+* @return Export a CSV file tempelete
+*/
+void Widget::onSaveExamplePushButtonClicked()
+{
+    //need improvment
+    QTableWidget* temp = new QTableWidget(this);
+    importTableFromCSVLocal(temp,":/data/data/My_Inventory.csv",componentList,this);
+    exportTableToCSV(temp,this);
+    importTableFromCSVLocal(ui->inventoryTableWidget,destPath,componentList,this);
+}
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief Search on component in lab inventory by MPN
+*
+* @param signal from Search pushbutton button.
+* @return display status of the component on Ui
+*/
+void Widget::onFindPushButtonClicked()
+{
+    //component search and return its row index value
+    std::optional<int> index = searchComponentsInTable(ui->searchMPNLineEdit->text());
+    updatedIndex = index;
+
+
+    // Check if the component available in inventory or not
+    //if not let the user know
+    if(index != std::nullopt)
+    {
+        //show the location of component
+        ui->foundedLocationLable->setText(ui->inventoryTableWidget->item(*index,locationOfComponent)->text());
+        //show the Quantity of component
+        ui->foundedQuantityLabel->setText(ui->inventoryTableWidget->item(*index,quantityOfComponent)->text());
+        //show the footprint of component
+        ui->foundedFootprintLabel->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
+        //show the type of component
+        ui->foundedTypeLable->setText(ui->inventoryTableWidget->item(*index,typeOfComponent)->text());
+    }
+    else if (ui->searchMPNLineEdit->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Component Search"),
+                             tr("You didn't enter the MPN\n"
+                                "Please insert it and try again"),
+                             QMessageBox::Ok);
+    }
+    else
+    {
+        auto ret = QMessageBox::warning(this, tr("Component Search"),
+                                        tr("The MPN you Entered not in your inventory\n"
+                                           "Do you want to add it?"),
+                                        QMessageBox::Ok |QMessageBox::Cancel);
+        if(ret == QMessageBox::Ok)
+        {
+            ui->tabWidget->setCurrentIndex(0);//open add component widget
+            ui->MPNLineEdit->setText(ui->searchMPNLineEdit->text());// copy the MPN to the tab of add
+            ui->locationLineEdit->setFocus();// move the pointer to Location
+            ui->searchMPNLineEdit->clear();//clear the search editline
+        }
+    }
+}
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief Connect function while pressing the button of edit component from search tab
+* all the info of the component move to the Edit tab to edit it and then update inventory
+*
+* @param signal from Edit component of search groupbox pushbutton button.
+* @return display status of the component on edit group box
+*/
+void Widget::onEditComponentPushButtonClicked()
+{
+    ui->tabWidget->setCurrentIndex(1);
+    ui->editMPNLineEdit->setText(ui->searchMPNLineEdit->text());
+
+    //Disable search in Edit mode
+    ui->editMPNLineEdit->setDisabled(true);
+    ui->editFindpushButton->setDisabled(true);
+
+    //Set the editable values to current vlaues as start
+    ui->editQuantitySpinBox->setValue(ui->foundedQuantityLabel->text().toInt());
+    ui->editFootprintLineEdit->setText(ui->foundedFootprintLabel->text());
+    ui->editLocatioLineEdit->setText(ui->foundedLocationLable->text());
+    ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->foundedTypeLable->text().remove(' ').remove('\n')));
+
+    //set the edit area to be enabled
+    ui->editLocatioLineEdit->setDisabled(false);
+    ui->editQuantitySpinBox->setDisabled(false);
+    ui->editFootprintLineEdit->setDisabled(false);
+    ui->editTypeComboBox->setDisabled(false);
+    ui->applyEditspushButton->setDisabled(false);
+    ui->deleteComponentpushButton->setDisabled(false);
+
+    //reset the search tabs values
+    ui->foundedFootprintLabel->clear();
+    ui->foundedLocationLable->clear();
+    ui->foundedQuantityLabel->clear();
+    ui->foundedTypeLable->clear();
+    ui->searchMPNLineEdit->clear();
+}
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+
+/**
+* @brief Connect function while pressing the button of find component from edit tab
+* all the info of the component move to the Edit tab to edit it and then update inventory
+* Checking if the MPN in inventory or not if not ask the user to add it
+*
+* @param signal from find component of Edit groupbox pushbutton button.
+* @return display status of the component on edit group box to help the user to edit it
+*/
+void Widget::onEditFindpushButtonClicked()
+{
+
+    //Searching on the component
+    std::optional<int> index = searchComponentsInTable(ui->editMPNLineEdit->text());
+    updatedIndex = index;
+
+    // Check if the component available in inventory or not
+    //if not let the user know
+    if(index != std::nullopt)
+    {
+        //show the location of component
+        ui->editLocatioLineEdit->setText(ui->inventoryTableWidget->item(*index,locationOfComponent)->text());
+        //show the Quantity of component
+        ui->editQuantitySpinBox->setValue(ui->inventoryTableWidget->item(*index,quantityOfComponent)->text().toInt());
+        //show the footprint of component
+        ui->editFootprintLineEdit->setText(ui->inventoryTableWidget->item(*index,footprintOfComponent)->text());
+        //show the type of component
+        ui->editTypeComboBox->setCurrentIndex(getComponentTypeIndex(ui->inventoryTableWidget->item(*index,typeOfComponent)->text().remove(' ').remove('\n')));
+        //disable editing on component
+        ui->editMPNLineEdit->setDisabled(true);
+        ui->editFindpushButton->setDisabled(true);
+        //enable editiong parameters
+        ui->editLocatioLineEdit->setDisabled(false);
+        ui->editQuantitySpinBox->setDisabled(false);
+        ui->editFootprintLineEdit->setDisabled(false);
+        ui->editTypeComboBox->setDisabled(false);
+        ui->applyEditspushButton->setDisabled(false);
+        ui->deleteComponentpushButton->setDisabled(false);
+    }
+    else if (ui->editMPNLineEdit->text().isEmpty())
+    {
+        QMessageBox::warning(this, tr("Component Search"),
+                             tr("You didn't enter the MPN\n"
+                                "Please insert it and try again"),
+                             QMessageBox::Ok);
+    }
+    else
+    {
+        auto ret = QMessageBox::warning(this, tr("Component Search"),
+                                        tr("The MPN you Entered not in your inventory\n"
+                                           "Do you want to add it?"),
+                                        QMessageBox::Ok |QMessageBox::Cancel);
+        if(ret == QMessageBox::Ok)
+        {
+            ui->tabWidget->setCurrentIndex(0);//open add component widget
+            ui->MPNLineEdit->setText(ui->editMPNLineEdit->text());// copy the MPN to the tab of add
+            ui->locationLineEdit->setFocus();// move the pointer to Location
+        }
+    }
+
+}
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+/**
+* @brief Connect function that update the data of inventory table
+*
+* @param signal from Edit component of Edit groupbox pushbutton button.
+* @return change the values according to user input and save it in table and component list
+*/
+void Widget::onApplyEditspushButtonClicked()
+{
+    if(updatedIndex != std::nullopt)
+    {
+        //update table widget
+        ui->inventoryTableWidget->item(*updatedIndex,locationOfComponent)->setText(ui->editLocatioLineEdit->text());
+        ui->inventoryTableWidget->item(*updatedIndex,footprintOfComponent)->setText(ui->editFootprintLineEdit->text());
+        ui->inventoryTableWidget->item(*updatedIndex,quantityOfComponent)->setText(ui->editQuantitySpinBox->text());
+        ui->inventoryTableWidget->item(*updatedIndex,typeOfComponent)->setText(ui->editTypeComboBox->currentText());
+
+        //update Component list
+        componentList.at(*updatedIndex).setLocation(ui->editLocatioLineEdit->text());
+        componentList.at(*updatedIndex).setFootpint(ui->editFootprintLineEdit->text());
+        componentList.at(*updatedIndex).setQuantity(ui->editQuantitySpinBox->text().toInt());
+        componentList.at(*updatedIndex).setType(ui->editTypeComboBox->currentText());
+
+        //clear editline
+        ui->editFootprintLineEdit->clear();
+        ui->editLocatioLineEdit->clear();
+        ui->editMPNLineEdit->clear();
+        ui->editQuantitySpinBox->setValue(0);
+        ui->editTypeComboBox->setCurrentIndex(0);
+
+        // Enable to find component
+        //disable editing on component
+        ui->editMPNLineEdit->setDisabled(false);
+        ui->editFindpushButton->setDisabled(false);
+        ui->editFootprintLineEdit->setDisabled(true);
+        ui->editLocatioLineEdit->setDisabled(true);
+        ui->editQuantitySpinBox->setDisabled(true);
+        ui->editTypeComboBox->setDisabled(true);
+        ui->applyEditspushButton->setDisabled(true);
+        ui->deleteComponentpushButton->setDisabled(true);
+
+        //reset index ptr
+        updatedIndex = std::nullopt;
+    }
+    else return;
+}
+/*--------------------------------------------------------------------------------------------*/
+/**********************************************************************************************/
+/*--------------------------------------------------------------------------------------------*/
+/**
+* @brief Connect function that delete a component from inventory table
+*
+* @param signal from delete component of Edit groupbox pushbutton button.
+* @return remove component
+*/
+void Widget::onDeleteComponentpushButtonClicked()
+{
+
+    auto ret = QMessageBox::information(this, tr("Component Delete"),
+                                        tr("Are you sure, Do you want to delete this component?"),
+                                        QMessageBox::Ok | QMessageBox::Cancel );
+
+    if(ret == QMessageBox::Ok && updatedIndex != std::nullopt)
+    {
+        int index = *updatedIndex;
+        ui->inventoryTableWidget->removeRow(*updatedIndex);
+        componentList.erase(componentList.begin() + index);
+        //clear editline
+        ui->editFootprintLineEdit->clear();
+        ui->editLocatioLineEdit->clear();
+        ui->editMPNLineEdit->clear();
+        ui->editQuantitySpinBox->setValue(0);
+        ui->editTypeComboBox->setCurrentIndex(0);
+
+        // Enable to find component
+        //disable editing on component
+        ui->editMPNLineEdit->setDisabled(false);
+        ui->editFindpushButton->setDisabled(false);
+        ui->editFootprintLineEdit->setDisabled(true);
+        ui->editLocatioLineEdit->setDisabled(true);
+        ui->editQuantitySpinBox->setDisabled(true);
+        ui->editTypeComboBox->setDisabled(true);
+        ui->applyEditspushButton->setDisabled(true);
+        ui->deleteComponentpushButton->setDisabled(true);
+        updatedIndex = std::nullopt;
+    }
+    else return;
+}
+
+
+
 
