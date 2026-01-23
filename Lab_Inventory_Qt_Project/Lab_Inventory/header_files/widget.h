@@ -53,6 +53,7 @@ private slots:
 
 
 
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 
@@ -64,12 +65,11 @@ private:
     // Prepare CSV file path
     QString destPath = dataDirPath + "/My_Inventory.csv";
     std::optional<int> updatedIndex = std::nullopt;
-    void inventoryTableStyleSetup();
+    void setTableStyle(QTableWidget *table, QStringList headers);
     void widget_connect_func();
     void showComponentsInTable();
     std::optional<int> searchComponentsInTable(QString MPN);
     int getComponentTypeIndex(QString type);
     void showVectorOfComponents(std::vector<Component> list);
-
 };
 #endif // WIDGET_H

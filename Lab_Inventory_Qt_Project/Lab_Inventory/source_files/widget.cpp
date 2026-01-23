@@ -10,6 +10,10 @@
 #define footprintOfComponent    3
 #define locationOfComponent     4
 
+// list of table headers
+QStringList headers {"Manufacturer part number","Quantity","Component Type","Footrpint","Location of Component"};
+
+
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -27,7 +31,8 @@ Widget::Widget(QWidget *parent)
     componentListoldSave = componentList;
 
     //Setup the inventory table
-    inventoryTableStyleSetup();
+    setTableStyle(ui->inventoryTableWidget,headers);
+    setTableStyle(ui->BomTableWidget,headers);
 
     //connect functions of widget
     widget_connect_func();
@@ -138,30 +143,29 @@ void Widget::widget_connect_func()
             });
 }
 
-void Widget::inventoryTableStyleSetup()
+void Widget::setTableStyle(QTableWidget *table, QStringList headers )
 {
     //Create the table rows and coloums
-    ui->inventoryTableWidget->setColumnCount(5);
+    table->setColumnCount(5);
     //ui->inventoryTableWidget->setRowCount(100);
 
     //Set Table Headers
-    QStringList headers {"Manufacturer part number","Quantity","Component Type","Footrpint","Location of Component"};
-    ui->inventoryTableWidget->setHorizontalHeaderLabels(headers);
+    table->setHorizontalHeaderLabels(headers);
 
     // Stretch columns to fill the table width
-    ui->inventoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // Allow sorting by clicking on headers
-    ui->inventoryTableWidget->setSortingEnabled(true);
+    table->setSortingEnabled(true);
 
     // Make rows selectable as whole rows
-    ui->inventoryTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    table->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     // Optional: Set table to read-only (no direct editing)
-    ui->inventoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     //Styling of Coloums headers
-    ui->inventoryTableWidget->horizontalHeader()->setStyleSheet(
+    table->horizontalHeader()->setStyleSheet(
         "QHeaderView::section {"
         "background-color: green;"
         "color: white;"            // optional: text color
@@ -171,7 +175,7 @@ void Widget::inventoryTableStyleSetup()
         );
 
     //styling of row's numbers
-    ui->inventoryTableWidget->verticalHeader()->setStyleSheet(
+    table->verticalHeader()->setStyleSheet(
         "QHeaderView::section {"
         "background-color: gray;"
         "color: white;"            // optional: text color
@@ -252,8 +256,6 @@ int Widget::getComponentTypeIndex(QString type)
 /*--------------------------------------------------------------------------------------------*/
 /**********************************************************************************************/
 /*--------------------------------------------------------------------------------------------*/
-
-
 
 void Widget::closeEvent(QCloseEvent *event)
 {
