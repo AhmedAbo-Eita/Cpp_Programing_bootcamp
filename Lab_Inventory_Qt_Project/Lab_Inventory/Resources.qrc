@@ -20,4 +20,7 @@
     <qresource prefix="/footprint">
         <file>footprint/SMDDimensionSelectionGuide.pdf</file>
     </qresource>
+    <qresource prefix="/styles">
+        <file>styles/app_style.qss</file>
+    </qresource>
 </RCC>
