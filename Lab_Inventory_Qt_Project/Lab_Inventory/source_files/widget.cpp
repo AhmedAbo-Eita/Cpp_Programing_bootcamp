@@ -1,10 +1,12 @@
 #include "../header_files/widget.h"
 #include "./ui_widget.h"
 #include "header_files/import_export_handler.h"
+#include "header_files/search_filter_handler.h"
 
 
 //Macros
 //number of colums of attributs in table
+#define MPN_Column              0
 #define quantityOfComponent     1
 #define typeOfComponent         2
 #define footprintOfComponent    3
@@ -161,28 +163,13 @@ void Widget::setTableStyle(QTableWidget *table, QStringList headers )
     // Make rows selectable as whole rows
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
 
+    // Set default row height for better text and editor spacing
+    table->verticalHeader()->setDefaultSectionSize(36);
+
     // Optional: Set table to read-only (no direct editing)
     table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    //Styling of Coloums headers
-    table->horizontalHeader()->setStyleSheet(
-        "QHeaderView::section {"
-        "background-color: green;"
-        "color: white;"            // optional: text color
-        "font-weight: bold;"       // optional: make text bold
-        "padding: 4px;"
-        "}"
-        );
-
-    //styling of row's numbers
-    table->verticalHeader()->setStyleSheet(
-        "QHeaderView::section {"
-        "background-color: gray;"
-        "color: white;"            // optional: text color
-        "font-weight: bold;"       // optional: make text bold
-        "padding: 4px;"
-        "}"
-        );
+    // Table headers are styled globally in app_style.qss to maintain theme consistency
 }
 
 /*--------------------------------------------------------------------------------------------*/
@@ -214,24 +201,7 @@ void Widget::showComponentsInTable()
 /**********************************************************************************************/
 /*--------------------------------------------------------------------------------------------*/
 
-std::optional<int> Widget::searchComponentsInTable(QString MPN){
-    for(std::size_t component_index = 0 ; component_index < componentList.size();component_index++)
-    {
-        //remove all spaces in the input text and make all letters in uppercase
-        MPN = MPN.remove(' ').remove('\n').toUpper();
 
-        // Searching on component in table
-        if (ui->inventoryTableWidget->item(component_index,0)->text().toUpper() == MPN)
-        {
-            return component_index;
-        }
-    }
-    return std::nullopt;
-}
-
-/*--------------------------------------------------------------------------------------------*/
-/**********************************************************************************************/
-/*--------------------------------------------------------------------------------------------*/
 
 /**
  * @brief function to return the value index of component type.
@@ -348,7 +318,7 @@ void Widget::onAddPushButtonClicked()
         user_component.setFootpint(user_footprint);
         user_component.setQuantity(user_quantity);
 
-        if(searchComponentsInTable(user_MPN) == std::nullopt)
+        if(searchItemInTable(ui->inventoryTableWidget,user_MPN,MPN_Column) == std::nullopt)
         {
             // add the user component to the component list
             componentList.push_back(user_component);
@@ -566,7 +536,7 @@ void Widget::onSaveExamplePushButtonClicked()
 void Widget::onFindPushButtonClicked()
 {
     //component search and return its row index value
-    std::optional<int> index = searchComponentsInTable(ui->searchMPNLineEdit->text());
+    std::optional<int> index= searchItemInTable(ui->inventoryTableWidget,ui->searchMPNLineEdit->text(),MPN_Column);
     updatedIndex = index;
 
 
@@ -662,7 +632,7 @@ void Widget::onEditFindpushButtonClicked()
 {
 
     //Searching on the component
-    std::optional<int> index = searchComponentsInTable(ui->editMPNLineEdit->text());
+    std::optional<int> index = searchItemInTable(ui->inventoryTableWidget,ui->editMPNLineEdit->text(),MPN_Column);
     updatedIndex = index;
 
     // Check if the component available in inventory or not

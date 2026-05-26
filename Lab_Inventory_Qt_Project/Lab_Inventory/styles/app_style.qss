@@ -18,7 +18,7 @@
 QWidget {
     background-color: #F8FAFC;
     color: #0F172A;
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Blinker", Blinker;
     font-size: 13px;
 }
 
@@ -183,6 +183,48 @@ QSpinBox:focus {
     background-color: #F0F9FF;
 }
 
+QSpinBox,
+QDoubleSpinBox {
+    padding-right: 24px;
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #CBD5E1;
+    border-bottom: 0.5px solid #CBD5E1;
+    border-top-right-radius: 6px;
+    background-color: #FFFFFF;
+}
+
+QSpinBox::up-button:hover, QDoubleSpinBox::up-button:hover {
+    background-color: #F1F5F9;
+}
+
+QSpinBox::up-button:pressed, QDoubleSpinBox::up-button:pressed {
+    background-color: #E2E8F0;
+}
+
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    width: 20px;
+    border-left: 1px solid #CBD5E1;
+    border-top: 0.5px solid #CBD5E1;
+    border-bottom-right-radius: 6px;
+    background-color: #FFFFFF;
+}
+
+QSpinBox::down-button:hover, QDoubleSpinBox::down-button:hover {
+    background-color: #F1F5F9;
+}
+
+QSpinBox::down-button:pressed, QDoubleSpinBox::down-button:pressed {
+    background-color: #E2E8F0;
+}
+
+
 /* ===================== COMBO BOX ===================== */
 QComboBox {
     background-color: #FFFFFF;
@@ -207,6 +249,8 @@ QComboBox::drop-down {
     border-left: none;
     background: transparent;
 }
+
+
 
 QComboBox QAbstractItemView {
     background-color: #FFFFFF;
@@ -267,44 +311,6 @@ QGroupBox::title {
     color: #0284C7;
     font-size: 13px;
     font-weight: 700;
-}
-
-/* ===================== TABLE WIDGET ===================== */
-QTableWidget {
-    background-color: #FFFFFF;
-    alternate-background-color: #F8FAFC;
-    gridline-color: #F1F5F9;
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
-    outline: none;
-}
-
-QTableWidget::item {
-    color: #334155;
-    padding: 10px 8px;
-    padding-left: 12px;
-    border-bottom: 1px solid #F1F5F9;
-}
-
-QTableWidget::item:selected {
-    background-color: #E0F2FE;
-    color: #075985;
-}
-
-QTableWidget::item:hover {
-    background-color: #F8FAFC;
-}
-
-QHeaderView::section {
-    background-color: #F8FAFC;
-    color: #0284C7;
-    font-weight: 700;
-    font-size: 12px;
-    padding: 12px 8px;
-    padding-left: 12px;
-    border: none;
-    border-bottom: 2px solid #BAE6FD;
-    letter-spacing: 0.3px;
 }
 
 /* ===================== SCROLLBARS ===================== */
@@ -373,4 +379,29 @@ QMessageBox QPushButton {
     min-height: 30px;
     text-align: center;
     padding-left: 0px;
+}
+
+/* ===================== TABLE / HEADERS ===================== */
+QTableWidget, QTableView {
+    background-color: #FFFFFF;
+    gridline-color: #E2E8F0;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+}
+
+QHeaderView::section {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 2px solid #E2E8F0;
+}
+
+QHeaderView::section:horizontal {
+    border-right: 1px solid #E2E8F0;
+}
+
+QHeaderView::section:vertical {
+    border-bottom: 1px solid #E2E8F0;
 }

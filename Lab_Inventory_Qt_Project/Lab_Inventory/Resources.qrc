@@ -13,6 +13,14 @@
         <file>Images/return_10118885.png</file>
         <file>Images/save_9584668.png</file>
         <file>Images/download_10255197.png</file>
+        <file>Images/chevron_down.svg</file>
+        <file>Images/chevron_down_hover.svg</file>
+        <file>Images/chevron_up.svg</file>
+        <file>Images/chevron_up_hover.svg</file>
+        <file>Images/chevron_left.svg</file>
+        <file>Images/chevron_left_hover.svg</file>
+        <file>Images/chevron_right.svg</file>
+        <file>Images/chevron_right_hover.svg</file>
     </qresource>
     <qresource prefix="/data">
         <file>data/My_Inventory.csv</file>
