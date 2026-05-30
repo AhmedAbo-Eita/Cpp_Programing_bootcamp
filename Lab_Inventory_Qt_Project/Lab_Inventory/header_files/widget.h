@@ -52,8 +52,6 @@ private slots:
     void onDeleteComponentpushButtonClicked();
 
 
-
-
 protected:
     void closeEvent(QCloseEvent *event) override;
 
@@ -71,5 +69,6 @@ private:
     std::optional<int> searchComponentsInTable(QString MPN);
     int getComponentTypeIndex(QString type);
     void showVectorOfComponents(std::vector<Component> list);
+
 };
 #endif // WIDGET_H

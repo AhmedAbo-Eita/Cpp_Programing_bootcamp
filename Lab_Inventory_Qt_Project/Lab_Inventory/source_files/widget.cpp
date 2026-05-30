@@ -70,11 +70,19 @@ void Widget::widget_connect_func()
     connect(ui->editFindpushButton,&QPushButton::clicked,this,&Widget::onEditFindpushButtonClicked);
     connect(ui->applyEditspushButton,&QPushButton::clicked,this,&Widget::onApplyEditspushButtonClicked);
     connect(ui->deleteComponentpushButton,&QPushButton::clicked,this,&Widget::onDeleteComponentpushButtonClicked);
+    connect(ui->editMPNLineEdit, &QLineEdit::textChanged, this, [=](const QString &text)
+            {
+                filterTable(ui->inventoryTableWidget, text);
+            });
 
 
     //connect functions for search tab widget buttons
     connect(ui->findPushButton,&QPushButton::clicked,this,&Widget::onFindPushButtonClicked);
     connect(ui->EditComponentPushButton, &QPushButton::clicked,this,&Widget::onEditComponentPushButtonClicked);
+    connect(ui->searchMPNLineEdit, &QLineEdit::textChanged, this, [=](const QString &text)
+            {
+                filterTable(ui->inventoryTableWidget, text);
+    });
 
     //connect function for table
     connect(ui->tabWidget,&QTabWidget::currentChanged,this,[=](int tabindex)
@@ -141,7 +149,6 @@ void Widget::widget_connect_func()
                 ui->editTypeComboBox->setDisabled(true);
                 ui->applyEditspushButton->setDisabled(true);
                 ui->deleteComponentpushButton->setDisabled(true);
-
             });
 }
 
@@ -770,6 +777,8 @@ void Widget::onDeleteComponentpushButtonClicked()
     }
     else return;
 }
+
+
 
 
 

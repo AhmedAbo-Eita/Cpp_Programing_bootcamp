@@ -8,6 +8,6 @@
 
 
 std::optional<int> searchItemInTable(QTableWidget *table,QString item,int search_colomn);
-//std::optional<int> filterItemInTable(QTableWidget *table,QString item);
+std::optional<int> filterTable(QTableWidget *tableWidget, QString filterText);
 
 #endif // SEARCH_FILTER_HANDLER_H
