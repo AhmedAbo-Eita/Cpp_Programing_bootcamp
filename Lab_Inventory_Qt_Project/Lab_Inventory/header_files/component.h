@@ -20,6 +20,8 @@ public:
     void setFootpint(QString footprint);
     void setType(QString type);
     void setLocation(QString location);
+    void setCustomercode(QString m_customer_code);
+    void setValue(QString m_value);
 
     //get classmember attributes
     QString getMPN();
@@ -27,14 +29,17 @@ public:
     QString getFootprint();
     QString getType();
     QString getLocation();
-
+    QString getCustomerCode();
+    QString getValue();
 
 private:
-    QString m_MPN;
-    int m_quantity {0};
-    QString m_footprint;
-    QString m_type;
-    QString m_location;
+    QString m_MPN;                          //component manifacuter part number
+    int m_quantity {0};                     //component quantity
+    QString m_footprint;                    //component footprint
+    QString m_type;                         //component type(resistor, capacitor, IC... etc)
+    QString m_location;                     //Customer number
+    QString m_customer_code;                //customer referance code
+    QString m_value;
 };
 
 #endif // COMPONENT_H
