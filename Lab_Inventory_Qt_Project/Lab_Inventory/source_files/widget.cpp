@@ -9,11 +9,13 @@
 #define MPN_Column              0
 #define quantityOfComponent     1
 #define typeOfComponent         2
-#define footprintOfComponent    3
-#define locationOfComponent     4
+#define valueOfComponent        3
+#define footprintOfComponent    4
+#define locationOfComponent     5
+#define customerCodeOfComponent 6
 
 // list of table headers
-QStringList headers {"Manufacturer part number","Quantity","Component Type","Footrpint","Location of Component"};
+QStringList headers {"Manufacturer part number","Quantity","Component Type","Value","Footprint","Location of Component","Customer Code"};
 
 
 
@@ -122,17 +124,23 @@ void Widget::widget_connect_func()
                 if (row >= 0 && row < static_cast<int>(componentList.size()))
                 {
                     switch (column) {
-                    case 1:
+                    case quantityOfComponent:
                         componentList.at(row).setQuantity(ui->inventoryTableWidget->item(row,column)->text().toInt());
                         break;
-                    case 2:
+                    case typeOfComponent:
                         componentList.at(row).setType(ui->inventoryTableWidget->item(row,column)->text());
                         break;
-                    case 3:
+                    case valueOfComponent:
+                        componentList.at(row).setValue(ui->inventoryTableWidget->item(row,column)->text());
+                        break;
+                    case footprintOfComponent:
                         componentList.at(row).setFootpint(ui->inventoryTableWidget->item(row,column)->text());
                         break;
-                    case 4:
+                    case locationOfComponent:
                         componentList.at(row).setLocation(ui->inventoryTableWidget->item(row,column)->text());
+                        break;
+                    case customerCodeOfComponent:
+                        componentList.at(row).setCustomercode(ui->inventoryTableWidget->item(row,column)->text());
                         break;
                     }
                     //showVectorOfComponents(componentList);
@@ -155,14 +163,21 @@ void Widget::widget_connect_func()
 void Widget::setTableStyle(QTableWidget *table, QStringList headers )
 {
     //Create the table rows and coloums
-    table->setColumnCount(5);
+    table->setColumnCount(headers.size());
     //ui->inventoryTableWidget->setRowCount(100);
 
     //Set Table Headers
     table->setHorizontalHeaderLabels(headers);
 
     // Stretch columns to fill the table width
-    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
+    table->setColumnWidth(MPN_Column, 190);
+    table->setColumnWidth(quantityOfComponent, 100);
+    table->setColumnWidth(typeOfComponent, 100);
+    table->setColumnWidth(valueOfComponent, 100);
+    table->setColumnWidth(footprintOfComponent, 100);
+    table->setColumnWidth(locationOfComponent, 150);
+    table->horizontalHeader()->setStretchLastSection(true);
 
     // Allow sorting by clicking on headers
     table->setSortingEnabled(true);
@@ -195,11 +210,14 @@ void Widget::showComponentsInTable()
     {
         Component currentComponent = componentList[row];
 
-        ui->inventoryTableWidget->setItem(row,0,new QTableWidgetItem(currentComponent.getMPN()));
-        ui->inventoryTableWidget->setItem(row,1,new QTableWidgetItem(QString::number(currentComponent.getQuantity())));
-        ui->inventoryTableWidget->setItem(row,2,new QTableWidgetItem(currentComponent.getType()));
-        ui->inventoryTableWidget->setItem(row,3,new QTableWidgetItem(currentComponent.getFootprint()));
-        ui->inventoryTableWidget->setItem(row,4,new QTableWidgetItem(currentComponent.getLocation()));
+        ui->inventoryTableWidget->setItem(row,MPN_Column,new QTableWidgetItem(currentComponent.getMPN()));
+        ui->inventoryTableWidget->setItem(row,quantityOfComponent,new QTableWidgetItem(QString::number(currentComponent.getQuantity())));
+        ui->inventoryTableWidget->setItem(row,typeOfComponent,new QTableWidgetItem(currentComponent.getType()));
+        ui->inventoryTableWidget->setItem(row,valueOfComponent,new QTableWidgetItem(currentComponent.getValue()));
+        ui->inventoryTableWidget->setItem(row,footprintOfComponent,new QTableWidgetItem(currentComponent.getFootprint()));
+        ui->inventoryTableWidget->setItem(row,locationOfComponent,new QTableWidgetItem(currentComponent.getLocation()));
+        ui->inventoryTableWidget->setItem(row,customerCodeOfComponent,new QTableWidgetItem(currentComponent.getCustomerCode()));
+
     }
 }
 

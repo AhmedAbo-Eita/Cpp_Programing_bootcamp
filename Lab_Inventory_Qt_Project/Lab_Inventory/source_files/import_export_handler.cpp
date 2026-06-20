@@ -152,14 +152,46 @@ void importTableFromCSV(QTableWidget *tableWidget, std::vector <Component> &comp
     //tableWidget->setColumnCount(0);//set the table colomns
     //componentList.clear(); // clear all the data in component list
 
+    // This map stores the actual index of each column from the CSV, allowing them to be in any order
+    std::vector<int> columnIndexMap(7, -1);
+    
     // Read headers
     if (!in.atEnd()) {
         QString headerLine = in.readLine();
         QStringList headers = headerLine.split(',', Qt::KeepEmptyParts);
-        for (QString &header : headers)
-            header = header.remove('\"');
-        tableWidget->setColumnCount(headers.size());
-        tableWidget->setHorizontalHeaderLabels(headers);
+        for (int i = 0; i < headers.size(); ++i) {
+            QString header = headers[i];
+            // Convert to lowercase and trim quotes/spaces to safely handle capital and small letters
+            header = header.remove('\"').trimmed().toLower();
+            
+            // Map the CSV columns to our expected data regardless of their sort order
+            if (header == "manufacturer part number") columnIndexMap[0] = i;
+            else if (header == "quantity") columnIndexMap[1] = i;
+            else if (header == "component type") columnIndexMap[2] = i;
+            else if (header == "value") columnIndexMap[3] = i;
+            else if (header == "footprint") columnIndexMap[4] = i;
+            else if (header == "location of component") columnIndexMap[5] = i;
+            else if (header == "customer code") columnIndexMap[6] = i;
+        }
+
+        // Verify that all required columns were found in the header
+        bool validHeader = true;
+        for (int idx : columnIndexMap) {
+            if (idx == -1) { // -1 means the column was never found
+                validHeader = false;
+                break;
+            }
+        }
+        
+        if (!validHeader) {
+            QMessageBox::warning(parent, "Invalid CSV File", "The selected CSV file does not contain the required headers.");
+            file.close();
+            return;
+        }
+
+        tableWidget->setColumnCount(7);
+        QStringList standardHeaders = {"Manufacturer part number", "Quantity", "Component Type", "Value", "Footprint", "Location of Component", "Customer Code"};
+        tableWidget->setHorizontalHeaderLabels(standardHeaders);
     }
 
     // Read and parse each row
@@ -167,30 +199,50 @@ void importTableFromCSV(QTableWidget *tableWidget, std::vector <Component> &comp
     while (!in.atEnd()) {
         QString line = in.readLine();
         QStringList cells = line.split(',', Qt::KeepEmptyParts);
-        if (cells.size() < 5) continue; // Skip incomplete rows
+
+        // Helper function to safely fetch data using the mapped column index
+        auto getCell = [&](int internalIdx) -> QString {
+            int csvIdx = columnIndexMap[internalIdx];
+            if (csvIdx >= 0 && csvIdx < cells.size()) {
+                QString cell = cells[csvIdx];
+                return cell.remove('\"').trimmed();
+            }
+            return "";
+        };
+
+        QString current_mpn        = getCell(0);
+        QString current_quantity   = getCell(1);
+        if (current_quantity.isEmpty()) current_quantity = "0";
+        QString current_type       = getCell(2);
+        QString current_value      = getCell(3);
+        QString current_footprint  = getCell(4);
+        QString current_location   = getCell(5);
+        QString current_customer   = getCell(6);
+
+        if (current_mpn.isEmpty() && current_type.isEmpty() && current_value.isEmpty()) {
+            continue; // Skip empty rows
+        }
 
         tableWidget->insertRow(row);
-
-        QString current_mpn        = cells[0].remove('\"');
-        QString current_quantity   = cells[1].remove('\"');
-        QString current_type       = cells[2].remove('\"');
-        QString current_footprint  = cells[3].remove('\"');
-        QString current_location   = cells[4].remove('\"');
 
         // Fill the table
         tableWidget->setItem(row, 0, new QTableWidgetItem(current_mpn));
         tableWidget->setItem(row, 1, new QTableWidgetItem(current_quantity));
         tableWidget->setItem(row, 2, new QTableWidgetItem(current_type));
-        tableWidget->setItem(row, 3, new QTableWidgetItem(current_footprint));
-        tableWidget->setItem(row, 4, new QTableWidgetItem(current_location));
+        tableWidget->setItem(row, 3, new QTableWidgetItem(current_value));
+        tableWidget->setItem(row, 4, new QTableWidgetItem(current_footprint));
+        tableWidget->setItem(row, 5, new QTableWidgetItem(current_location));
+        tableWidget->setItem(row, 6, new QTableWidgetItem(current_customer));
 
         // Add to componentList
         Component c;
         c.setMPN(current_mpn);
         c.setQuantity(current_quantity.toInt());
         c.setType(current_type);
+        c.setValue(current_value);
         c.setFootpint(current_footprint);
         c.setLocation(current_location);
+        c.setCustomercode(current_customer);
         componentList.push_back(c);
 
         ++row;
@@ -236,14 +288,46 @@ void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,
     tableWidget->setColumnCount(0);//set the table colomns
     componentList.clear(); // clear all the data in component list
 
+    // This map stores the actual index of each column from the CSV, allowing them to be in any order
+    std::vector<int> columnIndexMap(7, -1);
+    
     // Read headers
     if (!in.atEnd()) {
         QString headerLine = in.readLine();
         QStringList headers = headerLine.split(',', Qt::KeepEmptyParts);
-        for (QString &header : headers)
-            header = header.remove('\"');
-        tableWidget->setColumnCount(headers.size());
-        tableWidget->setHorizontalHeaderLabels(headers);
+        for (int i = 0; i < headers.size(); ++i) {
+            QString header = headers[i];
+            // Convert to lowercase and trim quotes/spaces to safely handle capital and small letters
+            header = header.remove('\"').trimmed().toLower();
+            
+            // Map the CSV columns to our expected data regardless of their sort order
+            if (header == "manufacturer part number") columnIndexMap[0] = i;
+            else if (header == "quantity") columnIndexMap[1] = i;
+            else if (header == "component type") columnIndexMap[2] = i;
+            else if (header == "value") columnIndexMap[3] = i;
+            else if (header == "footprint") columnIndexMap[4] = i;
+            else if (header == "location of component") columnIndexMap[5] = i;
+            else if (header == "customer code") columnIndexMap[6] = i;
+        }
+
+        // Verify that all required columns were found in the header
+        bool validHeader = true;
+        for (int idx : columnIndexMap) {
+            if (idx == -1) { // -1 means the column was never found
+                validHeader = false;
+                break;
+            }
+        }
+        
+        if (!validHeader) {
+            QMessageBox::warning(parent, "Invalid CSV File", "The selected CSV file does not contain the required headers.");
+            file.close();
+            return;
+        }
+
+        tableWidget->setColumnCount(7);
+        QStringList standardHeaders = {"Manufacturer part number", "Quantity", "Component Type", "Value", "Footprint", "Location of Component", "Customer Code"};
+        tableWidget->setHorizontalHeaderLabels(standardHeaders);
     }
 
     // Read and parse each row
@@ -251,30 +335,50 @@ void importTableFromCSVLocal(QTableWidget *tableWidget, QString filePath,
     while (!in.atEnd()) {
         QString line = in.readLine();
         QStringList cells = line.split(',', Qt::KeepEmptyParts);
-        if (cells.size() < 5) continue; // Skip incomplete rows
+
+        // Helper function to safely fetch data using the mapped column index
+        auto getCell = [&](int internalIdx) -> QString {
+            int csvIdx = columnIndexMap[internalIdx];
+            if (csvIdx >= 0 && csvIdx < cells.size()) {
+                QString cell = cells[csvIdx];
+                return cell.remove('\"').trimmed();
+            }
+            return "";
+        };
+
+        QString current_mpn        = getCell(0);
+        QString current_quantity   = getCell(1);
+        if (current_quantity.isEmpty()) current_quantity = "0";
+        QString current_type       = getCell(2);
+        QString current_value      = getCell(3);
+        QString current_footprint  = getCell(4);
+        QString current_location   = getCell(5);
+        QString current_customer   = getCell(6);
+
+        if (current_mpn.isEmpty() && current_type.isEmpty() && current_value.isEmpty()) {
+            continue; // Skip empty rows
+        }
 
         tableWidget->insertRow(row);
-
-        QString current_mpn        = cells[0].remove('\"');
-        QString current_quantity   = cells[1].remove('\"');
-        QString current_type       = cells[2].remove('\"');
-        QString current_footprint  = cells[3].remove('\"');
-        QString current_location   = cells[4].remove('\"');
 
         // Fill the table
         tableWidget->setItem(row, 0, new QTableWidgetItem(current_mpn));
         tableWidget->setItem(row, 1, new QTableWidgetItem(current_quantity));
         tableWidget->setItem(row, 2, new QTableWidgetItem(current_type));
-        tableWidget->setItem(row, 3, new QTableWidgetItem(current_footprint));
-        tableWidget->setItem(row, 4, new QTableWidgetItem(current_location));
+        tableWidget->setItem(row, 3, new QTableWidgetItem(current_value));
+        tableWidget->setItem(row, 4, new QTableWidgetItem(current_footprint));
+        tableWidget->setItem(row, 5, new QTableWidgetItem(current_location));
+        tableWidget->setItem(row, 6, new QTableWidgetItem(current_customer));
 
         // Add to componentList
         Component c;
         c.setMPN(current_mpn);
         c.setQuantity(current_quantity.toInt());
         c.setType(current_type);
+        c.setValue(current_value);
         c.setFootpint(current_footprint);
         c.setLocation(current_location);
+        c.setCustomercode(current_customer);
         componentList.push_back(c);
         ++row;
     }
@@ -310,7 +414,7 @@ void checkCSV(QString dataDirPath,QString destPath,QWidget *parent)
         }
         QTextStream out(&file);
         // Write fixed headers
-        out << "\"Manufacturer part number\",\"Quantity\",\"Component Type\",\"Footrpint\",\"Location of Component\"\n";
+        out << "\"Manufacturer part number\",\"Quantity\",\"Component Type\",\"Value\",\"Footprint\",\"Location of Component\",\"Customer Code\"\n";
         file.close();
 
         QMessageBox::information(parent, "Info", "New My_Inventory.csv created successfully.");
