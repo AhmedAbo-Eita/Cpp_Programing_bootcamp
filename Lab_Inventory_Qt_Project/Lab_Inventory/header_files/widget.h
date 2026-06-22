@@ -18,6 +18,7 @@
 #include <QTemporaryFile>
 #include <QStandardPaths>
 #include <QCloseEvent>
+#include <QApplication>
 #include "component.h"
 
 
@@ -50,6 +51,7 @@ private slots:
     void onEditFindpushButtonClicked();
     void onApplyEditspushButtonClicked();
     void onDeleteComponentpushButtonClicked();
+    void onThemeToggleClicked();
 
 
 protected:
@@ -63,12 +65,14 @@ private:
     // Prepare CSV file path
     QString destPath = dataDirPath + "/My_Inventory.csv";
     std::optional<int> updatedIndex = std::nullopt;
+    bool m_isDarkMode = false;
     void setTableStyle(QTableWidget *table, QStringList headers);
     void widget_connect_func();
     void showComponentsInTable();
     std::optional<int> searchComponentsInTable(QString MPN);
     int getComponentTypeIndex(QString type);
     void showVectorOfComponents(std::vector<Component> list);
+    void applyTheme(bool dark);
 
 };
 #endif // WIDGET_H

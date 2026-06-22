@@ -30,5 +30,6 @@
     </qresource>
     <qresource prefix="/styles">
         <file>styles/app_style.qss</file>
+        <file>styles/app_dark_style.qss</file>
     </qresource>
 </RCC>

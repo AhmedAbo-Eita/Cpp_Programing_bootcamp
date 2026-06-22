@@ -64,6 +64,9 @@ void Widget::widget_connect_func()
     connect(ui->importPushButton,&QPushButton::clicked,this,&Widget::onImportPushButtonClicked);
     connect(ui->exportPushButton,&QPushButton::clicked,this,[=](){exportTableToCSV(ui->inventoryTableWidget,this);});
 
+    // connect theme toggle button
+    connect(ui->pushButton, &QPushButton::clicked, this, &Widget::onThemeToggleClicked);
+
     //connect functions for add tab widget buttons
     connect(ui->addPushButton,&QPushButton::clicked,this,&Widget::onAddPushButtonClicked);
     connect(ui->clearPushButton,&QPushButton::clicked,this,&Widget::onClearPushButtonClicked);
@@ -279,6 +282,37 @@ void Widget::closeEvent(QCloseEvent *event)
         }
     }
     else event->accept();
+}
+
+/**
+ * @brief Toggles between light and dark application themes.
+ *
+ * @param signal from the dark mode toggle button (pushButton).
+ */
+void Widget::onThemeToggleClicked()
+{
+    m_isDarkMode = !m_isDarkMode;
+    applyTheme(m_isDarkMode);
+}
+
+/**
+ * @brief Loads and applies the appropriate QSS stylesheet to the application
+ *        and updates the toggle button label.
+ *
+ * @param dark  true  → apply dark theme
+ *              false → apply light theme
+ */
+void Widget::applyTheme(bool dark)
+{
+    QString qssPath = dark ? ":/styles/styles/app_dark_style.qss"
+                           : ":/styles/styles/app_style.qss";
+    QFile file(qssPath);
+    if (file.open(QFile::ReadOnly))
+    {
+        qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
+        file.close();
+    }
+    ui->pushButton->setText(dark ? "Light Mode" : "Dark Mode");
 }
 
 void Widget::showVectorOfComponents(std::vector<Component> list)

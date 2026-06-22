@@ -49,22 +49,22 @@
          <property name="title">
           <string>Inventory Table</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QScrollArea" name="scrollArea">
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>-70</y>
-               <width>1201</width>
-               <height>630</height>
-              </rect>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QScrollArea" name="scrollArea">
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,13">
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>-70</y>
+                <width>1201</width>
+                <height>630</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,13">
               <item>
                <widget class="QTableWidget" name="inventoryTableWidget">
                 <property name="sizePolicy">
@@ -1684,105 +1684,105 @@
          <property name="title">
           <string>BOM File</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_10">
-          <item>
-           <widget class="QScrollArea" name="scrollArea_2">
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>1218</width>
-               <height>504</height>
-              </rect>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <widget class="QScrollArea" name="scrollArea_2">
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_9">
+             <widget class="QWidget" name="scrollAreaWidgetContents_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>1218</width>
+                <height>504</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QTableWidget" name="BomTableWidget">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>250</width>
+               <height>250</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>150</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="UploadBomFileGroupBox">
+             <property name="title">
+              <string>GroupBox</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
               <item>
-               <widget class="QTableWidget" name="BomTableWidget">
+               <widget class="QLabel" name="EnterNameofTheBoardlabel">
+                <property name="text">
+                 <string>Enter the name of the board</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="BomBoardNamelineEdit"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="ImportBomPushButton">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>250</width>
-                  <height>250</height>
+                  <width>200</width>
+                  <height>70</height>
                  </size>
                 </property>
-                <property name="baseSize">
+                <property name="font">
+                 <font>
+                  <family>Blinker</family>
+                  <pointsize>12</pointsize>
+                  <italic>false</italic>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Import BOM CSV  </string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../Resources.qrc">
+                  <normaloff>:/inventoryMainIcons/Images/import.png</normaloff>:/inventoryMainIcons/Images/import.png</iconset>
+                </property>
+                <property name="iconSize">
                  <size>
-                  <width>0</width>
-                  <height>150</height>
+                  <width>45</width>
+                  <height>50</height>
                  </size>
                 </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QGroupBox" name="UploadBomFileGroupBox">
-                <property name="title">
-                 <string>GroupBox</string>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QLabel" name="EnterNameofTheBoardlabel">
-                   <property name="text">
-                    <string>Enter the name of the board</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="BomBoardNamelineEdit"/>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="ImportBomPushButton">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>200</width>
-                     <height>70</height>
-                    </size>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <family>Blinker</family>
-                     <pointsize>12</pointsize>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Import BOM CSV  </string>
-                   </property>
-                   <property name="icon">
-                    <iconset resource="../Resources.qrc">
-                     <normaloff>:/inventoryMainIcons/Images/import.png</normaloff>:/inventoryMainIcons/Images/import.png</iconset>
-                   </property>
-                   <property name="iconSize">
-                    <size>
-                     <width>45</width>
-                     <height>50</height>
-                    </size>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
                </widget>
               </item>
              </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
+             </widget>
+            </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+           </layout>
         </widget>
        </item>
       </layout>
@@ -1828,6 +1828,35 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>36</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Blinker</family>
+         <pointsize>11</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Dark Mode</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
